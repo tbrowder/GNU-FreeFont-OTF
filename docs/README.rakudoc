@@ -1,0 +1,30 @@
+=begin pod
+
+=head1 NAME
+
+B<GNU::FreeFont-TTF> - Provides routines for using the GNU FreeType font in TrueType format 
+
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use GNU::FreeFont-TTF;
+
+=end code
+
+=head1 DESCRIPTION
+
+B<GNU::FreeFont-TTF> is ...
+
+=head1 AUTHOR
+
+Tom Browder <tbrowder@acm.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+© 2025 Tom Browder
+
+This library is free software; you may redistribute it or modify it under the Artistic License 2.0.
+
+=end pod
