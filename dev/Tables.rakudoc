@@ -1,0 +1,37 @@
+=head2 Table 1
+
+=begin table :caption<The GNU FontFactory Collection>
+GNU FreeFont           | Code | Code2 | Reference No.
+-----------------------+------+--------------------------
+Free Serif             | se   | t     | 1
+Free Serif Bold        | seb  | tb    | 2
+Free Serif Italic      | sei  | ti    | 3
+Free Serif Bold Italic | sebi | tbi   | 4
+Free Sans              | sa   | h     | 5
+Free Sans Bold         | sab  | hb    | 6
+Free Sans Oblique      | sao  | ho    | 7
+Free Sans Bold Oblique | sabo | hbo   | 8
+Free Mono              | m    | c     | 9
+Free Mono Bold         | mb   | cb    | 10
+Free Mono Oblique      | mo   | co    | 11
+Free Mono Bold Oblique | mbo  | cbo   | 12
+=end table
+
+=head2 Table 2
+
+=begin table :caption<The Equivalent Adobe Type 1 Fonts>
+Adobe Type 1 Name      | Code | Code2 | Reference No.
+-----------------------+------+--------------------------
+Times                  | se   | t     | 1
+Times Bold             | seb  | tb    | 2
+Times Italic           | sei  | ti    | 3
+Times Bold Italic      | sebi | tbi   | 4
+Helvetica              | sa   | h     | 5
+Helvetica Bold         | sab  | hb    | 6
+Helvetica Oblique      | sao  | ho    | 7
+Helvetica Bold Oblique | sabo | hbo   | 8
+Courier                | m    | c     | 9
+Courier Bold           | mb   | cb    | 10
+Courier Oblique        | mo   | co    | 11
+Courier Bold Oblique   | mbo  | cbo   | 12
+=end table

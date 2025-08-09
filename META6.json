@@ -6,18 +6,27 @@
   "build-depends": [
   ],
   "depends": [
+    "OO::Monitors",
+    "Font::FreeType",
+    "MacOS::NativeLib",
+    "PDF::Font::Loader::HarfBuzz",
+    "PDF::Font::Loader",
+    "PDF::Content",
+    "Data::Dump",
+    "QueryOS"
   ],
-  "description": "Provides routines for using the GNU FreeType font in TrueType format \n",
+  "description": "Provides routines for using the GNU FreeType font in OpenType format \n",
   "license": "Artistic-2.0",
-  "name": "GNU::FreeFont-TTF",
+  "name": "GNU::FreeFont-OTF",
   "perl": "6.d",
   "provides": {
     "GNU::FreeFont-TTF": "lib/GNU/FreeFont-TTF.rakumod"
   },
   "resources": [
   ],
-  "source-url": "",
+  "source-url": "https://github.com/tbrowder/GNU-FreeFont-TTF.git",
   "tags": [
+    "font PDF GNU FreeFont OpenType"
   ],
   "test-depends": [
   ],

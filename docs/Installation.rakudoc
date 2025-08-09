@@ -1,0 +1,72 @@
+=begin pod
+
+=head1 Installation requirements
+
+The following system packages need to be installed to use all the
+features of this module.
+
+=head2 The FontConfig library
+
+On Debian:
+
+=begin code
+$ sudo aptitude install fontconfig
+=end code
+
+On MacOS:
+
+=begin code
+$ brew install fontconfig
+=end code
+
+On Windows:
+
+=begin code
+$ choco install fontconfig # if available
+=end code
+
+=head1 Other systems
+
+If this package does not install the fonts for your
+system you can obtain them from the following
+sources:
+
+On systems derived from Debian:
+
+=begin code
+$ sudo aptitude install fonts-freefont-otf
+=end code
+
+On MacOS:
+
+=begin code
+$ brew install --cask font-freefont
+=end code
+
+On Windows:
+
+=begin code
+$ choco install font-freefont
+=end code
+
+On other systems the files may be downloaded from
+L<https://ftp.gnu.org/gnu/freefont> and installed 
+in the following locations for the following systems:
+
+On Linux:
+=begin code
+/usr
+=end code
+
+On MacOS:
+=begin code
+/usr
+=end code
+
+On Windows:
+=begin code
+/usr
+=end code
+
+
+=end pod

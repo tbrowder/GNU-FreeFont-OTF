@@ -1,0 +1,99 @@
+unit module GNU::FreeFont-TTF::FPaths;
+
+use MacOS::NativeLib "*";
+
+#use PDF::Font::Loader::HarfBuzz;
+#use PDF::Font::Loader :load-font;
+#use PDF::Content;
+#use PDF::Content::FontObj;
+
+use QueryOS;
+
+my $os = OS.new;
+
+my $Ld = "/usr/share/fonts/truetype/freefont";
+my $Md = "/opt/homebrew/Caskroom/font-freefont/20120503/freefont-20120503";
+my $Wd = "/usr/share/fonts/truetype/freefont";
+
+#sub get-loaded-fonts-hash(:$debug --> Hash) is export {
+
+sub get-font-file-paths-hash(:$debug --> Hash) is export {
+    my $fontdir;
+    if $os.is-linux {
+        $fontdir = $Ld;
+    }
+    elsif $os.is-macos {
+        $fontdir = $Md;
+    }
+    elsif $os.is-windows {
+        $fontdir = $Wd;
+    }
+    else {
+        die "FATAL: Unable to determine your operating system (OS)";
+    }
+
+    # from the GNU FreeFont collection
+    # only OpenType fonts wanted
+    
+    # Use codes reflecting the Adobe parentage of its class PostScript fonts
+    # I grew up with in the PS days:
+    # 
+    # Times-Roman
+    my $fft   = "$fontdir/FreeSerif.otf".IO;
+    my $fftb  = "$fontdir/FreeSerifBold.otf".IO;
+    my $ffti  = "$fontdir/FreeSerifItalic.otf".IO;
+    my $fftbi = "$fontdir/FreeSerifBoldItalic.otf".IO;
+
+    # Helvetica
+    my $ffh   = "$fontdir/FreeSans.otf".IO;
+    my $ffhb  = "$fontdir/FreeSansBold.otf".IO;
+    my $ffho  = "$fontdir/FreeSansOblique.otf".IO;
+    my $ffhbo = "$fontdir/FreeSansBoldOblique.otf.IO";
+
+   # Courier
+    my $ffc   = "$fontdir/FreeMono.otf".IO;
+    my $ffcb  = "$fontdir/FreeMonoBold.otf".IO;
+    my $ffco  = "$fontdir/FreeMonoOblique.otf".IO;
+    my $ffcbo = "$fontdir/FreeMonoBoldOblique.otf.IO";
+
+    my %fonts;
+
+    # get paths, don't load
+    # %fonts<t>   = load :file($fft); # deb 12, :subset;
+
+    # Times-Roman
+    %fonts<t>   = $fft;   # deb 12, :subset;
+    %fonts<tb>  = $fftb;  # deb 12, :subset;
+    %fonts<ti>  = $ffti;  # deb 12, :subset;
+    %fonts<tbi> = $fftbi; # deb 12, :subset;
+
+    # Helvetica
+    %fonts<h>   = $ffh;   # deb 12, :subset;
+    %fonts<hb>  = $ffhb;  # deb 12, :subset;
+    %fonts<ho>  = $ffho;  # deb 12, :subset;
+    %fonts<hbo> = $ffhbo; # deb 12, :subset;
+
+    # Courier
+    %fonts<c>   = $ffc;   # deb 12, :subset;
+    %fonts<cb>  = $ffcb;  # deb 12, :subset;
+    %fonts<co>  = $ffco;  # deb 12, :subset;
+    %fonts<cbo> = $ffcbo; # deb 12, :subset;
+
+    # "aliases" for the real names
+    %fonts<se>   = %fonts<t>;
+    %fonts<seb>  = %fonts<tb>;
+    %fonts<sei>  = %fonts<ti>;
+    %fonts<sebi> = %fonts<tbi>;
+
+    %fonts<sa>   = %fonts<h>;
+    %fonts<sab>  = %fonts<hb>;
+    %fonts<sao>  = %fonts<ho>;
+    %fonts<sabo> = %fonts<hbo>;
+
+    %fonts<m>    = %fonts<c>;
+    %fonts<mb>   = %fonts<cb>;
+    %fonts<mo>   = %fonts<co>;
+    %fonts<mbo>  = %fonts<cbo>;
+
+    %fonts; # hash of font file paths
+}

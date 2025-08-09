@@ -1,0 +1,19 @@
+See my unpublished Font::Utils for FontFreeFace
+  for using David's Font::FreeType
+
+reate a font sample sheet
+ - See FontFactory
+
+In docs, mention lowercase and numbers for aliases
+
+=done:
+2025-08-04:
+
+# used FFT1 and added more special aliases
+# tested codes and aliases to ensure no overlaps
+Fix problem with alias names.
+  - consider using the system FontFactory::Type1 uses
+
+Add Numeric aliases
+
+Ensure users do NOT use uppercase codes or aliases
