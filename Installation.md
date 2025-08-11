@@ -34,6 +34,7 @@ On MacOS:
 On Windows:
 
     $ choco install font-freefont
+    $ choco install font-dejavu
 
 On other systems the files may be downloaded from [https://ftp.gnu.org/gnu/freefont](https://ftp.gnu.org/gnu/freefont) and installed in the following locations for the following systems:
 

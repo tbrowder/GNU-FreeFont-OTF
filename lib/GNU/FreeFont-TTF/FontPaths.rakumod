@@ -14,7 +14,11 @@ my $os = OS.new;
 # The font directory for each system:
 # /usr/share/fonts/truetype/freefont/
 my $Ld = "/usr/share/fonts/truetype/freefont";
+
+# on MacOs, use another font for .ttf
 my $Md = "/opt/homebrew/Caskroom/font-freefont/20120503/freefont-20120503";
+
+# on Windows, use another font for ttf
 my $Wd = "/usr/share/fonts/truetype/freefont";
 
 sub get-font-file-paths-hash(:$debug --> Hash) is export {

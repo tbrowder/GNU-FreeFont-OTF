@@ -28,6 +28,7 @@ jobs:
           brew install freetype
           brew install harfbuzz
           brew install --cask font-freefont
+          brew install --cask font-dejavu
           zef install MacOS::NativeLib
           zef install --/test --deps-only .
       - name: Install

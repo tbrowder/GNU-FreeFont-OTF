@@ -47,6 +47,7 @@ On Windows:
 
 =begin code
 $ choco install font-freefont
+$ choco install font-dejavu
 =end code
 
 On other systems the files may be downloaded from

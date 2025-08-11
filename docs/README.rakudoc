@@ -16,7 +16,7 @@ my $ff = GNU::FreeFont-TTF.new;
 
 # Select the GNU FreeFont 'Free Serif' to be loaded
 # as an object to be used to print text on a PDF page:
-my $font  = $ff.get-font: "FreeSerif";
+my $font  = $ff.get-font: "Free Serif";
 isa-ok $font, PDF::Content::FontObj;
 # OUTPUT:
 ok 1 - The object is-a 'PDF::Content::FontObj'
