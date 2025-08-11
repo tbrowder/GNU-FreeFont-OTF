@@ -13,12 +13,12 @@ use PDF::Lite;
 
 # testing the file path getter:
 use GNU::FreeFont-TTF::FontPaths;
-my %fpaths = get-font-file-paths-hash;
+my %fonts = get-font-file-paths-hash;
 
 my ($fpath, $fpath2);
 my ($font, $font2);
-$fpath  = %fpaths<t>;
-$fpath2 = %fpaths<sa>;
+$fpath  = %fonts<t>;
+$fpath2 = %fonts<sa>;
 isa-ok $fpath, IO::Path;
 isa-ok $fpath2, IO::Path;
 

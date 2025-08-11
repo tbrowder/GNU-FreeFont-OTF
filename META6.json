@@ -12,6 +12,8 @@
     "PDF::Font::Loader::HarfBuzz",
     "PDF::Font::Loader",
     "PDF::Content",
+    "PDF::Lite",
+    "PDF::API6",
     "Data::Dump",
     "QueryOS"
   ],

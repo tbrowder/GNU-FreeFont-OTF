@@ -33,14 +33,12 @@ isa-ok $ff.font-file-paths{@k.head}.IO, IO::Path, "valid path";
 $code = "t";
 isa-ok $ff.font-file-paths{$code}.IO, IO::Path, "valid path";
 
-my $file = $ff.font-file-paths{$code};
-isa-ok $file.IO, IO::Path, "valid path";
-
-$font = load-font :$file;
-isa-ok $font, PDF::Content::FontObj;
-
 $font = $ff.get-font: "t";
 is $font.font-name, "FreeSerif", "FontObj knows its name";
+
+my $file = $ff.get-font-path: "hob";
+$font = load-font :$file;
+isa-ok $font, PDF::Content::FontObj;
 
 $font = $ff.get-font: 1;
 isa-ok $font, PDF::Content::FontObj;

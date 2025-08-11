@@ -49,9 +49,11 @@ method get-font(
 }
 
 method get-font-path(
-    $code,
+    $code is copy,
     --> IO::Path
     ) {
+    # Note: "$code" may be the name with spaces
+    $code ~~ s:g/\h//;
     my $path = self.font-file-paths{$code} // "(none)";
     if $path eq "(none)" {
         say qq:to/HERE/;
