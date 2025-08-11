@@ -6,8 +6,6 @@ use PDF::Lite;
 use PDF::Content::Page :PageSizes;
 
 use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::Classes;
-use GNU::FreeFont-TTF::FontList;
 
 sub print-font-sample(
     :$debug

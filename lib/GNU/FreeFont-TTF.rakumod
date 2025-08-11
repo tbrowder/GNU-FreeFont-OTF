@@ -13,7 +13,6 @@ use PDF::Content::FontObj;
 
 use Font::FreeType;
 
-#use GNU::FreeFont-TTF::FontList;
 use GNU::FreeFont-TTF::FontPaths;
 
 #has %.loaded-fonts;

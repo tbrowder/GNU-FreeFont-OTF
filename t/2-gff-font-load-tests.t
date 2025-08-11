@@ -12,7 +12,6 @@ use PDF::Content::FontObj;
 use PDF::Lite;
 
 use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::FontList;
 use GNU::FreeFont-TTF::FontPaths;
 
 my ($fpath, $fpath2);
