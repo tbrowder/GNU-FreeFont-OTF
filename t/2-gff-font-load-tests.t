@@ -13,10 +13,10 @@ use PDF::Lite;
 
 use GNU::FreeFont-TTF;
 use GNU::FreeFont-TTF::FontList;
-use GNU::FreeFont-TTF::FPaths;
+use GNU::FreeFont-TTF::FontPaths;
 
 my ($fpath, $fpath2);
-my ($font, $font2);
+my ($font, $font2, $code);
 
 my $ff = GNU::FreeFont-TTF.new;
 isa-ok $ff, GNU::FreeFont-TTF, "good GNU::FreeFont object";
@@ -26,45 +26,28 @@ isa-ok %h, Hash, "good Hash of font paths";
 
 my @k  = %h.keys.sort;
 my $nk = @k.elems;
-is $nk, 24, "must have $nk elements";
+is $nk, 72, "must have $nk elements";
 isa-ok %h{@k.head}, IO::Path, "valid path";
 
-isa-ok $ff.font-file-paths{@k.head}, IO::Path, "valid path";
+isa-ok $ff.font-file-paths{@k.head}.IO, IO::Path, "valid path";
+$code = "t";
+isa-ok $ff.font-file-paths{$code}.IO, IO::Path, "valid path";
 
-#done-testing;
-#=finish
+my $file = $ff.font-file-paths{$code};
+isa-ok $file.IO, IO::Path, "valid path";
+
+$font = load-font :$file;
+isa-ok $font, PDF::Content::FontObj;
 
 $font = $ff.get-font: "t";
+is $font.font-name, "FreeSerif", "FontObj knows its name";
+
+$font = $ff.get-font: 1;
 isa-ok $font, PDF::Content::FontObj;
 
-#$font = $ff.get-font: 1;
-
-if 0 and $debug {
-    say "File paths hash contents ($nk elements):";
-    for @k -> $k {
-        my $v = %h{$k};
-        say "  key: ", $k;
-        say "    value: ", $v;
-    }
-}
-
-done-testing;
-
-=finish
-
-my %fpaths = get-font-file-paths-hash;
-my ($fpath, $fpath2);
-my ($font, $font2);
-$fpath  = %fpaths<t>;
-$fpath2 = %fpaths<sa>;
-isa-ok $fpath, IO::Path;
-isa-ok $fpath2, IO::Path;
-
-$font  = PDF::Font::Loader.load-font: :file($fpath);
-$font2 = PDF::Font::Loader.load-font: :file($fpath2);
+$code = "Free Serif";
+$font = $ff.get-font: $code;
 isa-ok $font, PDF::Content::FontObj;
-isa-ok $font2, PDF::Content::FontObj;
-
 
 done-testing;
 

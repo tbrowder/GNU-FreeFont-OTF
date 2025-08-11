@@ -6,7 +6,7 @@ my @modules = <
     GNU::FreeFont-TTF::Classes
     GNU::FreeFont-TTF::Subs
     GNU::FreeFont-TTF::Vars
-    GNU::FreeFont-TTF::FPaths
+    GNU::FreeFont-TTF::FontPaths
 >;
 
 plan @modules.elems;

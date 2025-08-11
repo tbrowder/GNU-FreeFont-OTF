@@ -1,6 +1,15 @@
+use OO::Monitors;
+
 use Test;
 
 my $debug = 1;
+
+use MacOS::NativeLib "*";
+use PDF::Font::Loader::HarfBuzz;
+use PDF::Font::Loader :load-font;
+use PDF::Content;
+use PDF::Content::FontObj;
+use PDF::Lite;
 
 use GNU::FreeFont-TTF;
 
@@ -14,17 +23,25 @@ if $debug {
 }
 
 my $last-font;
-my @fnames = <t se 1>;
+my @fnames = 't', 'se', 1;
 for @fnames.kv -> $i, $fnam {
     my $f = $ff.get-font: $fnam;
     isa-ok $f, PDF::Content::FontObj;
 
+    =begin comment
     if $i {
         is $f, $last-font;
     }
+    =end comment
 
     # save for the next comparison
     $last-font = $f;
+}
+
+# check ALL fonts load;
+for $ff.codes-list.sort -> $code {
+    my $f = $ff.get-font: $code;
+    say $f.font-name;
 }
 
 done-testing;

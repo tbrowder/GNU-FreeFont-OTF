@@ -22,8 +22,8 @@
   "provides": {
     "GNU::FreeFont-TTF": "lib/GNU/FreeFont-TTF.rakumod",
     "GNU::FreeFont-TTF::Classes": "lib/GNU/FreeFont-TTF/Classes.rakumod",
-    "GNU::FreeFont-TTF::FPaths": "lib/GNU/FreeFont-TTF/FPaths.rakumod",
     "GNU::FreeFont-TTF::FontList": "lib/GNU/FreeFont-TTF/FontList.rakumod",
+    "GNU::FreeFont-TTF::FontPaths": "lib/GNU/FreeFont-TTF/FontPaths.rakumod",
     "GNU::FreeFont-TTF::Subs": "lib/GNU/FreeFont-TTF/Subs.rakumod",
     "GNU::FreeFont-TTF::Vars": "lib/GNU/FreeFont-TTF/Vars.rakumod"
   },

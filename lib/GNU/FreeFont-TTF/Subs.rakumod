@@ -1,3 +1,5 @@
+use OO::Monitors;
+
 unit module GNU::FreeFont-TTF::Subs;
 
 use PDF::Lite;
@@ -14,7 +16,6 @@ sub print-font-sample(
     my $ff = GNU::FreeFont-TTF.new;
 
     my $f = $ff.get-font: 1;
-    my $fn = $f.name;
 
-    say "DEBUG: Face name: $fn";
+    my $fname = $f.font-name;
 }

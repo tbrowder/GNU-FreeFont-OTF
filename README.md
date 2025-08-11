@@ -3,7 +3,7 @@
 NAME
 ====
 
-**GNU::FreeFont-OT** - Provides a collection of GNU FreeType fonts for use in Raku PDF creation
+**GNU::FreeFont-TTF** - Provides a collection of GNU FreeType fonts for use in Raku PDF creation
 
 SYNOPSIS
 ========
@@ -11,13 +11,13 @@ SYNOPSIS
 ```raku
 use Test;
 use PDF::Content;
-use GNU::FreeFont-OT;
+use GNU::FreeFont-TTF;
 
-my %fonts = get-loaded-fonts-hash;
+my $ff = GNU::FreeFont-TTF.new;
 
-# Select the GNU FreeFont 'FreeSerif' to be loaded
+# Select the GNU FreeFont 'Free Serif' to be loaded
 # as an object to be used to print text on a PDF page:
-my $font  = %fonts<se>;
+my $font  = $ff.get-font: "FreeSerif";
 isa-ok $font, PDF::Content::FontObj;
 # OUTPUT:
 ok 1 - The object is-a 'PDF::Content::FontObj'
@@ -43,7 +43,7 @@ The following tables show the hash codes (keys) to use to select the desired fon
 
 Note the *Code* and *Code2* columns. Each row contains equivalent code you may use to select the desired GNU FreeFont face.
 
-NOTE: in a future revision you will be able use the reference number to select a font face.
+You maay also use the font name in the first colum or the reference number to select the font.
 
 Table 1
 -------

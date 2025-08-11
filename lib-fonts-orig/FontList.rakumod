@@ -7,10 +7,12 @@ our %Fonts is export = %(
     FreeSerif-Bold       => "tb",                             # 2
     FreeSerif-Italic     => "ti",  # also to                  # 3
     FreeSerif-BoldItalic => "tbi", # also tbo, tob, tib       # 4
+
     FreeSans             => "h",                              # 5
     FreeSans-Bold        => "hb",                             # 6
     FreeSans-Oblique     => "ho",  # also hi                  # 7
     FreeSans-BoldOblique => "hbo", # also hbi, hob, hib       # 8
+
     FreeMono             => "c",                              # 9
     FreeMono-Bold        => "cb",                             # 10
     FreeMono-Oblique     => "co",  # also ci                  # 11
