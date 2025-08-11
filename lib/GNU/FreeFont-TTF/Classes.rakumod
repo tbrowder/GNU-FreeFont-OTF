@@ -1,8 +1,16 @@
 unit module GNU::FreeFont-TTF::Classes;
 
-use PDF::Content::FontObj;
-
 =begin comment
+use PDF::Content::FontObj;
+use PDF::Font::Loader;
+
+class SimpleFont is export {
+    has PDF::Content::FontObj;
+    method get-font($path) {
+    
+    }
+}
+
 unit module GNU::FreeFont-TTF::Classes;
 
 use GNU::FreeFont-TTF::FontList;

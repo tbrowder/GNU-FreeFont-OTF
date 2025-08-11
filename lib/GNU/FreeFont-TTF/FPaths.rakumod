@@ -2,15 +2,16 @@ unit module GNU::FreeFont-TTF::FPaths;
 
 use MacOS::NativeLib "*";
 
-#use PDF::Font::Loader::HarfBuzz;
-#use PDF::Font::Loader :load-font;
-#use PDF::Content;
-#use PDF::Content::FontObj;
+use PDF::Font::Loader::HarfBuzz;
+use PDF::Font::Loader :load-font;
+use PDF::Content;
+use PDF::Content::FontObj;
 
 use QueryOS;
 
 my $os = OS.new;
 
+# /usr/share/fonts/truetype/freefont/
 my $Ld = "/usr/share/fonts/truetype/freefont";
 my $Md = "/opt/homebrew/Caskroom/font-freefont/20120503/freefont-20120503";
 my $Wd = "/usr/share/fonts/truetype/freefont";
@@ -34,27 +35,27 @@ sub get-font-file-paths-hash(:$debug --> Hash) is export {
 
     # from the GNU FreeFont collection
     # only OpenType fonts wanted
-    
+
     # Use codes reflecting the Adobe parentage of its class PostScript fonts
     # I grew up with in the PS days:
-    # 
+    #
     # Times-Roman
-    my $fft   = "$fontdir/FreeSerif.otf".IO;
-    my $fftb  = "$fontdir/FreeSerifBold.otf".IO;
-    my $ffti  = "$fontdir/FreeSerifItalic.otf".IO;
-    my $fftbi = "$fontdir/FreeSerifBoldItalic.otf".IO;
+    my $fft   = "$fontdir/FreeSerif.ttf".IO;
+    my $fftb  = "$fontdir/FreeSerifBold.ttf".IO;
+    my $ffti  = "$fontdir/FreeSerifItalic.ttf".IO;
+    my $fftbi = "$fontdir/FreeSerifBoldItalic.ttf".IO;
 
     # Helvetica
-    my $ffh   = "$fontdir/FreeSans.otf".IO;
-    my $ffhb  = "$fontdir/FreeSansBold.otf".IO;
-    my $ffho  = "$fontdir/FreeSansOblique.otf".IO;
-    my $ffhbo = "$fontdir/FreeSansBoldOblique.otf.IO";
+    my $ffh   = "$fontdir/FreeSans.ttf".IO;
+    my $ffhb  = "$fontdir/FreeSansBold.ttf".IO;
+    my $ffho  = "$fontdir/FreeSansOblique.ttf".IO;
+    my $ffhbo = "$fontdir/FreeSansBoldOblique.ttf".IO;
 
    # Courier
-    my $ffc   = "$fontdir/FreeMono.otf".IO;
-    my $ffcb  = "$fontdir/FreeMonoBold.otf".IO;
-    my $ffco  = "$fontdir/FreeMonoOblique.otf".IO;
-    my $ffcbo = "$fontdir/FreeMonoBoldOblique.otf.IO";
+    my $ffc   = "$fontdir/FreeMono.ttf".IO;
+    my $ffcb  = "$fontdir/FreeMonoBold.ttf".IO;
+    my $ffco  = "$fontdir/FreeMonoOblique.ttf".IO;
+    my $ffcbo = "$fontdir/FreeMonoBoldOblique.ttf".IO;
 
     my %fonts;
 

@@ -10,26 +10,34 @@ use PDF::Font::Loader :load-font;
 use PDF::Content;
 use PDF::Content::FontObj;
 use PDF::Lite;
-use Font::FreeType;
 
-use GNU::FreeFont-OTF;
-use GNU::FreeFont-OTF::FontList;
-use GNU::FreeFont-OTF::FPaths;
+use GNU::FreeFont-TTF;
+use GNU::FreeFont-TTF::FontList;
+use GNU::FreeFont-TTF::FPaths;
 
 my ($fpath, $fpath2);
 my ($font, $font2);
 
-my $ff = GNU::FreeFont-OTF.new;
-isa-ok $ff, GNU::FreeFont-OTF, "good GNU::FreeFont object";
+my $ff = GNU::FreeFont-TTF.new;
+isa-ok $ff, GNU::FreeFont-TTF, "good GNU::FreeFont object";
 
-my %h = $fpath = $ff.font-file-paths;
-isa-ok %h, Hash; # GNU::FreeFont-OTF, "good GNU::FreeFont object";
+my %h = $ff.font-file-paths;
+isa-ok %h, Hash, "good Hash of font paths";
 
 my @k  = %h.keys.sort;
 my $nk = @k.elems;
 is $nk, 24, "must have $nk elements";
+isa-ok %h{@k.head}, IO::Path, "valid path";
+
+isa-ok $ff.font-file-paths{@k.head}, IO::Path, "valid path";
+
+#done-testing;
+#=finish
 
 $font = $ff.get-font: "t";
+isa-ok $font, PDF::Content::FontObj;
+
+#$font = $ff.get-font: 1;
 
 if 0 and $debug {
     say "File paths hash contents ($nk elements):";

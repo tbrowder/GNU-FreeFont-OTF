@@ -9,10 +9,10 @@ use PDF::Font::Loader::HarfBuzz;
 use PDF::Font::Loader :load-font;
 use PDF::Content;
 use PDF::Content::FontObj;
-#use PDF::Lite;
+use PDF::Lite;
 
 # testing the file path getter:
-use GNU::FreeFont-OTF::FPaths;
+use GNU::FreeFont-TTF::FPaths;
 my %fpaths = get-font-file-paths-hash;
 
 my ($fpath, $fpath2);

@@ -105,6 +105,7 @@ for @clist {
 }
 
 our %codes-hash is export = %cchash; # set @clist; #(%Fonts.values).List;
+our @codes-list is export = @clist;  # set @clist; #(%Fonts.values).List;
 
 # remove codes from aliases
 for %Fonts.kv -> $k, $code {
@@ -125,4 +126,5 @@ for @alist {
 }
 
 our %aliases-hash is export = %aahash; #set @alist; # (%FontAliases.keys).List;
+our @aliases-list is export = @alist;  # set @clist; #(%Fonts.values).List;
 

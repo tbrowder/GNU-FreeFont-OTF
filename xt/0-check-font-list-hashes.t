@@ -1,6 +1,6 @@
 use Test;
 
-use GNU::FreeFont-OTF::FontList;
+use GNU::FreeFont-TTF::FontList;
 
 my $debug = 1;
 
