@@ -9,9 +9,11 @@ use GNU::FreeFont-TTF::Subs;
 
 my $debug = 0;
 
+my $ofil = "test5.pdf";
+
 if not $debug {
     lives-ok {
-        print-font-sample :$debug;
+        print-font-sample $ofil, :$debug;
     }
 }
 else {
