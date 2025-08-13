@@ -61,11 +61,13 @@ say "content-width: ", $tb.content-width;
 say "content-height: ", $tb.content-height;
 
 my @bbox;
+=begin comment
 $page.text: {
     # first line baseline
     .text-position = 72, 720;
     @bbox = .print: $tb;
 }
+=end comment
 
 # try cloning
 my $tb2 = $tb.clone: :text($quote), :width(4*72);;
@@ -99,7 +101,7 @@ $g.Restore;
 
 # try another clone
 my $tb3 = $tb.clone: :text($quote), :align<justify>, :width(4*72),
-                     :word-wrap($fo.stringwidth(' '));
+                     :word-wrap($tb.stringwidth(' '));
 isa-ok $tb3, PDF::Content::Text::Box;
 say "content-width: ", $tb3.content-width;
 say "content-height: ", $tb3.content-height;
@@ -121,7 +123,7 @@ else {
         .decoded,        # <== the plus sign was removed
         .content-width,
         # .word-gap = 6; # <== this is trial and error (David's solution)
-        .word-gap = $fo.stringwidth(' ');
+        .word-gap = $tb.stringwidth(' ');
     };
 }
 
