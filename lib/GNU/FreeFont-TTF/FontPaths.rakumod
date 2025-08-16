@@ -2,16 +2,13 @@ unit module GNU::FreeFont-TTF::FontPaths;
 
 use MacOS::NativeLib "*";
 
-use PDF::Font::Loader::HarfBuzz;
-use PDF::Font::Loader :load-font;
-use PDF::Content;
-use PDF::Content::FontObj;
-
 use QueryOS;
 
 my $os = OS.new;
 
 # The font directory for each system:
+
+# Linux
 # /usr/share/fonts/truetype/freefont/
 my $Ld = "/usr/share/fonts/truetype/freefont";
 

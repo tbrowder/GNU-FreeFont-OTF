@@ -8,6 +8,7 @@ use PDF::Content::Page :PageSizes;
 use GNU::FreeFont-TTF;
 use GNU::FreeFont-TTF::FontPaths;
 
+=begin comment
 sub print-font-sample(
     $ofil = "test5.pdf",
     :$debug
@@ -22,3 +23,4 @@ sub print-font-sample(
     }
     $pdf.save-as: $ofil;
 }
+=end comment
