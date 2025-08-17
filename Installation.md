@@ -25,7 +25,7 @@ If this package does not install the fonts for your system you can obtain them f
 
 On systems derived from Debian:
 
-    $ sudo aptitude install fonts-freefont-ttf
+    $ sudo aptitude install fonts-freefont-otf
 
 On MacOS:
 

@@ -11,9 +11,9 @@ use PDF::Content;
 use PDF::Content::FontObj;
 use PDF::Lite;
 
-use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::FontPaths;
-#use GNU::FreeFont-TTF::Subs;
+use GNU::FreeFont-OTF;
+use GNU::FreeFont-OTF::FontPaths;
+#use GNU::FreeFont-OTF::Subs;
 
 my $ofil = "test9.pdf";
 

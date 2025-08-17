@@ -8,7 +8,7 @@ use PDF::Content::Text::Box;
 
 use Compress::PDF;
 
-use GNU::FreeFont-TTF;
+use GNU::FreeFont-OTF;
 
 my $debug = 0;
 
@@ -24,7 +24,7 @@ without any temptation, that every man of sense, and character,
 detests and despises it.
 HERE
 
-my $file = "/usr/share/fonts/truetype/freefont/FreeSerif.ttf";
+my $file = "/usr/share/fonts/truetype/freefont/FreeSerif.otf";
 
 my PDF::Lite $pdf .= new;
 my $page = $pdf.add-page;

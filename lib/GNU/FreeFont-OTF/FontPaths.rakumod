@@ -1,4 +1,4 @@
-unit module GNU::FreeFont-TTF::FontPaths;
+unit module GNU::FreeFont-OTF::FontPaths;
 
 use MacOS::NativeLib "*";
 
@@ -12,10 +12,10 @@ my $os = OS.new;
 # /usr/share/fonts/truetype/freefont/
 my $Ld = "/usr/share/fonts/truetype/freefont";
 
-# on MacOs, use another font for .ttf
+# on MacOs, use another font for .otf
 my $Md = "/opt/homebrew/Caskroom/font-freefont/20120503/freefont-20120503";
 
-# on Windows, use another font for ttf
+# on Windows, use another font for otf
 my $Wd = "/usr/share/fonts/truetype/freefont";
 
 sub get-font-file-paths-hash(:$debug --> Hash) is export {
@@ -40,22 +40,22 @@ sub get-font-file-paths-hash(:$debug --> Hash) is export {
     # I grew up with in the PS days:
     #
     # Times-Roman
-    my $fft   = "$fontdir/FreeSerif.ttf".IO;
-    my $fftb  = "$fontdir/FreeSerifBold.ttf".IO;
-    my $ffti  = "$fontdir/FreeSerifItalic.ttf".IO;
-    my $fftbi = "$fontdir/FreeSerifBoldItalic.ttf".IO;
+    my $fft   = "$fontdir/FreeSerif.otf".IO;
+    my $fftb  = "$fontdir/FreeSerifBold.otf".IO;
+    my $ffti  = "$fontdir/FreeSerifItalic.otf".IO;
+    my $fftbi = "$fontdir/FreeSerifBoldItalic.otf".IO;
 
     # Helvetica
-    my $ffh   = "$fontdir/FreeSans.ttf".IO;
-    my $ffhb  = "$fontdir/FreeSansBold.ttf".IO;
-    my $ffho  = "$fontdir/FreeSansOblique.ttf".IO;
-    my $ffhbo = "$fontdir/FreeSansBoldOblique.ttf".IO;
+    my $ffh   = "$fontdir/FreeSans.otf".IO;
+    my $ffhb  = "$fontdir/FreeSansBold.otf".IO;
+    my $ffho  = "$fontdir/FreeSansOblique.otf".IO;
+    my $ffhbo = "$fontdir/FreeSansBoldOblique.otf".IO;
 
     # Courier
-    my $ffc   = "$fontdir/FreeMono.ttf".IO;
-    my $ffcb  = "$fontdir/FreeMonoBold.ttf".IO;
-    my $ffco  = "$fontdir/FreeMonoOblique.ttf".IO;
-    my $ffcbo = "$fontdir/FreeMonoBoldOblique.ttf".IO;
+    my $ffc   = "$fontdir/FreeMono.otf".IO;
+    my $ffcb  = "$fontdir/FreeMonoBold.otf".IO;
+    my $ffco  = "$fontdir/FreeMonoOblique.otf".IO;
+    my $ffcbo = "$fontdir/FreeMonoBoldOblique.otf".IO;
 
     my %fonts;
     # get paths, don't load

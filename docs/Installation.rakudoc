@@ -34,7 +34,7 @@ sources:
 On systems derived from Debian:
 
 =begin code
-$ sudo aptitude install fonts-freefont-ttf
+$ sudo aptitude install fonts-freefont-otf
 =end code
 
 On MacOS:

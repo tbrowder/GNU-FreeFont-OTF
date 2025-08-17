@@ -11,14 +11,14 @@ use PDF::Content;
 use PDF::Content::FontObj;
 use PDF::Lite;
 
-use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::FontPaths;
+use GNU::FreeFont-OTF;
+use GNU::FreeFont-OTF::FontPaths;
 
 my ($fpath, $fpath2);
 my ($font, $font2, $code);
 
-my $ff = GNU::FreeFont-TTF.new;
-isa-ok $ff, GNU::FreeFont-TTF, "good GNU::FreeFont object";
+my $ff = GNU::FreeFont-OTF.new;
+isa-ok $ff, GNU::FreeFont-OTF, "good GNU::FreeFont object";
 
 my %h = $ff.font-file-paths;
 isa-ok %h, Hash, "good Hash of font paths";

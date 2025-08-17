@@ -11,11 +11,11 @@ use PDF::Content;
 use PDF::Content::FontObj;
 use PDF::Lite;
 
-use GNU::FreeFont-TTF;
+use GNU::FreeFont-OTF;
 
-my $ff  = GNU::FreeFont-TTF.new;
+my $ff  = GNU::FreeFont-OTF.new;
 
-isa-ok $ff, GNU::FreeFont-TTF;
+isa-ok $ff, GNU::FreeFont-OTF;
 
 if $debug {
     say "WARNING: This test MUST pass in order to publish";

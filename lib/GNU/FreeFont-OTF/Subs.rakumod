@@ -1,12 +1,12 @@
 use OO::Monitors;
 
-unit module GNU::FreeFont-TTF::Subs;
+unit module GNU::FreeFont-OTF::Subs;
 
 use PDF::Lite;
 use PDF::Content::Page :PageSizes;
 
-use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::FontPaths;
+use GNU::FreeFont-OTF;
+use GNU::FreeFont-OTF::FontPaths;
 
 =begin comment
 sub print-font-sample(
@@ -14,7 +14,7 @@ sub print-font-sample(
     :$debug
 ) is export {
 
-    my $ff = GNU::FreeFont-TTF.new;
+    my $ff = GNU::FreeFont-OTF.new;
     my $f = $ff.get-font: 1;
     my $fname = $f.font-name;
     my PDF::Lite $pdf .= new;

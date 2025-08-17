@@ -1,9 +1,9 @@
 use Test;
 
 my @modules = <
-    GNU::FreeFont-TTF
-    GNU::FreeFont-TTF::Subs
-    GNU::FreeFont-TTF::FontPaths
+    GNU::FreeFont-OTF
+    GNU::FreeFont-OTF::Subs
+    GNU::FreeFont-OTF::FontPaths
 >;
 
 plan @modules.elems;

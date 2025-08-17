@@ -3,7 +3,7 @@
 NAME
 ====
 
-**GNU::FreeFont-TTF** - Provides a collection of GNU FreeType fonts for use in Raku PDF creation
+**GNU::FreeFont-OTF** - Provides a collection of GNU FreeType fonts for use in Raku PDF creation
 
 SYNOPSIS
 ========
@@ -11,9 +11,9 @@ SYNOPSIS
 ```raku
 use Test;
 use PDF::Content;
-use GNU::FreeFont-TTF;
+use GNU::FreeFont-OTF;
 
-my $ff = GNU::FreeFont-TTF.new;
+my $ff = GNU::FreeFont-OTF.new;
 
 # Select the GNU FreeFont 'Free Serif' to be loaded
 # as an object to be used to print text on a PDF page:
@@ -27,14 +27,14 @@ ok 1 - The object is-a 'PDF::Content::FontObj'
 DESCRIPTION
 ===========
 
-**GNU::FreeFont-TTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
+**GNU::FreeFont-OTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
 
 See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more information on the sources and Unicode coverage of the FontFactory GNU FreeFonts collection.
 
 Installation requirements
 =========================
 
-Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requiremnts to ensure they are installed before running `zef install GNU::FreeFont-TTF`.
+Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requiremnts to ensure they are installed before running `zef install GNU::FreeFont-OTF`.
 
 Using this module
 =================

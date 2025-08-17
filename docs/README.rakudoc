@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-B<GNU::FreeFont-TTF> - Provides a collection of GNU FreeType fonts for
+B<GNU::FreeFont-OTF> - Provides a collection of GNU FreeType fonts for
 use in Raku PDF creation
 
 =head1 SYNOPSIS
@@ -10,9 +10,9 @@ use in Raku PDF creation
 =begin code :lang<raku>
 use Test;
 use PDF::Content;
-use GNU::FreeFont-TTF;
+use GNU::FreeFont-OTF;
 
-my $ff = GNU::FreeFont-TTF.new;
+my $ff = GNU::FreeFont-OTF.new;
 
 # Select the GNU FreeFont 'Free Serif' to be loaded
 # as an object to be used to print text on a PDF page:
@@ -25,7 +25,7 @@ ok 1 - The object is-a 'PDF::Content::FontObj'
 
 =head1 DESCRIPTION
 
-B<GNU::FreeFont-TTF> is a Raku package that provides easy handling of
+B<GNU::FreeFont-OTF> is a Raku package that provides easy handling of
 the set of GNU FreeFont OpenType fonts which descended from the
 classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the
 original Adobe fonts, these fonts also include thousands of Unicode
@@ -41,7 +41,7 @@ FontFactory GNU FreeFonts collection.
 Your system may not have all the required packages to support this
 Raku module. See L<Installation |./Installation.md> for those
 requiremnts to ensure they are installed before running C<zef install
-GNU::FreeFont-TTF>.
+GNU::FreeFont-OTF>.
 
 =head1 Using this module
 

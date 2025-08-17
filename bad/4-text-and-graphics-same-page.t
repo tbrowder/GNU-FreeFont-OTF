@@ -12,10 +12,10 @@ use PDF::Content::FontObj;
 use PDF::Lite;
 use PDF::Font::Loader :load-font;;
 
-use GNU::FreeFont-TTF;
-use GNU::FreeFont-TTF::FontPaths;
+use GNU::FreeFont-OTF;
+use GNU::FreeFont-OTF::FontPaths;
 
-my $ff = GNU::FreeFont-TTF.new;
+my $ff = GNU::FreeFont-OTF.new;
 
 my ($font, $font-size);
 
