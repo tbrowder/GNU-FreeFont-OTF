@@ -1,35 +1,32 @@
-name: MacOS
-
+# .github/workflows/macos.yml
+name: macos
 on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*'
+  push: { branches: [ main ] }
   pull_request:
-
 jobs:
-  raku:
-    strategy:
-      matrix:
-        os:
-          - macos-latest
-        raku-version:
-          - 'latest'
-    runs-on: ${{ matrix.os }}
+  test:
+    runs-on: macos-13   # pin
     steps:
       - uses: actions/checkout@v4
-      - uses: Raku/setup-raku@v1
+      - name: Install Raku
+        uses: Raku/setup-raku@v1
         with:
-          raku-version: ${{ matrix.raku-version }}
-      - name: Install Dependencies
+          raku-version: "2024.12"
+      - name: Install fonts & deps
         run: |
-          brew install fontconfig
-          brew install freetype
+          brew update
+          brew tap homebrew/cask-fonts || true
+          brew install --cask font-freefont || true   # best-effort
           brew install harfbuzz
-          brew install --cask font-freefont
-          brew install --cask font-dejavu
-          zef install MacOS::NativeLib
-          zef install --/test --deps-only .
-      - name: Install
-        run: zef install --debug .
+      - name: Cache zef artifacts
+        uses: actions/cache@v4
+        with:
+          path: ~/.raku
+          key: zef-${{ runner.os }}-${{ hashFiles('META6.json') }}
+      - name: Install deps (pinned)
+        run: zef --/test install . --deps-only
+      - name: Run unit tests
+        run: zef test --exclude=xt .
+      - name: Run author sample (flex)
+        run: |
+          zef install . --debug

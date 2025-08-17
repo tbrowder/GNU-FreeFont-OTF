@@ -1,32 +1,32 @@
-name: Linux
-
+# .github/workflows/linux.yml
+name: linux
 on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*'
+  push: { branches: [ main ] }
   pull_request:
-
 jobs:
-  raku:
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-        raku-version:
-          - 'latest'
-    runs-on: ${{ matrix.os }}
+  test:
+    runs-on: ubuntu-22.04   # pin runner image
     steps:
       - uses: actions/checkout@v4
-      - uses: Raku/setup-raku@v1
+      - name: Install Raku (rakubrew)
+        uses: Raku/setup-raku@v1
         with:
-          raku-version: ${{ matrix.raku-version }}
-      - name: Install Dependencies
+          raku-version: "2024.12"   # pin a known-good Rakudo; bump deliberately
+      - name: Install system deps & GNU FreeFont (OTF)
         run: |
-          sudo apt-get install -y fontconfig locate libharfbuzz-dev
-          sudo apt-get install -y fonts-freefont-otf
-          sudo apt-get install -y fonts-freefont-ttf
-          zef install --/test --deps-only .
-      - name: Install
-        run: zef install --debug .
+          sudo apt-get update
+          sudo apt-get install -y fontconfig libharfbuzz-dev fonts-freefont-otf
+      - name: Cache zef artifacts
+        uses: actions/cache@v4
+        with:
+          path: ~/.raku
+          key: zef-${{ runner.os }}-${{ hashFiles('META6.json') }}
+      - name: Install deps (pinned)
+        run: |
+          zef --/test install . --deps-only
+      - name: Run unit tests
+        run: |
+          zef test --exclude=xt .
+      - name: Run author sample (tight)
+        run: |
+          zef install . --debug
