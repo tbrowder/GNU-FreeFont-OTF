@@ -19,16 +19,16 @@
   ],
   "description": "Provides routines for using the GNU FreeType font in OpenType format \n",
   "license": "Artistic-2.0",
-  "name": "GNU::FreeFont-TTF",
+  "name": "GNU::FreeFont-OTF",
   "perl": "6.d",
   "provides": {
-    "GNU::FreeFont-TTF": "lib/GNU/FreeFont-TTF.rakumod",
-    "GNU::FreeFont-TTF::FontPaths": "lib/GNU/FreeFont-TTF/FontPaths.rakumod",
-    "GNU::FreeFont-TTF::Subs": "lib/GNU/FreeFont-TTF/Subs.rakumod"
+    "GNU::FreeFont-OTF": "lib/GNU/FreeFont-OTF.rakumod",
+    "GNU::FreeFont-OTF::FontPaths": "lib/GNU/FreeFont-OTF/FontPaths.rakumod",
+    "GNU::FreeFont-OTF::Subs": "lib/GNU/FreeFont-OTF/Subs.rakumod"
   },
   "resources": [
   ],
-  "source-url": "https://github.com/tbrowder/GNU-FreeFont-TTF.git",
+  "source-url": "https://github.com/tbrowder/GNU-FreeFont-OTF.git",
   "tags": [
     "font PDF GNU FreeFont OpenType"
   ],

@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/tbrowder/GNU-FreeFont-TTF/actions/workflows/linux.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-TTF/actions) [![Actions Status](https://github.com/tbrowder/GNU-FreeFont-TTF/actions/workflows/macos.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-TTF/actions) [![Actions Status](https://github.com/tbrowder/GNU-FreeFont-TTF/actions/workflows/windows.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-TTF/actions)
+[![Actions Status](https://github.com/tbrowder/GNU-FreeFont-OTF/actions/workflows/linux.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-OTF/actions) [![Actions Status](https://github.com/tbrowder/GNU-FreeFont-OTF/actions/workflows/macos.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-OTF/actions) [![Actions Status](https://github.com/tbrowder/GNU-FreeFont-OTF/actions/workflows/windows.yml/badge.svg)](https://github.com/tbrowder/GNU-FreeFont-OTF/actions)
 
 NAME
 ====
@@ -27,14 +27,14 @@ ok 1 - The object is-a 'PDF::Content::FontObj'
 DESCRIPTION
 ===========
 
-**GNU::FreeFont-OT** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
+**GNU::FreeFont-TTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
 
 See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more information on the sources and Unicode coverage of the FontFactory GNU FreeFonts collection.
 
 Installation requirements
 =========================
 
-Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requiremnts to ensure they are installed before running `zef install GNU::FreeFont-OT`.
+Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requiremnts to ensure they are installed before running `zef install GNU::FreeFont-TTF`.
 
 Using this module
 =================

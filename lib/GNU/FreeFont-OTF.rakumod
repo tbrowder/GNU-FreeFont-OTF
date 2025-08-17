@@ -1,6 +1,6 @@
 use OO::Monitors;
 
-unit monitor GNU::FreeFont-TTF;
+unit monitor GNU::FreeFont-OTF;
 
 use MacOS::NativeLib "*";
 use PDF::Lite;
@@ -13,7 +13,7 @@ use PDF::Content::FontObj;
 
 use Font::FreeType;
 
-use GNU::FreeFont-TTF::FontPaths;
+use GNU::FreeFont-OTF::FontPaths;
 
 #has %.loaded-fonts;
 has %.font-file-paths;
@@ -83,7 +83,7 @@ sub print-font-sample(
     :$debug
 ) is export {
 
-    my $ff = GNU::FreeFont-TTF.new;
+    my $ff = GNU::FreeFont-OTF.new;
     my $f = $ff.get-font: 1;
     my $fname = $f.font-name;
     my PDF::Lite $pdf .= new;
