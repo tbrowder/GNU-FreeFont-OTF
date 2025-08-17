@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
+
 use File::Find;
-use Lines::Containing;
 
 my $dir = ".";
 
@@ -23,10 +23,11 @@ for @ttf -> $f {
 @ttf = [];
 
 for @f -> $f {
+
     next if $f ~~ /"finder.raku"/;
     my $add = 0;
     for $f.IO.lines -> $line is copy {
-        if $line ~~ / ttf / {
+        if $line ~~ / ttf | truetype / {
             ++$add;
 #           say $line;
         }
