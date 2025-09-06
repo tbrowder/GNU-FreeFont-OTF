@@ -9,14 +9,14 @@ my $os = OS.new;
 # The font directory for each system:
 
 # Linux
-# /usr/share/fonts/truetype/freefont/
-my $Ld = "/usr/share/fonts/truetype/freefont";
+# /usr/share/fonts/opentype/freefont/
+my $Ld = "/usr/share/fonts/opentype/freefont";
 
 # on MacOs, use another font for .otf
 my $Md = "/opt/homebrew/Caskroom/font-freefont/20120503/freefont-20120503";
 
 # on Windows, use another font for otf
-my $Wd = "/usr/share/fonts/truetype/freefont";
+my $Wd = "/usr/share/fonts/opentype/freefont";
 
 sub get-font-file-paths-hash(:$debug --> Hash) is export {
     my $fontdir;
