@@ -8,14 +8,15 @@ use PDF::Content::Page :PageSizes;
 use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::FontPaths;
 
-=begin comment
 sub print-font-sample(
     $ofil = "test5.pdf",
+    :$fnum = 1,
+    :$lang = "en",
     :$debug
 ) is export {
 
     my $ff = GNU::FreeFont-OTF.new;
-    my $f = $ff.get-font: 1;
+    my $f = $ff.get-font: $fnum;
     my $fname = $f.font-name;
     my PDF::Lite $pdf .= new;
     my $page = $pdf.add-page;
@@ -23,4 +24,3 @@ sub print-font-sample(
     }
     $pdf.save-as: $ofil;
 }
-=end comment
