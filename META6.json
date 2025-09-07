@@ -24,7 +24,8 @@
   "provides": {
     "GNU::FreeFont-OTF": "lib/GNU/FreeFont-OTF.rakumod",
     "GNU::FreeFont-OTF::FontPaths": "lib/GNU/FreeFont-OTF/FontPaths.rakumod",
-    "GNU::FreeFont-OTF::Subs": "lib/GNU/FreeFont-OTF/Subs.rakumod"
+    "GNU::FreeFont-OTF::Subs": "lib/GNU/FreeFont-OTF/Subs.rakumod",
+    "GNU::FreeFont-OTF::Vars": "lib/GNU/FreeFont-OTF/Vars.rakumod"
   },
   "resources": [
   ],
