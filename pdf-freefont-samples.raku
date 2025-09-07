@@ -3,30 +3,30 @@
 use PDF::Lite;
 use PDF::Content::Page :PageSizes, :&to-landscape;
 use PDF::Font::Loader :load-font;
+
 use QueryOS;
+
+use Font::FreeType;
 
 my $os = QueryOS.new;
 
-use lib "../lib";
-use FontFactory;
-use FontFactory::Classes;
-use FontFactory::X::FontHashes;
-
-my %n = %FontFactory::X::FontHashes::number;
-
-my $ofil = "Gnu-FontFactory-samples.pdf";
+my $ofil = "GNU-FreeFont-OTF-font-samples.pdf";
 
 my $pdf = PDF::Lite.new;
 
 # TODO: add page numbers upper right of page
+my %default-samples; # defined in BEGIN block at the end
 
 my $face2 = 0; #  = "FreeSerifBold";
 my $face3 = 0; #  = "FreeSerif";
-my $f2 = "FreeSerifBold.otf";
-my $f3 = "FreeSerif.otf";
+my $font-file       = "FreeSerif.otf";
+my $title-font-file = "FreeSerifBold.otf";
+my $pn-font = $font-file;
 
 my %m = %(PageSizes.enums);
 my @m = %m.keys.sort;
+
+sub make-page {...}
 
 #=== move this code chunk WAY up
 my $debug = 0;
@@ -74,13 +74,17 @@ for @*ARGS {
 
 my $font       = load-font :file($font-file);
 my $title-font = load-font :file($title-font-file);
+my $default-font-stem = "FreeSerifBold";
 
 $pdf.media-box = %(PageSizes.enums){$media};
 
 $page = $pdf.add-page;
+my %h;
+my $curr-page = 1;
+my $npages = 1;
 make-page :$pdf, :$page, :$font, :$title-font, :$media, :%h, :landscape(True), :font-name($default-font-stem);
 
-} # end of pages loop
+#} # end of pages loop
 
 # end the document
 $pdf.save-as: $ofil;
@@ -133,7 +137,7 @@ sub make-page(
         $cx = $w * 0.5;
 
         # get the font's values from FontFactory
-        my ($leading, $height, $dh);
+        my ($leading, $height, $dh, $sm);
         $leading = $height = $dh = $sm.height; #1.3 * $font-size;
 
         # use 1-inch margins left and right, 1/2-in top and bottom
@@ -153,8 +157,11 @@ sub make-page(
         my $ptitle = "FontFactory Language Samples for Font: $font-name";
         @position = [$cx, $y];
         @bbox = .print: $ptitle, :@position,
-                       :font($title-font), :font-size(16), :align<center>, :kern;
-my $pn = "Page $curr-page of $npages"; # upper-right, right-justified
+        :font($title-font), :font-size(16), :align<center>, :kern;
+
+        $curr-page = 1;
+        my $pn = "Page $curr-page of $npages"; # upper-right, right-justified
+        my $rx = $w - 36; # page width less right margin
         @position = [$rx, $y];
         @bbox = .print: $pn, :@position,
                        :font($pn-font), :font-size(10), :align<right>, :kern;
@@ -247,7 +254,7 @@ my $pn = "Page $curr-page of $npages"; # upper-right, right-justified
 }
 
 BEGIN {
-%default-samples = [
+%default-samples = %(
     # keyed by two-character ISO language code
     #     key => {
     #         lang => "",
@@ -318,5 +325,5 @@ BEGIN {
         text => 'Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!',
         font => "",
     },
-];
+);
 } # end BEGIN

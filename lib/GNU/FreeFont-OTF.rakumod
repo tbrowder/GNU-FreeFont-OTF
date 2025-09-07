@@ -76,20 +76,3 @@ method get-font-object(
 #   self.loaded-fonts{$code} = $font; #ad-font: :file($font-file);
     $font;
 }
-
-#=begin comment
-sub print-font-sample(
-    $ofil = "test5.pdf",
-    :$debug
-) is export {
-
-    my $ff = GNU::FreeFont-OTF.new;
-    my $f = $ff.get-font: 1;
-    my $fname = $f.font-name;
-    my PDF::Lite $pdf .= new;
-    my $page = $pdf.add-page;
-    $page.graphics: {
-    }
-    $pdf.save-as: $ofil;
-}
-#=end comment

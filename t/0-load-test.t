@@ -1,10 +1,10 @@
 use Test;
 
-my @modules = <
-    GNU::FreeFont-OTF
-    GNU::FreeFont-OTF::Subs
-    GNU::FreeFont-OTF::FontPaths
->;
+my @modules = [
+    'GNU::FreeFont-OTF',
+    'GNU::FreeFont-OTF::Subs',
+    'GNU::FreeFont-OTF::FontPaths',
+];
 
 plan @modules.elems;
 
