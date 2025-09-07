@@ -4,6 +4,7 @@ my @modules = [
     'GNU::FreeFont-OTF',
     'GNU::FreeFont-OTF::Subs',
     'GNU::FreeFont-OTF::FontPaths',
+    'GNU::FreeFont-OTF::Vars',
 ];
 
 plan @modules.elems;
