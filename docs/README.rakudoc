@@ -34,7 +34,7 @@ among the few, freely-available fonts that have Type 1 kerning.
 
 See L<GNU FreeFont|https://www.gnu.org/software/freefont/sources/> for
 much more information on the sources and Unicode coverage of the
-FontFactory GNU FreeFonts collection.
+GNU FreeFonts collection.
 
 =head1 Installation requirements
 
@@ -59,7 +59,7 @@ to select the font.
 
 =head2 Table 1
 
-=begin table :caption<The GNU FontFactory Collection>
+=begin table :caption<The GNU FreeFont Collection>
 GNU FreeFont           | Code | Code2 | Reference No.
 -----------------------+------+--------------------------
 Free Serif             | se   | t     | 1

@@ -29,7 +29,7 @@ DESCRIPTION
 
 **GNU::FreeFont-OTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
 
-See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more information on the sources and Unicode coverage of the FontFactory GNU FreeFonts collection.
+See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more information on the sources and Unicode coverage of the GNU FreeFonts collection.
 
 Installation requirements
 =========================
@@ -49,7 +49,7 @@ Table 1
 -------
 
 <table class="pod-table">
-<caption>The GNU FontFactory Collection</caption>
+<caption>The GNU FreeFont Collection</caption>
 <thead><tr>
 <th>GNU FreeFont</th> <th>Code</th> <th>Code2</th> <th>Reference No.</th>
 </tr></thead>
