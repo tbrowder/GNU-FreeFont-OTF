@@ -7,17 +7,17 @@
   ],
   "depends": [
     "OO::Monitors",
-    "Font::FreeType:ver<0.5.4>:auth<zef:dwarring",
+    "Font::FreeType:ver<0.5.4>:auth<zef:dwarring>",
     "MacOS::NativeLib",
     "PDF::Font::Loader::HarfBuzz",
     "PDF::Font::Loader",
     "PDF::Content",
-    "PDF::Lite",a
+    "PDF::Lite",
     "PDF::API6",
     "Data::Dump",
     "QueryOS"
   ],
-  "description": "Provides routines for using the GNU FreeType font in OpenType format \n",
+  "description": "Provides routines for using the GNU FreeType font in OpenType format",
   "license": "Artistic-2.0",
   "name": "GNU::FreeFont-OTF",
   "perl": "6.d",
