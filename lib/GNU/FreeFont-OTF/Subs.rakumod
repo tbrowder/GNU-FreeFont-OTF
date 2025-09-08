@@ -7,6 +7,7 @@ use PDF::Content::Page :PageSizes;
 
 use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::FontPaths;
+use GNU::FreeFont-OTF::Vars;
 
 sub print-font-sample(
     $ofil = "test5.pdf",

@@ -1,0 +1,17 @@
+```
+===> Testing: GNU::FreeFont-OTF:ver<0.0.1>:auth<zef:tbrowder>
+[GNU::FreeFont-OTF] t/0-load-test.t ............ ok
+[GNU::FreeFont-OTF] t/1-raw-font-load-tests.t .. ok
+[GNU::FreeFont-OTF] t/2-gff-font-load-tests.t .. ok
+[GNU::FreeFont-OTF] t/9-font-samples.t ......... Dubious, test returned 1
+[GNU::FreeFont-OTF] Failed 1/1 subtests
+[GNU::FreeFont-OTF]
+[GNU::FreeFont-OTF] Test Summary Report
+[GNU::FreeFont-OTF] -------------------
+[GNU::FreeFont-OTF] t/9-font-samples.t  (Wstat: 256 Tests: 1 Failed: 1)
+[GNU::FreeFont-OTF]   Failed tests:  1
+[GNU::FreeFont-OTF] Non-zero exit status: 1
+[GNU::FreeFont-OTF] Files=4, Tests=18,  4 wallclock secs
+[GNU::FreeFont-OTF] Result: FAILED
+===> Testing [FAIL]: GNU::FreeFont-OTF:ver<0.0.1>:auth<zef:tbrowder>
+```

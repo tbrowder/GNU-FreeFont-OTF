@@ -1,0 +1,38 @@
+# GNU::FreeFont add-on (ChatGPT)
+
+This bundle adds a routine to `lib/GNU/FreeFont/Subs.rakumod`:
+
+- `pdf-language-samples($font-ref, Str:D $outfile --> IO::Path)`
+
+It renders a **portrait A4** PDF page sequence with page numbers “n of m” at the bottom-right that shows each entry in `%default-samples` with a language label and the sample text, using the selected GNU FreeFont face. The page **title includes the resolved face name** when available.
+
+## Accepted `$font-ref` forms
+
+- `1|2|3` → `FreeSerif`, `FreeSans`, `FreeMono`
+- A **family name** like `FreeSans`
+- A **path** to a `.ttf`/`.otf` file
+
+## Test
+
+A small test `t/90-pdf-language-samples.t` generates a PDF to `t/out/lang-samples-test.pdf` if a FreeFont face is present on the system. If not installed, it skips gracefully.
+
+## Dependencies
+
+Ensure your `META6.json` includes:
+
+```json
+{
+  "depends": [
+    "PDF::Lite",
+    "PDF::Font::Loader"
+  ]
+}
+```
+
+## Install
+
+Paste the routine into your existing `lib/GNU/FreeFont/Subs.rakumod` (or drop this file in place if you prefer to replace) and run:
+
+```
+zef test .
+```
