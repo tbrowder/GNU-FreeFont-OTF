@@ -1,31 +1,15 @@
-name: Win64
-  
-env:
-  TEST_JOBS: 1
-
-on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*'
-  pull_request:
-
+name: windows
+on: [push, pull_request]
 jobs:
-  raku:
-    strategy:
-      matrix:
-        os:
-          - windows-latest
-        raku-version:
-          - 'latest'
-    runs-on: ${{ matrix.os }}
+  test:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Raku/setup-raku@v1
-      - name: Install Dependencies
-        run: |
-            choco install rakudostar
-            zef --exclude="z" install --debug --/test --test-depends --deps-only .
-      - name: Run Tests
-        run: zef install . --debug
+      - name: Install Rakudo & zef
+        uses: Raku/setup-raku@v1
+      - name: Install deps
+        shell: bash
+        run: zef install --/test . --depsonly
+      - name: Run tests
+        shell: bash
+        run: zef test .

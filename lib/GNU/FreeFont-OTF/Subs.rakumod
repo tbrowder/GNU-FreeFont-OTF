@@ -62,10 +62,10 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
     my @pages = $pdf.pages;  # capture page list
 
     # --- Page metrics ---
-    my num $margin = 54;                 # 0.75in
-    my num $x      = $margin;
-    my num $y      = $page.media-box[3] - $margin; # top margin from page height
-    my num $col-w  = $page.media-box[2] - 2*$margin;
+    my Numeric $margin = 54;                 # 0.75in
+    my Numeric $x      = $margin;
+    my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
+    my Numeric $col-w  = $page.media-box[2] - 2*$margin;
 
     # --- Title ---
     $page.text: -> $txt {

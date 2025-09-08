@@ -14,6 +14,8 @@ use PDF::Content::FontObj;
 use Font::FreeType;
 
 use GNU::FreeFont-OTF::FontPaths;
+use GNU::FreeFont-OTF::Subs;
+use GNU::FreeFont-OTF::Vars;
 
 #has %.loaded-fonts;
 has %.font-file-paths;

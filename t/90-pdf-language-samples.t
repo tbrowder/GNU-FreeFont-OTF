@@ -11,14 +11,14 @@ ok &pdf-language-samples.defined, 'pdf-language-samples is exported';
 
 # Try to locate a FreeFont face. If missing, skip the rest gracefully.
 my @candidates = (
-    '/usr/share/fonts/truetype/freefont/FreeSerif.ttf',
-    '/usr/share/fonts/truetype/freefont/FreeSans.ttf',
-    '/usr/share/fonts/truetype/freefont/FreeMono.ttf',
-    '/usr/local/share/fonts/freefont/FreeSerif.ttf',
+    '/usr/share/fonts/opentype/freefont/FreeSerif.otf',
+    '/usr/share/fonts/opentype/freefont/FreeSans.otf',
+    '/usr/share/fonts/opentype/freefont/FreeMono.otf',
+    '/usr/local/share/fonts/freefont/FreeSerif.otf',
 ).grep(*.IO.f);
 
 if !@candidates {
-    skip-rest "GNU FreeFont not installed on this CI host; skipping PDF generation test";
+    skip-rest "GNU::FreeFont-OTF not installed on this CI host; skipping PDF generation test";
     exit;
 }
 
