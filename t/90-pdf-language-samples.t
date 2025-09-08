@@ -9,7 +9,6 @@ my $sample = $repo-root.IO.add("pdf-freefont-samples.raku").absolute;
 ok $sample.IO.e, "Found pdf-freefont-samples.raku at $sample"
     or bail-out "Cannot locate pdf-freefont-samples.raku";
 
-#=finish
 plan 6;
 
 # Ensure module compiles
