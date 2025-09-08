@@ -46,3 +46,13 @@ zef test .
 ## Kerning
 - Toggle per call: `:kerning(True|False)` (default: `True`).
 - We pass this through to `PDF::Lite` as `:kern($kerning)` when drawing sample text.
+
+
+## CLI usage
+A small wrapper is included:
+
+```
+raku bin/make-freefont-samples.raku --font-ref=1 --out=out.pdf
+raku bin/make-freefont-samples.raku --font-ref=FreeSans --page-size=Letter --no-kern --out=sans-letter.pdf
+raku bin/make-freefont-samples.raku --font-ref=/usr/share/fonts/truetype/freefont/FreeSerif.ttf --out=serif.pdf
+```
