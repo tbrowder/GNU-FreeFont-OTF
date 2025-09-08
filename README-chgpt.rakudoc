@@ -36,3 +36,8 @@ Paste the routine into your existing `lib/GNU/FreeFont/Subs.rakumod` (or drop th
 ```
 zef test .
 ```
+
+
+### Options
+
+- `:page-size<Letter|A4>` (default A4)
