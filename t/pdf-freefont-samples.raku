@@ -8,7 +8,7 @@ use QueryOS;
 
 use Font::FreeType;
 
-my $os = QueryOS.new;
+my $os = OS.new;
 
 my $ofil = "GNU-FreeFont-OTF-font-samples.pdf";
 
