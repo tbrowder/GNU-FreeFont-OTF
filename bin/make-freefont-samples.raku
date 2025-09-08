@@ -1,6 +1,7 @@
 #!/usr/bin/env raku
 use v6.d;
 
+use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::Subs; # :pdf-language-samples;
 use GNU::FreeFont-OTF::Vars; # :pdf-language-samples;
 

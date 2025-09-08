@@ -4,8 +4,8 @@ use Test;
 plan 3;
 
 # Ensure module compiles
-use lib 'lib';
 use GNU::FreeFont-OTF::Subs; # :pdf-language-samples;
+use GNU::FreeFont-OTF::Vars; # :pdf-language-samples;
 
 ok &pdf-language-samples.defined, 'pdf-language-samples is exported';
 
