@@ -41,3 +41,8 @@ zef test .
 ### Options
 
 - `:page-size<Letter|A4>` (default A4)
+
+
+## Kerning
+- Toggle per call: `:kerning(True|False)` (default: `True`).
+- We pass this through to `PDF::Lite` as `:kern($kerning)` when drawing sample text.
