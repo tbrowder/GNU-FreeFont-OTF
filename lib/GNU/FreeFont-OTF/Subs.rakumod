@@ -2,18 +2,15 @@ unit module GNU::FreeFont-OTF::Subs;
 
 use GNU::FreeFont-OTF::Vars;
 
-#| Write a portrait PDF showing all language samples using a selected 
-#|   GNU FreeFont face.
-#|
+#| Write a portrait PDF showing all language samples using a selected GNU FreeFont face.
 #| $font-ref may be:
 #|   * Int: 1=FreeSerif, 2=FreeSans, 3=FreeMono
 #|   * Str: a family name (e.g., "FreeSans") or a path to a .ttf/.otf file
 #| Options:
 #|   * :page-size<Letter|A4> (default A4)
-#| Renders pages in the given portrait size with ~0.75in margins and 
-#|   adds "n of m" page numbers bottom-right.
+#| Renders pages in the given portrait size with ~0.75in margins and adds "n of m" page numbers bottom-right.
 #| Returns the created file path as IO::Path.
-sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' --> IO::Path) is export {
+sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerning = True --> IO::Path) is export {
     use PDF::Lite;
     use PDF::Font::Loader :load-font;
     use PDF::Content::Page :PageSizes;   # A4, Letter available
@@ -65,10 +62,10 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' --> IO::P
     my @pages = $pdf.pages;  # capture page list
 
     # --- Page metrics ---
-    my Numeric $margin = 54;                 # 0.75in
-    my Numeric $x      = $margin;
-    my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
-    my Numeric $col-w  = $page.media-box[2] - 2*$margin;
+    my num $margin = 54;                 # 0.75in
+    my num $x      = $margin;
+    my num $y      = $page.media-box[3] - $margin; # top margin from page height
+    my num $col-w  = $page.media-box[2] - 2*$margin;
 
     # --- Title ---
     $page.text: -> $txt {
@@ -112,7 +109,7 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' --> IO::P
         $page.text: -> $t {
             $t.font = $loaded-font, 12;
             $t.text-position = $x, $y;
-            @box = $t.say: $sample, :width($col-w), :align<left>, :kern;
+            @box = $t.say: $sample, :width($col-w), :align<left>, :kern($kerning);
         }
         # Move below the block with a little breathing room.
         my $block-h = @box[3] - @box[1];       # y1 - y0
