@@ -1,0 +1,13 @@
+
+had to mv file "pdf-free-font-samples.raku" to dir /t
+  + I prefer to use /sbin for such
+
+  + had to modify the bin file to use QueryOS properly
+
+    line 11 chg:
+      my $os = QueryOS.new;
+             to
+      my $os = OS.new;
+
+modified t/90*
+  +
