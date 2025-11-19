@@ -1,12 +1,13 @@
 unit module GNU::FreeFont-OTF::Subs;
 
 use GNU::FreeFont-OTF::Vars;
+use GNU::FreeFont-OTF::TextBox;
 
 sub help() is export {
 print q:to/HERE/;
-   Writes a portrait PDF showing all language samples using a selected GNU FreeFont 
+   Writes a portrait PDF showing all language samples using a selected GNU FreeFont
      face and size.
-   
+
    $font-ref may be:
      * Int: 1=FreeSerif, 2=FreeSans, 3=FreeMono
      * Str: a family name (e.g., "FreeSans") or a path to a .ttf/.otf file
@@ -16,34 +17,23 @@ print q:to/HERE/;
      * :kerning<True|False>  (default: True)
      * :font-size(Int > 0)   (default: 12)
 
-   Renders pages in the given portrait size with ~0.75in margins and adds 
+   Renders pages in the given portrait size with ~0.75in margins and adds
      "n of m" page numbers bottom-right.
-  
+
    Returns the created file path as IO::Path.
 HERE
 } # end of sub help
 
 sub pdf-language-samples(
-    $font-ref, 
-    Str:D $outfile, 
+    $font-ref,
+    Str:D $outfile,
     # default options if NOT explicitly entered
     :$font-size = 12,
-    :$page-size = 'Letter', 
-    :$kerning = True, 
+    :$page-size = 'Letter',
+    :$kerning = True,
+    :$debug,
     --> IO::Path
     ) is export {
-    # check for undefined options
-    my $err = 0;
-    my %err-msg;
-    for $font-size, $page-size, $kerning -> $e {
-        unless $e.defined {
-            ++$err;
-            my $nam = $e;
-            %err-msg{$err} = qq:to/HERE/;
-            $nam is undefined
-            HERE
-        }
-    }
 
     use PDF::Lite;
     use PDF::Font::Loader :load-font;
@@ -60,7 +50,7 @@ sub pdf-language-samples(
     my $loaded-font = do given $font-ref {
         when Int {
             my $fam = %num-to-family{$font-ref} // 'FreeSerif';
-            try { load-font :family($fam) } // 
+            try { load-font :family($fam) } //
             die "Could not find GNU FreeFont family ‘$fam’. Is it installed?";
         }
         when Str {
@@ -69,12 +59,12 @@ sub pdf-language-samples(
                 load-font :file($s.absolute);
             }
             else {
-                try { load-font :family($_) } // 
+                try { load-font :family($_) } //
                 die "Could not find font family ‘$_’. Is it installed?";
             }
         }
-        default { 
-            die "Unsupported font reference type: { .^name }" 
+        default {
+            die "Unsupported font reference type: { .^name }"
         }
     };
 
@@ -89,15 +79,15 @@ sub pdf-language-samples(
             my $io = $ref.IO;
             $io.f ?? $io.basename !! $ref
         }
-        else { 
-            "GNU FreeFont" 
+        else {
+            "GNU FreeFont"
         }
     }
     my $face-title = face-title($loaded-font, $font-ref);
 
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
-    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);  
+    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
@@ -127,7 +117,7 @@ sub pdf-language-samples(
         $x    = $margin;
         $y    = $page.media-box[3] - $margin;
         # repeat running head (optional)
-        $page.text: -> $t {
+        $page.texT: -> $t {
             $t.font = $head-core, 12; # head-core-size2
             $t.text-position = $x, $y;
             $t.say: "GNU FreeFont — {$face-title}", :align<left>;
@@ -138,26 +128,38 @@ sub pdf-language-samples(
     # --- Body: each entry in %default-samples is a (language => text) pair ---
     my %samples := try %default-samples
         orelse die q:to/HERE/;
-        FATAL: This routine expects %default-samples to be defined in 
+        FATAL: This routine expects %default-samples to be defined in
             GNU::FreeFont::Subs
         HERE
 
-    for %samples.sort(*.key) -> $k, $sample {
+    my @keys = %samples.keys.sort;
+    for @keys -> $k {
+#   for %samples.sort(*.key) -> $k, $sample {
+#       say "DEBUG: \$k: $k" if $debug;
+        # $k is the two-char ISO abbreviation of the language
+        # $sample{$k}.text  is the text line
+
+        my %h = %samples{$k};
+        my $lang = %h<lang>;
+        my $text = %h<text>;
+        say "DEBUG: \$lang: $lang" if $debug;
+        say "DEBUG: \$text: $text" if $debug;
         # Header label for the language
         if $y < $margin + 60 { new-page }
         $page.text: -> $t {
             $t.font = $head-core, 12; # head-core-size2
             $t.text-position = $x, $y;
-            $t.say: $k;
+            $t.say: $lang;
         }
         $y -= 16;
 
-        # The sample text set in the chosen font (wrap within the content width)
+        # The sample text set in the chosen font (wrap within the
+        # content width)
         my @box;
         $page.text: -> $t {
             $t.font = $loaded-font, 12; # sample-text-size
             $t.text-position = $x, $y;
-            @box = $t.say: $sample, :width($col-w), :align<left>, :kern($kerning);
+            @box = $t.say: $text, :width($col-w), :align<left>, :kern($kerning);
         }
         # Move below the block with a little breathing room.
         my $block-h = @box[3] - @box[1];       # y1 - y0
@@ -165,7 +167,7 @@ sub pdf-language-samples(
     }
 
     # --- Footers: add "n of m" and a generator mark on every page ---
-    my $total = +@pages;
+    my $total = @pages.elems;
     my $w = $page.media-box[2];
     my $h = $page.media-box[3];
     my $right-x = $w - $margin;                 # right margin x
@@ -173,7 +175,7 @@ sub pdf-language-samples(
         my $num = $i + 1;
         $pg.text: -> $t {
             $t.font = $pdf.core-font(:family<Helvetica>), 9; # page-number-size
-            $t.FillColor = rgb(.5, .5, .5);
+#           $t.FillColor = rgb(.5, .5, .5);
             # Left footer mark
             $t.text-position = $margin, $margin - 10;
             $t.say: "Generated by GNU::FreeFont";

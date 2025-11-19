@@ -6,7 +6,7 @@ use PDF::Font::Loader :load-font;
 use QueryOS;
 
 # local modules
-use GNU::FreeFont-OTF;
+#use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
 
@@ -53,9 +53,11 @@ if not @*ARGS.elems {
 
 #my ($text, $page);
 
-my $media = "Letter"; # the default
-my $landscape = True;
+my $page-size = "Letter"; # the default
+#my $landscape = True;
 my $font-ref = "Free Serif";
+my $font-size = 12;
+my $kerning = True;
 
 for @*ARGS {
     when /^:i p / {
@@ -64,11 +66,17 @@ for @*ARGS {
     when /^:i h / {
         ++$help;
     }
+    when /^:i '!'k / {
+        $kerning = False;
+    }
+    when /^:i k / {
+        $kerning = True;
+    }
     when /^:i a4 / {
-        $media = "A4";
+        $page-size = "A4";
     }
     when /^:i l / {
-        $media = "Letter";
+        $page-size = "Letter";
     }
     when /^:i d / {
         ++$debug
@@ -87,11 +95,11 @@ if $help {
 
 =begin comment
 sub pdf-language-samples(
-    $font-ref, 
-    Str:D $outfile, 
+    $font-ref,
+    Str:D $outfile,
     :$font-size = 12,
-    :$page-size = 'Letter', 
-    :$kerning = True, 
+    :$page-size = 'Letter',
+    :$kerning = True,
     :$debug,
     --> IO::Path
     ) is export {
