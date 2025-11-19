@@ -32,6 +32,18 @@ sub pdf-language-samples(
     :$kerning = True, 
     --> IO::Path
     ) is export {
+    # check for undefined options
+    my $err = 0;
+    my %err-msg;
+    for $font-size, $page-size, $kerning -> $e {
+        unless $e.defined {
+            ++$err;
+            my $nam = $e;
+            %err-msg{$err} = qq:to/HERE/;
+            $nam is undefined
+            HERE
+        }
+    }
 
     use PDF::Lite;
     use PDF::Font::Loader :load-font;
