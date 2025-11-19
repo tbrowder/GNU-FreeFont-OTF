@@ -2,19 +2,45 @@ unit module GNU::FreeFont-OTF::Subs;
 
 use GNU::FreeFont-OTF::Vars;
 
-#| Write a portrait PDF showing all language samples using a selected GNU FreeFont face.
-#| $font-ref may be:
-#|   * Int: 1=FreeSerif, 2=FreeSans, 3=FreeMono
-#|   * Str: a family name (e.g., "FreeSans") or a path to a .ttf/.otf file
-#| Options:
-#|   * :page-size<Letter|A4> (default A4)
-#| Renders pages in the given portrait size with ~0.75in margins and adds "n of m" page numbers bottom-right.
-#| Returns the created file path as IO::Path.
-sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerning = True --> IO::Path) is export {
+sub help() is export {
+print q:to/HERE/;
+   Writes a portrait PDF showing all language samples using a selected GNU FreeFont 
+     face and size.
+   
+   $font-ref may be:
+     * Int: 1=FreeSerif, 2=FreeSans, 3=FreeMono
+     * Str: a family name (e.g., "FreeSans") or a path to a .ttf/.otf file
+
+   Options:
+     * :page-size<Letter|A4> (default: Letter)
+     * :kerning<True|False>  (default: True)
+     * :font-size(Int > 0)   (default: 12)
+
+   Renders pages in the given portrait size with ~0.75in margins and adds 
+     "n of m" page numbers bottom-right.
+  
+   Returns the created file path as IO::Path.
+HERE
+} # end of sub help
+
+sub pdf-language-samples(
+    $font-ref, 
+    Str:D $outfile, 
+    # default options if NOT explicitly entered
+    :$font-size = 12,
+    :$page-size = 'Letter', 
+    :$kerning = True, 
+    --> IO::Path
+    ) is export {
+
     use PDF::Lite;
     use PDF::Font::Loader :load-font;
     use PDF::Content::Page :PageSizes;   # A4, Letter available
     use PDF::Content::Color :rgb;
+
+    # Note: font-size is only for the body text
+    # other sizes to modify after seeing real output:
+    my $head-core-size = 18;
 
     # --- Resolve the font the caller wants ---
     my %num-to-family = 1 => 'FreeSerif', 2 => 'FreeSans', 3 => 'FreeMono';
@@ -22,7 +48,8 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
     my $loaded-font = do given $font-ref {
         when Int {
             my $fam = %num-to-family{$font-ref} // 'FreeSerif';
-            try { load-font :family($fam) } // die "Could not find GNU FreeFont family ‘$fam’. Is it installed?";
+            try { load-font :family($fam) } // 
+            die "Could not find GNU FreeFont family ‘$fam’. Is it installed?";
         }
         when Str {
             my $s = $_.IO;
@@ -30,10 +57,13 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
                 load-font :file($s.absolute);
             }
             else {
-                try { load-font :family($_) } // die "Could not find font family ‘$_’. Is it installed?";
+                try { load-font :family($_) } // 
+                die "Could not find font family ‘$_’. Is it installed?";
             }
         }
-        default { die "Unsupported font reference type: { .^name }" }
+        default { 
+            die "Unsupported font reference type: { .^name }" 
+        }
     };
 
     # Introspect a face title as best we can; fallback to reference/filename.
@@ -47,12 +77,15 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
             my $io = $ref.IO;
             $io.f ?? $io.basename !! $ref
         }
-        else { "GNU FreeFont" }
+        else { 
+            "GNU FreeFont" 
+        }
     }
     my $face-title = face-title($loaded-font, $font-ref);
 
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
-    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);  # face only
+    #   face only
+    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);  
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
@@ -83,7 +116,7 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
         $y    = $page.media-box[3] - $margin;
         # repeat running head (optional)
         $page.text: -> $t {
-            $t.font = $head-core, 12;
+            $t.font = $head-core, 12; # head-core-size2
             $t.text-position = $x, $y;
             $t.say: "GNU FreeFont — {$face-title}", :align<left>;
         }
@@ -92,13 +125,16 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
 
     # --- Body: each entry in %default-samples is a (language => text) pair ---
     my %samples := try %default-samples
-        orelse die "This routine expects %%default-samples to be defined in GNU::FreeFont::Subs";
+        orelse die q:to/HERE/;
+        FATAL: This routine expects %default-samples to be defined in 
+            GNU::FreeFont::Subs
+        HERE
 
     for %samples.sort(*.key) -> $k, $sample {
         # Header label for the language
         if $y < $margin + 60 { new-page }
         $page.text: -> $t {
-            $t.font = $head-core, 12;
+            $t.font = $head-core, 12; # head-core-size2
             $t.text-position = $x, $y;
             $t.say: $k;
         }
@@ -107,7 +143,7 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
         # The sample text set in the chosen font (wrap within the content width)
         my @box;
         $page.text: -> $t {
-            $t.font = $loaded-font, 12;
+            $t.font = $loaded-font, 12; # sample-text-size
             $t.text-position = $x, $y;
             @box = $t.say: $sample, :width($col-w), :align<left>, :kern($kerning);
         }
@@ -124,7 +160,7 @@ sub pdf-language-samples($font-ref, Str:D $outfile, :$page-size = 'A4' , :$kerni
     for @pages.kv -> $i, $pg {
         my $num = $i + 1;
         $pg.text: -> $t {
-            $t.font = $pdf.core-font(:family<Helvetica>), 9;
+            $t.font = $pdf.core-font(:family<Helvetica>), 9; # page-number-size
             $t.FillColor = rgb(.5, .5, .5);
             # Left footer mark
             $t.text-position = $margin, $margin - 10;

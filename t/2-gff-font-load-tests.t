@@ -47,7 +47,6 @@ $font = $ff.get-font: $code;
 isa-ok $font, PDF::Content::FontObj;
 
 done-testing;
-
 =finish
 
 # test the sharing of the same font

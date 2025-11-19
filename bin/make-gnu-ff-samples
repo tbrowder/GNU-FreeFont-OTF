@@ -12,12 +12,11 @@ use GNU::FreeFont-OTF::Vars;
 
 my $os = OS.new;
 
-my $ofil = "GNU-FreeFont-OTF-samples.pdf";
 
+=begin comment
 my $pdf = PDF::Lite.new;
 
 # TODO: add page numbers upper right of page
-
 my $face2 = 0; #  = "FreeSerifBold";
 my $face3 = 0; #  = "FreeSerif";
 my $f2 = "FreeSerifBold.otf";
@@ -25,9 +24,12 @@ my $f3 = "FreeSerif.otf";
 
 my %m = %(PageSizes.enums);
 my @m = %m.keys.sort;
+=end comment
 
-#=== move this code chunk WAY up
 my $debug = 0;
+my $print = 0;
+my $help  = 0;
+my $ofil  = "GNU-FreeFont-OTF-samples.pdf";
 if not @*ARGS.elems {
     my $p = $*PROGRAM.basename;
 
@@ -38,6 +40,7 @@ if not @*ARGS.elems {
       print  - Create a PDF of the default text samples
 
     Options
+      help   - Show more detailed program information
       A4     - Use A4 paper instead of the default US Letter
                for the sample output file:
                    $ofil
@@ -47,31 +50,62 @@ if not @*ARGS.elems {
     HERE
     exit
 }
-#=== move code chunk above WAY up
 
-my ($text, $page);
+#my ($text, $page);
 
-my $m1 = 'Letter';
-my $m2 = 'A4';
-my $media = $m1; # the default
+my $media = "Letter"; # the default
 my $landscape = True;
-
-# find attributes:
-# NOT using find-font
+my $font-ref = "Free Serif";
 
 for @*ARGS {
-    # one/two char options
-    when /^:i a4?/ {
-        $media = $m2;
+    when /^:i p / {
+        ++$print;
     }
-    # single char options
+    when /^:i h / {
+        ++$help;
+    }
+    when /^:i a4 / {
+        $media = "A4";
+    }
+    when /^:i l / {
+        $media = "Letter";
+    }
+    when /^:i d / {
+        ++$debug
+    }
     default {
-        note "FATAL: Unknown argument '$_'";
+        say "FATAL: Unknown argument '$_'";
+        say "       Exiting...";
+        exit;
     }
 }
 
-my $font       = load-font :file($font-file);
-my $title-font = load-font :file($title-font-file);
+if $help {
+    help();
+    exit;
+}
+
+=begin comment
+sub pdf-language-samples(
+    $font-ref, 
+    Str:D $outfile, 
+    :$font-size = 12,
+    :$page-size = 'Letter', 
+    :$kerning = True, 
+    :$debug,
+    --> IO::Path
+    ) is export {
+=end comment
+# call the governing sub
+my $opath = pdf-language-samples $font-ref, $ofil, :$font-size,
+                :$page-size, :$kerning, :$debug;
+say "See output: $opath";
+
+=finish
+
+my $ff = GNU::FreeFont-OTF.new;
+my $font       = $ff.get-font: "Free Serif";
+my $title-font = $ff.gett-font: "Free Serif Bold";
 
 $pdf.media-box = %(PageSizes.enums){$media};
 
@@ -84,6 +118,8 @@ make-page :$pdf, :$page, :$font, :$title-font, :$media, :%h, :landscape(True), :
 $pdf.save-as: $ofil;
 #my $landscape = False;
 say "See output file: $ofil";
+
+#old code?
 
 #====================================
 # subroutines

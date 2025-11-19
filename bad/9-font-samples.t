@@ -3,7 +3,7 @@ use Test;
 
 # Walk up from CWD until we find repo root
 sub find-up(
-    $start as Str, 
+    Str $start, 
     :$name!, 
     :$also = [],
 ) {
