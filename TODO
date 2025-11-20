@@ -1,3 +1,5 @@
+Move the TextBox module to PDF::GraphicsUtils
+
 NO REUSE OF A LOADED FONT FOR NOW
   check with David again
 
@@ -5,13 +7,13 @@ NO REUSE OF A LOADED FONT FOR NOW
 2025-08-11
 IMPORTANT
 1. Combine ALL primary and alias keys into ONE
-   giant hasb.
+   giant hash.
 
 
 See my unpublished Font::Utils for FontFreeFace
   for using David's Font::FreeType
 
-reate a font sample sheet
+create a font sample sheet
  - See FontFactory
 
 In docs, mention lowercase and numbers for aliases

@@ -1,6 +1,4 @@
-use v6.d;
 use Test;
-
 
 # Resolve repo root from this test file’s location, then the script path:
 my $repo-root = $*PROGRAM.absolute.IO.dirname;      # …/repo/t -> …/repo

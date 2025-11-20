@@ -5,7 +5,6 @@ my @modules = <
     GNU::FreeFont-OTF::Subs
     GNU::FreeFont-OTF::FontPaths
     GNU::FreeFont-OTF::Vars
-    GNU::FreeFont-OTF::TextBox
 >;
 
 plan @modules.elems;

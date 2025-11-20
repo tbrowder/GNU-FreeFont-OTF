@@ -34,7 +34,7 @@ See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more
 Installation requirements
 =========================
 
-Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requiremnts to ensure they are installed before running `zef install GNU::FreeFont-OTF`.
+Your system may not have all the required packages to support this Raku module. See [Installation](./Installation.md) for those requirements to ensure they are installed before running `zef install GNU::FreeFont-OTF`.
 
 Using this module
 =================

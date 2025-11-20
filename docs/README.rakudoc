@@ -40,7 +40,7 @@ GNU FreeFonts collection.
 
 Your system may not have all the required packages to support this
 Raku module. See L<Installation |./Installation.md> for those
-requiremnts to ensure they are installed before running C<zef install
+requirements to ensure they are installed before running C<zef install
 GNU::FreeFont-OTF>.
 
 =head1 Using this module

@@ -6,30 +6,17 @@ use PDF::Font::Loader :load-font;
 use QueryOS;
 
 # local modules
-#use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
 
 my $os = OS.new;
 
-
-=begin comment
-my $pdf = PDF::Lite.new;
-
-# TODO: add page numbers upper right of page
-my $face2 = 0; #  = "FreeSerifBold";
-my $face3 = 0; #  = "FreeSerif";
-my $f2 = "FreeSerifBold.otf";
-my $f3 = "FreeSerif.otf";
-
-my %m = %(PageSizes.enums);
-my @m = %m.keys.sort;
-=end comment
-
 my $debug = 0;
 my $print = 0;
 my $help  = 0;
 my $ofil  = "GNU-FreeFont-OTF-samples.pdf";
+my $ofile = $ofil; # default
+
 if not @*ARGS.elems {
     my $p = $*PROGRAM.basename;
 
@@ -37,13 +24,15 @@ if not @*ARGS.elems {
     Usage: $p <mode> [options]
 
     Modes
-      print  - Create a PDF of the default text samples
+      print   - Create a local PDF of the default text samples
+                for the sample output file:
+                   $ofil
+
+      ofile=X - Where X is the desired output PDF file name
 
     Options
-      help   - Show more detailed program information
-      A4     - Use A4 paper instead of the default US Letter
-               for the sample output file:
-                   $ofil
+      help    - Show more detailed program information
+      A4      - Use A4 paper instead of the default US Letter
 
     See more information about pangrams and a large list of them
     for many languages at 'https:://clagnut.com'.
@@ -51,17 +40,23 @@ if not @*ARGS.elems {
     exit
 }
 
-#my ($text, $page);
-
+# defauults:
 my $page-size = "Letter"; # the default
-#my $landscape = True;
-my $font-ref = "Free Serif";
+my $font-ref  = "Free Serif";
 my $font-size = 12;
-my $kerning = True;
+my $kerning   = True;
 
 for @*ARGS {
     when /^:i p / {
         ++$print;
+    }
+    when /^:i ofile '=' (\S+) / {
+        # ensure the path ends with ".pdf"
+        my $f = ~$0;
+        unless $f ~~ /'.pdf' $/ {
+            $f ~~ s:g/:i '.' .* $/'.pdf/;
+        }
+        $ofile = $f;
     }
     when /^:i h / {
         ++$help;
@@ -96,7 +91,7 @@ if $help {
 =begin comment
 sub pdf-language-samples(
     $font-ref,
-    Str:D $outfile,
+    Str:D :$ofile!,
     :$font-size = 12,
     :$page-size = 'Letter',
     :$kerning = True,
@@ -104,8 +99,9 @@ sub pdf-language-samples(
     --> IO::Path
     ) is export {
 =end comment
+
 # call the governing sub
-my $opath = pdf-language-samples $font-ref, $ofil, :$font-size,
+my $opath = pdf-language-samples $font-ref, :$ofile, :$font-size,
                 :$page-size, :$kerning, :$debug;
 say "See output: $opath";
 

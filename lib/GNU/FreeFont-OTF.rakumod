@@ -17,7 +17,6 @@ use GNU::FreeFont-OTF::FontPaths;
 use GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
 
-#has %.loaded-fonts;
 has %.font-file-paths;
 has @.codes-list;
 
@@ -74,7 +73,5 @@ method get-font-object(
 
     # load the font, then return it
     my $font  = PDF::Font::Loader.load-font: :$file;
-
-#   self.loaded-fonts{$code} = $font; #ad-font: :file($font-file);
     $font;
 }
