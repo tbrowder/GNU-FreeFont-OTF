@@ -1,5 +1,21 @@
 unit module GNU::FreeFont-OTF::Vars;
 
+our %lang-names is export = %(
+    English              => "en",
+    Dutch                => "nl",
+    German               => "de";
+    Spanish              => "es",
+    French               => "fr",
+    Indonesian           => "id",
+    Italian              => "it",
+    'Norwegian (Bokmål)' => "nb",
+    'Norwegian (Nyorsk)' => "nn",
+    Polish               => "pl",
+    Romanian             => "ro",
+    Russian              => "ru",
+    Ukranian             => "uk",
+);
+
 our %default-samples is export = %(
     # keyed by two-character ISO language code
     #     key => {
@@ -18,7 +34,7 @@ our %default-samples is export = %(
     },
     fr => {
         lang => 'French',
-        text => 'Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.',
+        text => 'Voix ambiguë d’un cœur qui, au zéphyr, préfère les jattes de kiwis.',
         font => "",
     },
     de => {
@@ -38,12 +54,12 @@ our %default-samples is export = %(
     },
     nb => {
         lang => 'Norwegian (Bokmål)',
-        text => 'En god stil må først og fremst være klar. Den må være passende. Aristoteles.',
+        text => 'Vår sære Zulu fra badeøya spilte jo whist og quickstep',
         font => "",
     },
     nn => {
         lang => 'Norwegian (Nyorsk)',
-        text => "NONE YET",
+        text => "Høvdingen såg på dei små fugleungane då ætta åt ein ås.",
         font => "",
     },
     pl => {
