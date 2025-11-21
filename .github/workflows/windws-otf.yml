@@ -54,7 +54,7 @@ jobs:
               break
             }
             catch {
-              Write-Warning "Download failed from $u: $_"
+              Write-Warning "Download failed from ${u}: $_";
             }
           }
 
