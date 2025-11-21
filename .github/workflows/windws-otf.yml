@@ -19,12 +19,65 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+
       - uses: Raku/setup-raku@v1
+        with:
+          raku-version: ${{ matrix.raku-version }}
+
       - name: Install Dependencies
+        shell: pwsh
         run: |
-            choco install rakudostar
-            choco install wget
-            choco install dejavufonts
-            zef --exclude="z" install --debug --/test --test-depends --deps-only .
-      - name: Run Tests
-        run: zef install --debug .
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+
+          Write-Host "==> Preparing font directory"
+          $freefontDir = "$env:RUNNER_TEMP\freefont"
+          New-Item -ItemType Directory -Force -Path $freefontDir | Out-Null
+
+          Write-Host "==> Downloading GNU FreeFont (OTF) for tests"
+
+          $urls = @(
+            "https://ftp.gnu.org/gnu/freefont/freefont-otf-20120503.tar.gz",
+            "https://ftpmirror.gnu.org/freefont/freefont-otf-20120503.tar.gz",
+            "https://gnu.mirror.constant.com/freefont/freefont-otf-20120503.tar.gz"
+          )
+
+          $tarPath = Join-Path $freefontDir "freefont-otf-20120503.tar.gz"
+          $downloaded = $false
+
+          foreach ($u in $urls) {
+            Write-Host "  -> Trying $u"
+            try {
+              Invoke-WebRequest -Uri $u -OutFile $tarPath -UseBasicParsing
+              $downloaded = $true
+              Write-Host "  -> Downloaded from $u"
+              break
+            }
+            catch {
+              Write-Warning "Download failed from $u: $_"
+            }
+          }
+
+          if (-not $downloaded) {
+            Write-Error "Could not download freefont-otf-20120503.tar.gz from any mirror"
+            exit 1
+          }
+
+          Write-Host "==> Extracting fonts"
+          # Windows runners have tar available via Git / bsdtar
+          tar -xzf $tarPath -C $freefontDir
+
+          Write-Host "Extracted files:"
+          Get-ChildItem -Recurse $freefontDir -Filter *.otf
+
+          # Optionally set env var for tests to find fonts easily
+          # (You can read this in your Raku tests if desired.)
+          echo "FREEFONT_DIR=$freefontDir" >> $env:GITHUB_ENV
+
+          Write-Host "==> Installing Raku dependencies via zef"
+          zef --exclude="z" install --debug --/test --test-depends --deps-only .
+
+      - name: Run Tests (zef install)
+        shell: pwsh
+        run: |
+          zef install --debug .

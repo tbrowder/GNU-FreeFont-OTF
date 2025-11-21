@@ -19,15 +19,78 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+
       - uses: Raku/setup-raku@v1
         with:
           raku-version: ${{ matrix.raku-version }}
+
       - name: Install Dependencies
+        shell: bash
         run: |
-          # note packages fontconfig, freetype, and harfbuzz 
-          #   are already loaded by default
-          brew install --cask font-freefont 
+          set -euo pipefail
+
+          # Homebrew fonts: try cask first, but with retries and cleanup.
+          echo "==> Installing GNU FreeFont (robust)"
+
+          brew update >/dev/null
+          brew tap homebrew/cask-fonts
+
+          success=0
+          for attempt in 1 2 3; do
+            if brew install --cask font-freefont; then
+              echo "font-freefont installed via Homebrew on attempt ${attempt}"
+              success=1
+              break
+            fi
+            echo "font-freefont failed on attempt ${attempt}, cleaning cache and retrying..."
+            brew uninstall --cask font-freefont || true
+            rm -rf "${HOME}/Library/Caches/Homebrew/downloads"/*freefont* || true
+            sleep 15
+          done
+
+          if [ "$success" -ne 1 ]; then
+            echo "==> Homebrew cask font-freefont failed after retries; falling back to direct download"
+
+            FONT_DIR="${HOME}/Library/Fonts"
+            mkdir -p "${FONT_DIR}"
+
+            cd "${RUNNER_TEMP}"
+
+            urls=(
+              "https://ftp.gnu.org/gnu/freefont/freefont-otf-20120503.tar.gz"
+              "https://ftpmirror.gnu.org/freefont/freefont-otf-20120503.tar.gz"
+              "https://gnu.mirror.constant.com/freefont/freefont-otf-20120503.tar.gz"
+              "https://mirrors.ibiblio.org/CTAN/fonts/gnu-freefont/freefont-otf-20120503.tar.gz"
+              "https://mirrors.ctan.org/fonts/gnu-freefont/freefont-otf-20120503.tar.gz"
+            )
+
+            got_tar=0
+            for u in "${urls[@]}"; do
+              echo "  -> Trying $u"
+              if curl -L --retry 5 --retry-delay 10 --fail "$u" -o freefont-otf-20120503.tar.gz; then
+                got_tar=1
+                echo "  -> Downloaded from $u"
+                break
+              fi
+            done
+
+            if [ "$got_tar" -ne 1 ]; then
+              echo "ERROR: Could not download freefont-otf-20120503.tar.gz from any mirror" >&2
+              exit 1
+            fi
+
+            tar xzf freefont-otf-20120503.tar.gz
+
+            echo "==> Copying OTF fonts into ${FONT_DIR}"
+            find . -maxdepth 5 -type f -name '*.otf' -print -exec cp {} "${FONT_DIR}/" \;
+
+            echo "Installed fonts:"
+            ls -1 "${FONT_DIR}" | grep -i free || true
+          fi
+
+          # Raku deps
           zef install MacOS::NativeLib
           zef install --/test --deps-only .
+
       - name: Install
         run: zef install --debug .

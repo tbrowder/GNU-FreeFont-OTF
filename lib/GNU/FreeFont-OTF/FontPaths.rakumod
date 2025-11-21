@@ -179,5 +179,3 @@ sub get-font-file-paths-hash(:$debug --> Hash) is export {
     # the final hassh:
     %fonts; # hash of font file paths
 }
-
-
