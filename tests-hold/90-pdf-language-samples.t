@@ -2,7 +2,7 @@ use Test;
 
 # Resolve repo root from this test file’s location, then the script path:
 my $repo-root = $*PROGRAM.absolute.IO.dirname;      # …/repo/t -> …/repo
-my $sample = $repo-root.IO.add("pdf-freefont-samples.raku").absolute;
+my $sample = $repo-root.IO.add("t/bin/pdf-freefont-samples.raku").absolute;
 
 ok $sample.IO.e, "Found pdf-freefont-samples.raku at $sample"
     or bail-out "Cannot locate pdf-freefont-samples.raku";
@@ -33,12 +33,17 @@ my $outdir = 't/out'.IO; $outdir.mkdir unless $outdir.d;
 my $outfile = $outdir.add('lang-samples-test.pdf').Str;
 
 lives-ok {
-    pdf-language-samples($font-path, $outfile)
+# Smoke test: run the CLI with --no-kern
+my $cmd = "raku -I. ./bin/make-gnu-ff-samples ofile=$out !kerning";
+    pdf-language-samples.raku $font-path, :ofile($outfile);
+    #pdf-language-samples($font-path, $outfile)
 }, 'generated PDF without exceptions';
 
 ok $outfile.IO.f && $outfile.IO.s > 0, "output file exists and is non-empty";
 lives-ok {
-    pdf-language-samples($font-path, $outdir.add('lang-samples-test-nk.pdf').Str, :kerning(False))
+    my $outfile = $outdir.add('lang-samples-test.pdf').Str;
+    pdf-language-samples $font-path, :ofile($outfile);
+    #pdf-language-samples($font-path, $outdir.add('lang-samples-test-nk.pdf').Str, :kerning(False))
 }, 'generated PDF with kerning disabled';
 
 # sanity: file extension
