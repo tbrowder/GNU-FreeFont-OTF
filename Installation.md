@@ -17,6 +17,9 @@ On Debian:
 On MacOS:
 
     $ brew install fontconfig
+    $ brew install freetype
+    $ brew install harfbuzz
+    $ brew install --cask font-freefont
 
 On Windows:
 
