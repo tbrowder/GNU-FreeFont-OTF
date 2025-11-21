@@ -1,0 +1,16 @@
+#!/usr/bin/env raku
+use v6.d;
+
+use GNU::FreeFont::CodeCharts :generate-codecharts;
+
+sub MAIN(
+    Str :$output    = 'FreeFont-CodeCharts.pdf',
+    Str :$page-size = 'Letter',       # 'Letter' or 'A4'
+    Str :$font-file!                  # path to FreeSerif/FreeSans/FreeMono OTF/TTF
+) {
+    generate-codecharts(
+        :$output,
+        :$page-size,
+        :$font-file,
+    );
+}

@@ -1,0 +1,25 @@
+{
+    "name": "GNU::FreeFont::CodeCharts",
+    "version": "0.0.1",
+    "description": "Generate Unicode-style code chart PDFs from GNU FreeFont range data",
+    "authors": [ "Tom Browder" ],
+    "auth": "zef:tbrowder",
+    "license": "Artistic-2.0",
+    "source-url": "https://github.com/tbrowder/GNU-FreeFont-CodeCharts.git",
+    "depends": [
+        "HTTP::UserAgent",
+        "PDF::Lite",
+        "PDF::Font::Loader",
+        "PDF::Content"
+    ],
+    "provides": {
+        "GNU::FreeFont::CodeCharts": "lib/GNU/FreeFont/CodeCharts.rakumod"
+    },
+    "resources": [],
+    "build-depends": [],
+    "test-depends": [ "Test" ],
+    "support": {
+        "source": "https://github.com/tbrowder/GNU-FreeFont-CodeCharts.git",
+        "bugtracker": "https://github.com/tbrowder/GNU-FreeFont-CodeCharts/issues"
+    }
+}
