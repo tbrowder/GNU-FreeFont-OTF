@@ -8,7 +8,11 @@ The FontConfig library
 
 On Debian:
 
-    $ sudo aptitude install fontconfig
+    $ sudo apt-get install -y libfontconfig1-dev
+    $ sudo apt-get install -y fontconfig 
+    $ sudo apt-get install -y locate 
+    $ sudo apt-get install -y libharfbuzz-dev
+    $ sudo apt-get install -y fonts-freefont-otf
 
 On MacOS:
 

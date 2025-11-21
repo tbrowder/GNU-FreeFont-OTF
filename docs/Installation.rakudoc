@@ -10,7 +10,11 @@ features of this module.
 On Debian:
 
 =begin code
-$ sudo aptitude install fontconfig
+$ sudo apt-get install -y libfontconfig1-dev
+$ sudo apt-get install -y fontconfig 
+$ sudo apt-get install -y locate 
+$ sudo apt-get install -y libharfbuzz-dev
+$ sudo apt-get install -y fonts-freefont-otf
 =end code
 
 On MacOS:
