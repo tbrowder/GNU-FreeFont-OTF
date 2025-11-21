@@ -73,6 +73,9 @@ jobs:
           # Make the directory visible to your Raku module
           echo "FREEFONT_DIR=${FONT_DIR}" >> "${GITHUB_ENV}"
 
+          # *** IMPORTANT: go back to project root before running zef ***
+          cd "$GITHUB_WORKSPACE"
+
           # Raku deps
           zef install MacOS::NativeLib
           zef install --/test --deps-only .
