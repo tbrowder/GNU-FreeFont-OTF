@@ -12,6 +12,7 @@
     "PDF::Font::Loader::HarfBuzz",
     "PDF::Font::Loader",
     "PDF::Content",
+    "FontConfig:ver<0.1.8>",
     "PDF::Lite",
     "PDF::API6",
     "Data::Dump",
