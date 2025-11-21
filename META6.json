@@ -7,7 +7,7 @@
   ],
   "depends": [
     "OO::Monitors",
-    "Font::FreeType:ver<0.5.4>:auth<zef:dwarring>",
+    "Font::FreeType:ver<0.5.14+>:auth<zef:dwarring>",
     "MacOS::NativeLib",
     "PDF::Font::Loader::HarfBuzz",
     "PDF::Font::Loader",
