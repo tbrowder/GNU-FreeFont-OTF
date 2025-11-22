@@ -24,20 +24,19 @@ if not @*ARGS.elems {
     Usage: $p <mode> [options]
 
     Modes
-      print   - Create a local PDF of the default text samples
-                for the sample output file:
-                   $ofil
-
-      ofile=X - Where X is the desired output PDF file name
-
+      print   - Creates a local PDF of the text samples for
+                the the default font ('Free Serif')
     Options
+      font=X  - Where X is the desired font reference
+      ofile=X - Where X is the desired output PDF file name
+      size=X  - Where X is the desired font size (default: 12)
       help    - Show more detailed program information
       A4      - Use A4 paper instead of the default US Letter
 
     See more information about pangrams and a large list of them
     for many languages at 'https:://clagnut.com'.
     HERE
-    exit
+    exit;
 }
 
 # defauults:

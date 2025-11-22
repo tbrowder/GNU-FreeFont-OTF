@@ -8,8 +8,10 @@ print q:to/HERE/;
      face and size.
 
    $font-ref may be:
-     * Int: 1=FreeSerif, 2=FreeSans, 3=FreeMono
-     * Str: a family name (e.g., "FreeSans") or a path to a .ttf/.otf file
+     * Int: A reference number from the code tables (1..12)
+     * Str: a code from the code tables
+     * Str: a family name (e.g., "Free Sans") 
+     * Str: a path to a .ttf/.otf file
 
    With the 'print' input the default output PDF file will be:
        GNU-FreeFont-OTF-samples.pdf
@@ -140,17 +142,16 @@ sub pdf-language-samples(
             GNU::FreeFont::Subs
         HERE
 
-    my @names = %lang-names.keys.sort;
-    my @keys;
-    for @names -> $name {
-        my $key = %lang-names{$name};
-        @keys.push: $key;
+    my %names;
+    for %samples.keys -> $iso-key {
+        my $name = %samples{$iso-key}<lang>;
+        %names{$name} = $iso-key;
     }
 
-#   my @keys = %samples.keys.sort;
-    for @keys -> $k {
-#   for %samples.sort(*.key) -> $k, $sample {
-#       say "DEBUG: \$k: $k" if $debug;
+    my @nkeys = %names.keys.sort;
+    for @nkeys -> $name {
+        my $k = %names{$name};
+        say "DEBUG: \$k: $k" if $debug;
         # $k is the two-char ISO abbreviation of the language
         # $sample{$k}.text  is the text line
 

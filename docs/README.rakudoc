@@ -57,6 +57,14 @@ code you may use to select the desired GNU FreeFont face.
 You maay also use the font name in the first colum or the reference number
 to select the font.
 
+=head2 Font samples
+
+This package includes an installed Raku script, C<make-gnu-ff-samples>, to
+produce a page of I<pangrams> in several languages for a selected font. Please create an issue if you
+want one changed or added for your language. Languages currently shown are:
+
+
+
 =head2 Table 1
 
 =begin table :caption<The GNU FreeFont Collection>
