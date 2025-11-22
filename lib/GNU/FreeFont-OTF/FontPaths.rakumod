@@ -34,7 +34,7 @@ sub get-font-file-paths-hash(:$debug --> Hash) is export {
     }
 
     # from the GNU FreeFont collection
-    # only TrueType fonts wanted
+    # only OpenType fonts wanted
 
     # Use codes reflecting the Adobe parentage of its class PostScript fonts
     # I grew up with in the PS days:

@@ -1,6 +1,7 @@
 unit module GNU::FreeFont-OTF::Subs;
 
 use GNU::FreeFont-OTF::Vars;
+use GNU::FreeFont-OTF::FontPaths;
 
 sub help() is export {
 print q:to/HERE/;
@@ -54,8 +55,57 @@ sub pdf-language-samples(
     # other sizes to modify after seeing real output:
 #   my $head-core-size = 18;
 
+    my %fonts = get-font-file-paths-hash; #(:$debug --> Hash) is export {
+    unless %fonts.defined {
+        die "Could not find font hash '%fonts'. Is it installed?";
+    }
+
     # --- Resolve the font the caller wants ---
-    my %num-to-family = 1 => 'FreeSerif', 2 => 'FreeSans', 3 => 'FreeMono';
+#   my %num-to-family = 1 => 'FreeSerif', 2 => 'FreeSans', 3 => 'FreeMono';
+
+    # convert inputs to valid font refs
+    my $fr = $font-ref;
+    my $fpath = "";
+    # any hyphens or spaces or both?
+    my ($has-hyphens, $has-spaces) = 0, 0;
+    if $fr ~~ / '-' / {
+        ++$has-hyphens;
+        $fr ~~ s:g/'-'+/-/; # rm  xtra hyphens
+    }
+    if $fr ~~ / \h / {
+        ++$has-spacess;
+        $fr ~~ s:g/\h+/ /; # rm xtra spaces
+    }
+    if $has-hyphens and $has-spaces / {
+        # remove the spaces
+        $fr ~~ s:g/\h+//; # rm all spaces
+    }
+
+    if $has-hyphens or $has-spaces / {
+        my $sep = ~$0;
+        # assume its mostly correct except ensure pieces are capitalized properly
+        my @parts = $fr.split($sep);
+        unless @parts.elems == 2 { die "unknow font alias '$font-ref'; }
+        $fr = "";
+        for @parts.kv -> $i, $p is copy {
+            $p .= tc;
+            if $i {
+                $fr ~= $p ~ '-';
+            }
+            else {
+                $fr ~= $p;
+            }
+        }
+    }
+    with $font-ref {
+        my $r = $_;
+        when $r ~~ / (<[1..12]>) / {
+            $fpath = %fonts{+$0};
+        }
+        when $r ~~ / (<[1..12]>) / {
+            $fpath = %fonts{+$0};
+        }
+    }
 
     my $loaded-font = do given $font-ref {
         when Int {
@@ -78,6 +128,10 @@ sub pdf-language-samples(
         }
     };
 
+    if $debug {
+        say "DEBUG: input font ref: $font-ref";
+    }
+
     # Introspect a face title as best we can; fallback to reference/filename.
     sub face-title($font, $ref) {
         for <full-name family subfamily style name ps-name postscript-name> -> $m {
@@ -94,6 +148,10 @@ sub pdf-language-samples(
         }
     }
     my $face-title = face-title($loaded-font, $font-ref);
+
+    if $debug {
+        say "DEBUG: derived face title: $face-title";
+    }
 
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only

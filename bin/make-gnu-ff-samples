@@ -8,6 +8,7 @@ use QueryOS;
 # local modules
 use GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
+use GNU::FreeFont-OTF::FontPaths;
 
 my $os = OS.new;
 
@@ -56,6 +57,12 @@ for @*ARGS {
             $f ~~ s:g/:i '.' .* $/'.pdf/;
         }
         $ofile = $f;
+    }
+    when /^:i size '=' (\d+ ['.' \d+]?) $/ {
+        $font-size = +$0;
+    }
+    when /^:i font '=' (\S+) / {
+        $font-ref = ~$0;
     }
     when /^:i h / {
         ++$help;
