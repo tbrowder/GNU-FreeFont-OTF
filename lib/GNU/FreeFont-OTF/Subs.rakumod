@@ -140,37 +140,8 @@ sub pdf-language-samples(
         }
     }
 
-#   say "DEBUG: font-ref: '$font-ref' exiting..."; exit;
-    my $loaded-font = 
-            try { load-font :file($fpath) } //
+    my $loaded-font = try { load-font :file($fpath) } //
             die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
-
-=begin comment
-    my $loaded-font = do given $font-ref {
-#       when Int {
-#           my $fam = %num-to-family{$font-ref} // 'FreeSerif';
-#           #try { load-font :family($fam) } //
-#           try { load-font :file($font-ref) } //
-#           die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
-#       }
-        when Str {
-            my $s = $_.IO;
-            if $s.e && $s.f {         # looks like a path to a font file
-                load-font :file($s.absolute);
-            }
-            else {
-                try { load-font :file($font-ref) } //
-#               try { load-font :family($_) } //
-#               die "Could not find font family ‘$_’. Is it installed?";
-                die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
-            }
-        }
-        default {
-            #die "Unsupported font reference type: { .^name }"
-            die "Unsupported font reference type: { .^name }"
-        }
-    }
-=end comment
 
     my $face-title = $font-ref.IO.basename;
     if $face-title ~~ /'.'/ {
@@ -180,29 +151,6 @@ sub pdf-language-samples(
     if $debug {
         say "DEBUG: input font ref: $font-ref";
     }
-
-=begin comment
-    # Introspect a face title as best we can; fallback to reference/filename.
-    sub face-title($font, $ref) {
-        for <full-name family subfamily style name ps-name postscript-name> -> $m {
-            my $v = try $font."$m"();
-            return $v if $v.defined && $v ne "" ;
-        }
-        if $ref ~~ Int { %num-to-family{$ref} // "GNU FreeFont" }
-        elsif $ref ~~ Str {
-            my $io = $ref.IO;
-            $io.f ?? $io.basename !! $ref
-        }
-        else {
-            "GNU FreeFont"
-        }
-    }
-    my $face-title = face-title($loaded-font, $font-ref);
-
-    if $debug {
-        say "DEBUG: derived face title: $face-title";
-    }
-=end comment
 
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
