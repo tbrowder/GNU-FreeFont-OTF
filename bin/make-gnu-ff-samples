@@ -26,11 +26,12 @@ if not @*ARGS.elems {
 
     Modes
       print   - Creates a local PDF of the text samples for
-                the the default font ('Free Serif')
+                the default font ('Free Serif')
     Options
       font=X  - Where X is the desired font reference
       ofile=X - Where X is the desired output PDF file name
       size=X  - Where X is the desired font size (default: 12)
+      lang=X  - Where X is the desired language (in place of all languages)
       help    - Show more detailed program information
       A4      - Use A4 paper instead of the default US Letter
 
@@ -45,6 +46,7 @@ my $page-size = "Letter"; # the default
 my $font-ref  = "Free Serif";
 my $font-size = 12;
 my $kerning   = True;
+my $lang      = "";
 
 for @*ARGS {
     when /^:i p / {
@@ -63,6 +65,13 @@ for @*ARGS {
     }
     when /^:i font '=' (\S+) / {
         $font-ref = ~$0;
+    }
+    when /^:i lang '=' (\S\S) / {
+        $lang = ~$0.lc;
+        unless %default-samples{$lang}:exists {
+            say "FATAL: Language code '$lang' is not recognized.";
+            exit;
+        }
     }
     when /^:i h / {
         ++$help;
@@ -101,6 +110,7 @@ sub pdf-language-samples(
     :$font-size = 12,
     :$page-size = 'Letter',
     :$kerning = True,
+    :$lang,
     :$debug,
     --> IO::Path
     ) is export {
@@ -108,7 +118,7 @@ sub pdf-language-samples(
 
 # call the governing sub
 my $opath = pdf-language-samples $font-ref, :$ofile, :$font-size,
-                :$page-size, :$kerning, :$debug;
+                :$page-size, :$kerning, :$lang, :$debug;
 say "See output: $opath";
 
 =finish

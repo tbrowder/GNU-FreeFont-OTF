@@ -60,10 +60,24 @@ to select the font.
 =head2 Font samples
 
 This package includes an installed Raku script, C<make-gnu-ff-samples>, to
-produce a page of I<pangrams> in several languages for a selected font. Please create an issue if you
-want one changed or added for your language. Languages currently shown are:
+produce a page of I<pangrams> in several languages for a selected font. 
 
+Please create an issue if you want one changed or added for your language. 
+Languages currently shown are:
 
+=item de - German
+=item en - English
+=item es - Spanish
+=item fr - French
+=item id - Indonesian
+=item it - Italian
+=item nb - Norwegian (Bokmål)
+=item nl - Dutch
+=item nn - Norwegian (Nyorsk)
+=item pl - Polish
+=item ro - Romanian
+=item ru - Russian
+=item uk - Ukranian
 
 =head2 Table 1
 

@@ -48,7 +48,35 @@ You maay also use the font name in the first colum or the reference number to se
 Font samples
 ------------
 
-This package includes an installed Raku script, `make-gnu-ff-samples`, to produce a page of *pangrams* in several languages for a selected font. Please create an issue if you want one changed or added for your language. Languages currently shown are:
+This package includes an installed Raku script, `make-gnu-ff-samples`, to produce a page of *pangrams* in several languages for a selected font. 
+
+Please create an issue if you want one changed or added for your language. Languages currently shown are:
+
+  * de - German
+
+  * en - English
+
+  * es - Spanish
+
+  * fr - French
+
+  * id - Indonesian
+
+  * it - Italian
+
+  * nb - Norwegian (Bokmål)
+
+  * nl - Dutch
+
+  * nn - Norwegian (Nyorsk)
+
+  * pl - Polish
+
+  * ro - Romanian
+
+  * ru - Russian
+
+  * uk - Ukranian
 
 Table 1
 -------
