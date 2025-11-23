@@ -62,9 +62,6 @@ sub pdf-language-samples(
         die "Could not find font hash '%fonts'. Is it installed?";
     }
 
-    # --- Resolve the font the caller wants ---
-#   my %num-to-family = 1 => 'FreeSerif', 2 => 'FreeSans', 3 => 'FreeMono';
-
     # convert inputs to valid font refs
     my $fpath = "";
     my $fr = $font-ref;
@@ -93,7 +90,6 @@ sub pdf-language-samples(
         die "FATAL: \$fr is not usable";
     }
 
-    #if $has-hyphens or $has-spaces {
     if $has-hyphens {
         # assume its mostly correct except ensure pieces are capitalized properly
         my @parts = $fr.split($sep);
