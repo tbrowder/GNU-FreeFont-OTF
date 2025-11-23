@@ -23,6 +23,7 @@ print q:to/HERE/;
      * :page-size<Letter|A4> (default: Letter)
      * :kerning<True|False>  (default: True)
      * :font-size(Int > 0)   (default: 12)
+     * :lang(Lang code)      (default: False)
 
    Renders pages in the given portrait size with ~0.75in margins and adds
      "n of m" page numbers bottom-right.
@@ -38,6 +39,7 @@ sub pdf-language-samples(
     :$font-size = 12,
     :$page-size = 'Letter',
     :$kerning   = True,
+    :$lang      = False,
     :$debug,
     --> IO::Path
     ) is export {
@@ -52,10 +54,10 @@ sub pdf-language-samples(
     }
 
     # Note: font-size is only for the body text
-    # other sizes to modify after seeing real output:
-#   my $head-core-size = 18;
+    # other sizes may need to be modified after seeing real output:
+    my $head-core-size = 16;
 
-    my %fonts = get-font-file-paths-hash; #(:$debug --> Hash) is export {
+    my %fonts = get-font-file-paths-hash; 
     unless %fonts.defined {
         die "Could not find font hash '%fonts'. Is it installed?";
     }
@@ -216,7 +218,7 @@ sub pdf-language-samples(
 
     # --- Title ---
     $page.text: -> $txt {
-        $txt.font = $head-core, 18;
+        $txt.font = $head-core, $head-core-size; # 16;
         $txt.text-position = $x, $y;
         $txt.say: "GNU FreeFont – Language Samples — {$face-title}", :align<left>;
     }
