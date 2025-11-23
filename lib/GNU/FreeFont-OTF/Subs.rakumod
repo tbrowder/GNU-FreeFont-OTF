@@ -33,33 +33,10 @@ HERE
 } # end of sub help
 
 sub resolve-font-ref(
-) is export {
-} # end of sub resolve-font-ref
-
-sub do-pdf-language-samples(
     $font-ref is copy,
-    Str:D :$ofile!,
-    # default options if NOT explicitly entered
-    :$font-size = 12,
-    :$page-size = 'Letter',
-    :$kerning   = True,
-    :$lang      = False,
     :$debug,
     --> IO::Path
-    ) is export {
-
-    use PDF::Lite;
-    use PDF::Font::Loader :load-font;
-    use PDF::Content::Page :PageSizes;   # A4, Letter available
-    use PDF::Content::Color :rgb;
-
-    unless $font-ref.defined and ($font-ref ~~ /\S/) {
-        $font-ref = "Free Serif";
-    }
-
-    # Note: font-size is only for the body text
-    # other sizes may need to be modified after seeing real output:
-    my $head-core-size = 16;
+) is export {
 
     my %fonts = get-font-file-paths-hash; 
     unless %fonts.defined {
@@ -67,7 +44,7 @@ sub do-pdf-language-samples(
     }
 
     # convert inputs to valid font refs
-    my $fpath = "";
+    my $font-path = "";
     my $fr = $font-ref;
 
     # any hyphens or spaces or both?
@@ -124,26 +101,213 @@ sub do-pdf-language-samples(
     with $font-ref {
         my $r = $_;
         when $r ~~ 1..12 {
-            $fpath = %fonts{$r};
+            $font-path = %fonts{$r};
         }
         default {
-            $fpath = %fonts{$r};
+            $font-path = %fonts{$r};
         }
     }
 
-    if $fpath.defined {
-        if $fpath.IO.r {
-            $font-ref = $fpath;
+    if $font-path.defined {
+        if $font-path.IO.r {
+            $font-ref = $font-path;
         }
         else {
-            die "Could not find GNU FreeFont file '$fpath'"; #family ‘$fam’. Is it installed?";
+            die "Could not find GNU FreeFont file '$font-path'"; #family ‘$fam’. Is it installed?";
         }
     }
 
-    my $loaded-font = try { load-font :file($fpath) } //
-            die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
+=begin comment
+    my $loaded-font = try { load-font :file($font-path) } //
+            die "Could not find GNU FreeFont file ‘$font-path’. Is it installed?";
 
-    my $face-title = $font-ref.IO.basename;
+    my $face-title = $font-path.IO.basename;
+    if $face-title ~~ /'.'/ {
+        $face-title ~~ s/'.' .* $//;
+    }
+
+    if $debug {
+        say "DEBUG: input font ref: $font-ref";
+    }
+
+    # A bold core-font for headings (portable even if GNU FreeFont is missing)
+    #   face only
+    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
+
+    # --- Make a new PDF (portrait page-size) ---
+    my PDF::Lite $pdf .= new;
+    my $size = $page-size.lc eq 'letter' ?? Letter !! A4;
+    $pdf.media-box = $size;  # chosen size
+    my PDF::Lite::Page $page = $pdf.add-page;
+    my @pages = $pdf.pages;  # capture page list
+
+    # --- Page metrics ---
+    my Numeric $margin = 54;                 # 0.75in
+    my Numeric $x      = $margin;
+    my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
+    my Numeric $col-w  = $page.media-box[2] - 2*$margin;
+
+    # --- Title ---
+    $page.text: -> $txt {
+        $txt.font = $head-core, $head-core-size; # 16;
+        $txt.text-position = $x, $y;
+        $txt.say: "GNU FreeFont – Language Samples — {$face-title}", :align<left>;
+    }
+    $y -= 26;   # space after the title
+
+    # Helper to start a fresh page when we run out of space
+    sub new-page() {
+        $page = $pdf.add-page;
+        @pages = $pdf.pages;  # refresh list
+        $x    = $margin;
+        $y    = $page.media-box[3] - $margin;
+        # repeat running head (optional)
+        $page.text: -> $t {
+            $t.font = $head-core, 12; # $font-size; head-core-size2
+            $t.text-position = $x, $y;
+            $t.say: "GNU FreeFont — {$face-title}", :align<left>;
+        }
+        $y -= 20;
+    }
+
+    # --- Body: each entry in %default-samples is a (language => text) pair ---
+    my %samples := try %default-samples
+        orelse die q:to/HERE/;
+        FATAL: This routine expects %default-samples to be defined in
+            GNU::FreeFont::Subs
+        HERE
+
+    my %names;
+    for %samples.keys -> $iso-key {
+        my $name = %samples{$iso-key}<lang>;
+        %names{$name} = $iso-key;
+    }
+
+    my @nkeys = %names.keys.sort;
+    my $n = 2; 
+    for @nkeys.kv -> $i, $name {
+        my $k = %names{$name};
+        say "DEBUG: \$k: $k, \$name: $name" if $debug and $i < $n;
+=end comment
+
+    $font-path;
+
+} # end of sub resolve-font-ref
+
+sub do-pdf-language-samples(
+    $font-ref is copy,
+    Str:D :$ofile!,
+    # default options if NOT explicitly entered
+    :$font-size = 11,
+    :$page-size = 'Letter',
+    :$kerning   = True,
+    :$lang      = False,
+    :$debug,
+    --> IO::Path
+    ) is export {
+
+    use PDF::Lite;
+    use PDF::Font::Loader :load-font;
+    use PDF::Content::Page :PageSizes;   # A4, Letter available
+    use PDF::Content::Color :rgb;
+
+    unless $font-ref.defined and ($font-ref ~~ /\S/) {
+        $font-ref = "Free Serif";
+    }
+
+    my $font-path = resolve-font-ref $font-ref;
+
+
+    # Note: font-size is only for the body text
+    # other sizes may need to be modified after seeing real output:
+    my $head-core-size = 16;
+
+=begin comment
+
+    my %fonts = get-font-file-paths-hash; 
+    unless %fonts.defined {
+        die "Could not find font hash '%fonts'. Is it installed?";
+    }
+
+    # convert inputs to valid font refs
+    my $font-path = "";
+    my $fr = $font-ref;
+
+    # any hyphens or spaces or both?
+    my $sep;
+    my ($has-hyphens, $has-spaces) = 0, 0;
+    if $fr ~~ / '-' / {
+        ++$has-hyphens;
+        $sep = '-';
+        $fr ~~ s:g/'-'+/-/; # rm  xtra hyphens
+    }
+    if $fr ~~ / \h / {
+        ++$has-spaces;
+        $sep = ' ';
+        $fr ~~ s:g/\h+//; # rm spaces
+    }
+    if $has-hyphens and $has-spaces {
+        # remove the spaces
+        $fr ~~ s:g/\h+//; # rm all spaces
+        $sep = '-';
+    }
+
+    # sanity check
+    unless $fr.defined and ($fr ~~ /\S/) {
+        die "FATAL: \$fr is not usable";
+    }
+
+    if $has-hyphens {
+        # assume its mostly correct except ensure pieces are capitalized properly
+        my @parts = $fr.split($sep);
+        unless @parts.elems == 2 { die "unknown font alias '$fr'"; }
+        $fr = "";
+        for @parts.kv -> $i, $p is copy {
+            $p .= tc;
+            if $i {
+                $fr ~= $p ~ '-';
+            }
+            else {
+                $fr ~= $p;
+            }
+        }
+    }
+
+    # sanity check
+    unless $fr.defined and ($fr ~~ /\S/) {
+        die "FATAL: \$fr is not usable";
+    }
+
+    $font-ref = $fr;
+
+    if $debug {
+        say "DEBUG: calculated \$fr: $fr";
+    }
+    
+    with $font-ref {
+        my $r = $_;
+        when $r ~~ 1..12 {
+            $font-path = %fonts{$r};
+        }
+        default {
+            $font-path = %fonts{$r};
+        }
+    }
+
+    if $font-path.defined {
+        if $font-path.IO.r {
+            $font-ref = $font-path;
+        }
+        else {
+            die "Could not find GNU FreeFont file '$font-path'"; #family ‘$fam’. Is it installed?";
+        }
+    }
+=end comment
+
+    my $loaded-font = try { load-font :file($font-path) } //
+            die "Could not find GNU FreeFont file ‘$font-path’. Is it installed?";
+
+    my $face-title = $font-path.IO.basename;
     if $face-title ~~ /'.'/ {
         $face-title ~~ s/'.' .* $//;
     }
@@ -262,4 +426,6 @@ sub do-pdf-language-samples(
     # --- Write the file ---
     $pdf.save-as: $ofile;
     return $ofile.IO;
-}
+
+
+} # end sub do-*

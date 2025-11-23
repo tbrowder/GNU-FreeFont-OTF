@@ -14,7 +14,7 @@ use PDF::Lite;
 use GNU::FreeFont-OTF;
 use GNU::FreeFont-OTF::FontPaths;
 
-my ($fpath, $fpath2);
+my ($font-path, $font-path2);
 my ($font, $font2, $code);
 
 my $ff = GNU::FreeFont-OTF.new;

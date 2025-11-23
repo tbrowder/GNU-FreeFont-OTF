@@ -15,22 +15,22 @@ use PDF::Lite;
 use GNU::FreeFont-OTF::FontPaths;
 my %fonts = get-font-file-paths-hash;
 
-my ($fpath, $fpath2, $fpath3, $fpath4);
+my ($font-path, $font-path2, $font-path3, $font-path4);
 my ($font, $font2, $font3, $font4);
-$fpath  = %fonts<t>;
-$fpath2 = %fonts<sa>;
-$fpath3 = %fonts<1>;
-$fpath4 = %fonts{1};
-isa-ok $fpath, IO::Path;
-isa-ok $fpath2, IO::Path;
-isa-ok $fpath3, IO::Path;
-isa-ok $fpath4, IO::Path;
+$font-path  = %fonts<t>;
+$font-path2 = %fonts<sa>;
+$font-path3 = %fonts<1>;
+$font-path4 = %fonts{1};
+isa-ok $font-path, IO::Path;
+isa-ok $font-path2, IO::Path;
+isa-ok $font-path3, IO::Path;
+isa-ok $font-path4, IO::Path;
 
 # use the valid paths to get a loaded font
-$font  = PDF::Font::Loader.load-font: :file($fpath);
-$font2 = PDF::Font::Loader.load-font: :file($fpath2);
-$font3 = PDF::Font::Loader.load-font: :file($fpath3);
-$font4 = PDF::Font::Loader.load-font: :file($fpath4);
+$font  = PDF::Font::Loader.load-font: :file($font-path);
+$font2 = PDF::Font::Loader.load-font: :file($font-path2);
+$font3 = PDF::Font::Loader.load-font: :file($font-path3);
+$font4 = PDF::Font::Loader.load-font: :file($font-path4);
 
 isa-ok $font, PDF::Content::FontObj;
 isa-ok $font2, PDF::Content::FontObj;
