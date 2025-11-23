@@ -104,20 +104,20 @@ if $help {
 }
 
 =begin comment
-sub pdf-language-samples(
+sub do-pdf-language-samples(
     $font-ref,
     Str:D :$ofile!,
     :$font-size = 12,
     :$page-size = 'Letter',
-    :$kerning = True,
-    :$lang,
+    :$kerning   = True,
+    :$lang      = False,
     :$debug,
     --> IO::Path
     ) is export {
 =end comment
 
 # call the governing sub
-my $opath = pdf-language-samples $font-ref, :$ofile, :$font-size,
+my $opath = do-pdf-language-samples $font-ref, :$ofile, :$font-size,
                 :$page-size, :$kerning, :$lang, :$debug;
 say "See output: $opath";
 

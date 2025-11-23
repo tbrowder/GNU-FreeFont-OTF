@@ -32,7 +32,11 @@ print q:to/HERE/;
 HERE
 } # end of sub help
 
-sub pdf-language-samples(
+sub resolve-font-ref(
+) is export {
+} # end of sub resolve-font-ref
+
+sub do-pdf-language-samples(
     $font-ref is copy,
     Str:D :$ofile!,
     # default options if NOT explicitly entered

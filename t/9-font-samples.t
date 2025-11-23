@@ -20,7 +20,7 @@ try { $outfile.IO.unlink if $outfile.IO.e; CATCH { } }
 lives-ok {
 
     my $font-ref = "Free Serif";
-    pdf-language-samples $font-ref, :ofile($outfile);
+    do-pdf-language-samples $font-ref, :ofile($outfile);
 
     is $outfile.IO.r, True, "outfile $outfile exists";
 
