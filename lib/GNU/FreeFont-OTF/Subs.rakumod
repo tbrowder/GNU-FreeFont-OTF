@@ -32,7 +32,7 @@ HERE
 } # end of sub help
 
 sub pdf-language-samples(
-    $font-ref,
+    $font-ref is copy,
     Str:D :$ofile!,
     # default options if NOT explicitly entered
     :$font-size = 12,
@@ -47,7 +47,7 @@ sub pdf-language-samples(
     use PDF::Content::Page :PageSizes;   # A4, Letter available
     use PDF::Content::Color :rgb;
 
-    unless $font-ref.defined {
+    unless $font-ref.defined and ($font-ref ~~ /\S/) {
         $font-ref = "Free Serif";
     }
 
@@ -64,28 +64,38 @@ sub pdf-language-samples(
 #   my %num-to-family = 1 => 'FreeSerif', 2 => 'FreeSans', 3 => 'FreeMono';
 
     # convert inputs to valid font refs
-    my $fr = $font-ref;
     my $fpath = "";
+    my $fr = $font-ref;
+
     # any hyphens or spaces or both?
+    my $sep;
     my ($has-hyphens, $has-spaces) = 0, 0;
     if $fr ~~ / '-' / {
         ++$has-hyphens;
+        $sep = '-';
         $fr ~~ s:g/'-'+/-/; # rm  xtra hyphens
     }
     if $fr ~~ / \h / {
-        ++$has-spacess;
-        $fr ~~ s:g/\h+/ /; # rm xtra spaces
+        ++$has-spaces;
+        $sep = ' ';
+        $fr ~~ s:g/\h+//; # rm spaces
     }
-    if $has-hyphens and $has-spaces / {
+    if $has-hyphens and $has-spaces {
         # remove the spaces
         $fr ~~ s:g/\h+//; # rm all spaces
+        $sep = '-';
     }
 
-    if $has-hyphens or $has-spaces / {
-        my $sep = ~$0;
+    # sanity check
+    unless $fr.defined and ($fr ~~ /\S/) {
+        die "FATAL: \$fr is not usable";
+    }
+
+    #if $has-hyphens or $has-spaces {
+    if $has-hyphens {
         # assume its mostly correct except ensure pieces are capitalized properly
         my @parts = $fr.split($sep);
-        unless @parts.elems == 2 { die "unknow font alias '$font-ref'; }
+        unless @parts.elems == 2 { die "unknown font alias '$fr'"; }
         $fr = "";
         for @parts.kv -> $i, $p is copy {
             $p .= tc;
@@ -97,41 +107,74 @@ sub pdf-language-samples(
             }
         }
     }
+
+    # sanity check
+    unless $fr.defined and ($fr ~~ /\S/) {
+        die "FATAL: \$fr is not usable";
+    }
+
+    $font-ref = $fr;
+
+    if $debug {
+        say "DEBUG: calculated \$fr: $fr";
+    }
+    
     with $font-ref {
         my $r = $_;
-        when $r ~~ / (<[1..12]>) / {
-            $fpath = %fonts{+$0};
+        when $r ~~ 1..12 {
+            $fpath = %fonts{$r};
         }
-        when $r ~~ / (<[1..12]>) / {
-            $fpath = %fonts{+$0};
+        default {
+            $fpath = %fonts{$r};
         }
     }
 
-    my $loaded-font = do given $font-ref {
-        when Int {
-            my $fam = %num-to-family{$font-ref} // 'FreeSerif';
-            try { load-font :family($fam) } //
-            die "Could not find GNU FreeFont family ‘$fam’. Is it installed?";
+    if $fpath.defined {
+        if $fpath.IO.r {
+            $font-ref = $fpath;
         }
+        else {
+            die "Could not find GNU FreeFont file '$fpath'"; #family ‘$fam’. Is it installed?";
+        }
+    }
+
+#   say "DEBUG: font-ref: '$font-ref' exiting..."; exit;
+
+    my $loaded-font = do given $font-ref {
+#       when Int {
+#           my $fam = %num-to-family{$font-ref} // 'FreeSerif';
+#           #try { load-font :family($fam) } //
+#           try { load-font :file($font-ref) } //
+#           die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
+#       }
         when Str {
             my $s = $_.IO;
             if $s.e && $s.f {         # looks like a path to a font file
                 load-font :file($s.absolute);
             }
             else {
-                try { load-font :family($_) } //
-                die "Could not find font family ‘$_’. Is it installed?";
+                try { load-font :file($font-ref) } //
+#               try { load-font :family($_) } //
+#               die "Could not find font family ‘$_’. Is it installed?";
+                die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
             }
         }
         default {
+            #die "Unsupported font reference type: { .^name }"
             die "Unsupported font reference type: { .^name }"
         }
-    };
+    }
+
+    my $face-title = $font-ref.IO.basename;
+    if $face-title ~~ /'.'/ {
+        $face-title ~~ s/'.' .* $//;
+    }
 
     if $debug {
         say "DEBUG: input font ref: $font-ref";
     }
 
+=begin comment
     # Introspect a face title as best we can; fallback to reference/filename.
     sub face-title($font, $ref) {
         for <full-name family subfamily style name ps-name postscript-name> -> $m {
@@ -152,6 +195,7 @@ sub pdf-language-samples(
     if $debug {
         say "DEBUG: derived face title: $face-title";
     }
+=end comment
 
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
@@ -207,17 +251,18 @@ sub pdf-language-samples(
     }
 
     my @nkeys = %names.keys.sort;
-    for @nkeys -> $name {
+    my $n = 2; 
+    for @nkeys.kv -> $i, $name {
         my $k = %names{$name};
-        say "DEBUG: \$k: $k" if $debug;
+        say "DEBUG: \$k: $k, \$name: $name" if $debug and $i < $n;
         # $k is the two-char ISO abbreviation of the language
         # $sample{$k}.text  is the text line
 
         my %h = %samples{$k};
         my $lang = %h<lang>;
         my $text = %h<text>;
-        say "DEBUG: \$lang: $lang" if $debug;
-        say "DEBUG: \$text: $text" if $debug;
+        say "DEBUG: \$lang: $lang" if 0 and $debug;
+        say "DEBUG: \$text: $text" if 0 and $debug;
         # Header label for the language
         if $y < $margin + 60 { new-page }
         $page.text: -> $t {
