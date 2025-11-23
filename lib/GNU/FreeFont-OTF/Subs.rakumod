@@ -141,7 +141,11 @@ sub pdf-language-samples(
     }
 
 #   say "DEBUG: font-ref: '$font-ref' exiting..."; exit;
+    my $loaded-font = 
+            try { load-font :file($fpath) } //
+            die "Could not find GNU FreeFont file ‘$fpath’. Is it installed?";
 
+=begin comment
     my $loaded-font = do given $font-ref {
 #       when Int {
 #           my $fam = %num-to-family{$font-ref} // 'FreeSerif';
@@ -166,6 +170,7 @@ sub pdf-language-samples(
             die "Unsupported font reference type: { .^name }"
         }
     }
+=end comment
 
     my $face-title = $font-ref.IO.basename;
     if $face-title ~~ /'.'/ {
