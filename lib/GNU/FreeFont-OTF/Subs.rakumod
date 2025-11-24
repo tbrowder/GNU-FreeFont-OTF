@@ -222,91 +222,10 @@ sub do-pdf-language-samples(
     # other sizes may need to be modified after seeing real output:
     my $head-core-size = 16;
 
-=begin comment
-
-    my %fonts = get-font-file-paths-hash; 
-    unless %fonts.defined {
-        die "Could not find font hash '%fonts'. Is it installed?";
-    }
-
-    # convert inputs to valid font refs
-    my $font-path = "";
-    my $fr = $font-ref;
-
-    # any hyphens or spaces or both?
-    my $sep;
-    my ($has-hyphens, $has-spaces) = 0, 0;
-    if $fr ~~ / '-' / {
-        ++$has-hyphens;
-        $sep = '-';
-        $fr ~~ s:g/'-'+/-/; # rm  xtra hyphens
-    }
-    if $fr ~~ / \h / {
-        ++$has-spaces;
-        $sep = ' ';
-        $fr ~~ s:g/\h+//; # rm spaces
-    }
-    if $has-hyphens and $has-spaces {
-        # remove the spaces
-        $fr ~~ s:g/\h+//; # rm all spaces
-        $sep = '-';
-    }
-
-    # sanity check
-    unless $fr.defined and ($fr ~~ /\S/) {
-        die "FATAL: \$fr is not usable";
-    }
-
-    if $has-hyphens {
-        # assume its mostly correct except ensure pieces are capitalized properly
-        my @parts = $fr.split($sep);
-        unless @parts.elems == 2 { die "unknown font alias '$fr'"; }
-        $fr = "";
-        for @parts.kv -> $i, $p is copy {
-            $p .= tc;
-            if $i {
-                $fr ~= $p ~ '-';
-            }
-            else {
-                $fr ~= $p;
-            }
-        }
-    }
-
-    # sanity check
-    unless $fr.defined and ($fr ~~ /\S/) {
-        die "FATAL: \$fr is not usable";
-    }
-
-    $font-ref = $fr;
-
-    if $debug {
-        say "DEBUG: calculated \$fr: $fr";
-    }
-    
-    with $font-ref {
-        my $r = $_;
-        when $r ~~ 1..12 {
-            $font-path = %fonts{$r};
-        }
-        default {
-            $font-path = %fonts{$r};
-        }
-    }
-
-    if $font-path.defined {
-        if $font-path.IO.r {
-            $font-ref = $font-path;
-        }
-        else {
-            die "Could not find GNU FreeFont file '$font-path'"; #family ‘$fam’. Is it installed?";
-        }
-    }
-=end comment
-
     my $loaded-font = try { load-font :file($font-path) } //
             die "Could not find GNU FreeFont file ‘$font-path’. Is it installed?";
 
+    # the default page name is derived from the font file name
     my $face-title = $font-path.IO.basename;
     if $face-title ~~ /'.'/ {
         $face-title ~~ s/'.' .* $//;
@@ -333,13 +252,19 @@ sub do-pdf-language-samples(
     my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
     my Numeric $col-w  = $page.media-box[2] - 2*$margin;
 
-    # --- Title ---
+    # --- Page Title ---
+    my ($ptitle, $ptitle2);
     $page.text: -> $txt {
         $txt.font = $head-core, $head-core-size; # 16;
         $txt.text-position = $x, $y;
-        $txt.say: "GNU FreeFont – Language Samples — {$face-title}", :align<left>;
+        $ptitle  = "GNU FreeFont – Language Samples — {$face-title}";
+        $ptitle2 = "(Font size $font-size)";
+        $txt.print: $ptitle, :align<left>;
+
+        $txt.font = $head-core, $head-core-size - 2; # 16;
+        $txt.say:   $ptitle2, :align<right>;
     }
-    $y -= 26;   # space after the title
+    $y -= 26;   # add some vertical space after the title
 
     # Helper to start a fresh page when we run out of space
     sub new-page() {
@@ -351,7 +276,8 @@ sub do-pdf-language-samples(
         $page.text: -> $t {
             $t.font = $head-core, 12; # $font-size; head-core-size2
             $t.text-position = $x, $y;
-            $t.say: "GNU FreeFont — {$face-title}", :align<left>;
+            $ptitle2 = "GNU FreeFont — {$face-title}";
+            $t.say: $ptitle2, :align<left>;
         }
         $y -= 20;
     }
@@ -385,10 +311,11 @@ sub do-pdf-language-samples(
         # Header label for the language
         if $y < $margin + 60 { new-page }
         $page.text: -> $t {
-            #$t.font = $head-core, 12; # head-core-size2
             $t.font = $head-core, $font-size; # head-core-size2
             $t.text-position = $x, $y;
-            $t.say: "$lang       (ISO ID: {$k.uc}, Font size: {$font-size})";
+            # original text: $t.say: "$lang       (ISO ID: {$k.uc}, Font size: {$font-size})";
+            $t.print: "$lang", :align<left>;
+            $t.say:   "ISO ID: {$k.uc}", :align<right>;
         }
         $y -= 16;
 
