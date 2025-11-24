@@ -117,79 +117,6 @@ sub resolve-font-ref(
         }
     }
 
-=begin comment
-    my $loaded-font = try { load-font :file($font-path) } //
-            die "Could not find GNU FreeFont file ‘$font-path’. Is it installed?";
-
-    my $face-title = $font-path.IO.basename;
-    if $face-title ~~ /'.'/ {
-        $face-title ~~ s/'.' .* $//;
-    }
-
-    if $debug {
-        say "DEBUG: input font ref: $font-ref";
-    }
-
-    # A bold core-font for headings (portable even if GNU FreeFont is missing)
-    #   face only
-    my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
-
-    # --- Make a new PDF (portrait page-size) ---
-    my PDF::Lite $pdf .= new;
-    my $size = $page-size.lc eq 'letter' ?? Letter !! A4;
-    $pdf.media-box = $size;  # chosen size
-    my PDF::Lite::Page $page = $pdf.add-page;
-    my @pages = $pdf.pages;  # capture page list
-
-    # --- Page metrics ---
-    my Numeric $margin = 54;                 # 0.75in
-    my Numeric $x      = $margin;
-    my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
-    my Numeric $col-w  = $page.media-box[2] - 2*$margin;
-
-    # --- Title ---
-    $page.text: -> $txt {
-        $txt.font = $head-core, $head-core-size; # 16;
-        $txt.text-position = $x, $y;
-        $txt.say: "GNU FreeFont – Language Samples — {$face-title}", :align<left>;
-    }
-    $y -= 26;   # space after the title
-
-    # Helper to start a fresh page when we run out of space
-    sub new-page() {
-        $page = $pdf.add-page;
-        @pages = $pdf.pages;  # refresh list
-        $x    = $margin;
-        $y    = $page.media-box[3] - $margin;
-        # repeat running head (optional)
-        $page.text: -> $t {
-            $t.font = $head-core, 12; # $font-size; head-core-size2
-            $t.text-position = $x, $y;
-            $t.say: "GNU FreeFont — {$face-title}", :align<left>;
-        }
-        $y -= 20;
-    }
-
-    # --- Body: each entry in %default-samples is a (language => text) pair ---
-    my %samples := try %default-samples
-        orelse die q:to/HERE/;
-        FATAL: This routine expects %default-samples to be defined in
-            GNU::FreeFont::Subs
-        HERE
-
-    my %names;
-    for %samples.keys -> $iso-key {
-        my $name = %samples{$iso-key}<lang>;
-        %names{$name} = $iso-key;
-    }
-
-    my @nkeys = %names.keys.sort;
-    my $n = 2; 
-    for @nkeys.kv -> $i, $name {
-        my $k = %names{$name};
-        say "DEBUG: \$k: $k, \$name: $name" if $debug and $i < $n;
-=end comment
-
     $font-path;
 
 } # end of sub resolve-font-ref
@@ -202,6 +129,7 @@ sub do-pdf-language-samples(
     :$page-size = 'Letter',
     :$kerning   = True,
     :$lang      = False,
+    :$all       = False,
     :$debug,
     --> IO::Path
     ) is export {
@@ -353,6 +281,5 @@ sub do-pdf-language-samples(
     # --- Write the file ---
     $pdf.save-as: $ofile;
     return $ofile.IO;
-
 
 } # end sub do-*
