@@ -32,21 +32,24 @@ if not @*ARGS.elems {
       ofile=X - Where X is the desired output PDF file name
       size=X  - Where X is the desired font size (default: 12)
       lang=X  - Where X is the desired language (in place of all languages)
+      all     - Print a separate page for each language with each
+                  font used to print that language's pangram
       help    - Show more detailed program information
       A4      - Use A4 paper instead of the default US Letter
 
     See more information about pangrams and a large list of them
-    for many languages at 'https:://clagnut.com'.
+    for many languages at 'https://clagnut.com'.
     HERE
     exit;
 }
 
-# defauults:
+# defaults:
 my $page-size = "Letter"; # the default
 my $font-ref  = "Free Serif";
 my $font-size = 12;
 my $kerning   = True;
 my $lang      = "";
+my $all       = "";
 
 for @*ARGS {
     when /^:i p / {
@@ -84,6 +87,9 @@ for @*ARGS {
     }
     when /^:i a4 / {
         $page-size = "A4";
+    }
+    when /^:i a / {
+        $all = True;
     }
     when /^:i l / {
         $page-size = "Letter";

@@ -61,6 +61,8 @@ to select the font.
 
 This package includes an installed Raku script, C<make-gnu-ff-samples>, to
 produce a page of I<pangrams> in several languages for a selected font. 
+(See more information about pangrams and a large list of them for many 
+languages at L<https://clagnut.com>.)
 
 Please create an issue if you want one changed or added for your language. 
 Languages currently shown are:

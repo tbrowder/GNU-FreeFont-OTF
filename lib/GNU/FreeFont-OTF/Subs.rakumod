@@ -123,7 +123,7 @@ sub resolve-font-ref(
 
 sub do-pdf-language-samples(
     $font-ref is copy,
-    Str:D :$ofile!,
+    Str:D :$ofile is copy,
     # default options if NOT explicitly entered
     :$font-size = 11,
     :$page-size = 'Letter',
@@ -133,6 +133,11 @@ sub do-pdf-language-samples(
     :$debug,
     --> IO::Path
     ) is export {
+
+    # unless the output file is defined, make it reflect the other input values
+    unless $ofile.defined {
+        $ofile = "GNU-FreeFont-OTF-samples.pdf"; # start with this and modify as needed
+    }
 
     use PDF::Lite;
     use PDF::Font::Loader :load-font;
