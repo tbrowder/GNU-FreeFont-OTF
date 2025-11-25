@@ -30,7 +30,7 @@ if not @*ARGS.elems {
     Options
       font=X  - Where X is the desired font reference
       ofile=X - Where X is the desired output PDF file name
-      size=X  - Where X is the desired font size (default: 12)
+      size=X  - Where X is the desired font size (default: $default-font-size)
       lang=X  - Where X is the desired language (in place of all languages)
       all     - Print a separate page for each language with each
                   font used to print that language's pangram

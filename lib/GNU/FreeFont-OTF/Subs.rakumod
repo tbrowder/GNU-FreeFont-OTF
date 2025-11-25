@@ -3,6 +3,7 @@ unit module GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
 use GNU::FreeFont-OTF::FontPaths;
 
+our $default-font-size is export = 11;
 sub help() is export {
 print q:to/HERE/;
    Writes a portrait PDF showing all language samples using a selected GNU FreeFont
@@ -22,7 +23,7 @@ print q:to/HERE/;
    Options:
      * :page-size<Letter|A4> (default: Letter)
      * :kerning<True|False>  (default: True)
-     * :font-size(Int > 0)   (default: 12)
+     * :font-size(Int > 0)   (default: $default-font-size)
      * :lang(Lang code)      (default: False)
 
    Renders pages in the given portrait size with ~0.75in margins and adds
@@ -151,7 +152,7 @@ sub do-pdf-language-samples(
         # remove any ending hyphen
         $ofile ~~ s:g/'-'+ $//;
 
-        $ofile ~= ".pdf";
+        $ofile ~= "-samples.pdf";
         #=end comment
     }
 
