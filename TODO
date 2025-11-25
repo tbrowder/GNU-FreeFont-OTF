@@ -1,14 +1,16 @@
-Check clagnut.com for pangrams
+Produce several types of output
+
+=done Check clagnut.com for pangrams
 
 Add more languages
 
-Add a lang option that gens a page for one language 
+=done Add a lang option that gens a page for one language 
 for all fonts
 
-Add an option to resolve font aliases or bail with info
+=done Add an option to resolve font aliases or bail with info
 (check in FontFactory code)
 
-Document in README
+=done Document in README
 
 Check dir new-module1 for CodCharts for FreeFont
 

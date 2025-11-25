@@ -1,5 +1,10 @@
 unit module GNU::FreeFont-OTF::Subs;
 
+use PDF::Lite;
+use PDF::Font::Loader :load-font;
+use PDF::Content::Page :PageSizes;   # A4, Letter available
+use PDF::Content::Color :rgb;
+
 use GNU::FreeFont-OTF::Vars;
 use GNU::FreeFont-OTF::FontPaths;
 
@@ -149,22 +154,15 @@ Str :$ofile is copy,
         $ofile ~~ s:g/'-'+/-/;
         # remove any ending hyphen
         $ofile ~~ s:g/'-'+ $//;
-
+        # a standard ending:
         $ofile ~= "-samples.pdf";
-        #=end comment
     }
-
-    use PDF::Lite;
-    use PDF::Font::Loader :load-font;
-    use PDF::Content::Page :PageSizes;   # A4, Letter available
-    use PDF::Content::Color :rgb;
 
     unless $font-ref.defined and ($font-ref ~~ /\S/) {
         $font-ref = "Free Serif";
     }
 
     my $font-path = resolve-font-ref $font-ref;
-
 
     # Note: font-size is only for the body text
     # other sizes may need to be modified after seeing real output:
