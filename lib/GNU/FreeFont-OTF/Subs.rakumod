@@ -123,20 +123,36 @@ sub resolve-font-ref(
 
 sub do-pdf-language-samples(
     $font-ref is copy,
-    Str:D :$ofile is copy,
+    :$ofile is copy,
     # default options if NOT explicitly entered
     :$font-size = 11,
     :$page-size = 'Letter',
     :$kerning   = True,
     :$lang      = False,
-    :$all       = False,
+    :$all       = False, # show all features
     :$debug,
     --> IO::Path
     ) is export {
 
     # unless the output file is defined, make it reflect the other input values
-    unless $ofile.defined {
-        $ofile = "GNU-FreeFont-OTF-samples.pdf"; # start with this and modify as needed
+    unless $ofile.defined and $ofile ~~ /\S/ {
+        # start with this and modify as needed:
+        #$ofile   = "GNU-FreeFont-OTF-samples.pdf"; 
+        #=begin comment
+        my $base = "GNU-FreeFont-OTF"; 
+      
+        my $n1 = $page-size.contains("a4", :i) ?? "A4" !! "";
+        my $n2 = $kerning ?? "kern" !! "nokern";
+        my $n3 = $lang ?? $lang !! "";
+        my $n4 = $all  ?? "all" !! "";
+        $ofile = "$base-$n1-$n2-$n3-$n3";
+        # remove duplicate hyphens
+        $ofile ~~ s:g/'-'+/-/;
+        # remove any ending hyphen
+        $ofile ~~ s:g/'-'+ $//;
+
+        $ofile ~= ".pdf";
+        #=end comment
     }
 
     use PDF::Lite;
@@ -191,7 +207,12 @@ sub do-pdf-language-samples(
         $txt.font = $head-core, $head-core-size; # 16;
         $txt.text-position = $x, $y;
         $ptitle  = "GNU FreeFont – Language Samples — {$face-title}";
-        $ptitle2 = "(Font size $font-size)";
+        if $kerning {
+            $ptitle2 = "(Font size, with kerning)";
+        }
+        else {
+            $ptitle2 = "(Font size, no kerning)";
+        }
         $txt.print: $ptitle, :align<left>;
 
         $txt.font = $head-core, $head-core-size - 2; # 16;
@@ -246,7 +267,6 @@ sub do-pdf-language-samples(
         $page.text: -> $t {
             $t.font = $head-core, $font-size; # head-core-size2
             $t.text-position = $x, $y;
-            # original text: $t.say: "$lang       (ISO ID: {$k.uc}, Font size: {$font-size})";
             $t.print: "$lang", :align<left>;
             $t.say:   "ISO ID: {$k.uc}", :align<right>;
         }

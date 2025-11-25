@@ -15,8 +15,8 @@ my $os = OS.new;
 my $debug = 0;
 my $print = 0;
 my $help  = 0;
-my $ofil  = "GNU-FreeFont-OTF-samples.pdf";
-my $ofile = $ofil; # default
+my $defofil  = "GNU-FreeFont-OTF-samples.pdf";
+my $ofile; # = $ofil; # default
 
 if not @*ARGS.elems {
     my $p = $*PROGRAM.basename;
