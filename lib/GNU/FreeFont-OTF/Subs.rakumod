@@ -126,7 +126,7 @@ sub do-pdf-language-samples(
     $font-ref is copy,
     :$ofile is copy,
     # default options if NOT explicitly entered
-    :$font-size = 11,
+    :$font-size = $default-font-size,
     :$page-size = 'Letter',
     :$kerning   = True,
     :$lang      = False,
@@ -138,15 +138,13 @@ sub do-pdf-language-samples(
     # unless the output file is defined, make it reflect the other input values
     unless $ofile.defined and $ofile ~~ /\S/ {
         # start with this and modify as needed:
-        #$ofile   = "GNU-FreeFont-OTF-samples.pdf"; 
-        #=begin comment
         my $base = "GNU-FreeFont-OTF"; 
       
         my $n1 = $page-size.contains("a4", :i) ?? "A4" !! "";
         my $n2 = $kerning ?? "kern" !! "nokern";
         my $n3 = $lang ?? $lang !! "";
         my $n4 = $all  ?? "all" !! "";
-        $ofile = "$base-$n1-$n2-$n3-$n3";
+        $ofile = "$base-$n1-$n2-$n3-$n4";
         # remove duplicate hyphens
         $ofile ~~ s:g/'-'+/-/;
         # remove any ending hyphen

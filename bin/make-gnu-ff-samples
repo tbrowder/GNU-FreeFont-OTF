@@ -46,7 +46,7 @@ if not @*ARGS.elems {
 # defaults:
 my $page-size = "Letter"; # the default
 my $font-ref  = "Free Serif";
-my $font-size = 12;
+my $font-size = $default-font-size;
 my $kerning   = True;
 my $lang      = "";
 my $all       = "";
@@ -117,6 +117,7 @@ sub do-pdf-language-samples(
     :$page-size = 'Letter',
     :$kerning   = True,
     :$lang      = False,
+    :$all       = False,
     :$debug,
     --> IO::Path
     ) is export {
@@ -124,7 +125,7 @@ sub do-pdf-language-samples(
 
 # call the governing sub
 my $opath = do-pdf-language-samples $font-ref, :$ofile, :$font-size,
-                :$page-size, :$kerning, :$lang, :$debug;
+                :$page-size, :$kerning, :$lang, :$all, :$debug;
 say "See output: $opath";
 
 =finish
