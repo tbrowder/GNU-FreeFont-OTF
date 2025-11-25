@@ -124,7 +124,7 @@ sub resolve-font-ref(
 
 sub do-pdf-language-samples(
     $font-ref is copy,
-    :$ofile is copy,
+Str :$ofile is copy,
     # default options if NOT explicitly entered
     :$font-size = $default-font-size,
     :$page-size = 'Letter',
