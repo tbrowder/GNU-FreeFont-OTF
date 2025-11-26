@@ -184,6 +184,7 @@ sub do-pdf-language-samples(
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
     my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
+    my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); #, :weight<re>);
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
@@ -198,26 +199,28 @@ sub do-pdf-language-samples(
     my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
     my Numeric $col-w  = $page.media-box[2] - 2*$margin;
     my Numeric $rmx    = $page.media-box[2] - $margin;
+    my Numeric $ctrx   = $x + 0.5 * $col-w;
 
     # --- Page Title ---
     my ($ptitle, $ptitle2);
     $page.text: -> $txt {
         $txt.font = $head-core, $head-core-size; # 16;
-        $txt.text-position = $x, $y;
+        $txt.text-position = $ctrx, $y;
         $ptitle  = "GNU FreeFont – Language Samples — {$face-title}";
         if $kerning {
-            $ptitle2 = "(Font size, with kerning)";
+            $ptitle2 = "(Font size $font-size, with kerning)";
         }
         else {
-            $ptitle2 = "(Font size, no kerning)";
+            $ptitle2 = "(Font size $font-size, no kerning)";
         }
-        $txt.print: $ptitle, :align<left>;
+        $txt.print: $ptitle, :align<center>;
 
-        $txt.text-position = $rmx, $y;
-        $txt.font = $head-core, $head-core-size - 2; # 16;
-        $txt.say:   $ptitle2, :align<right>;
+        $y -= 15;   # add some vertical space after the title
+        $txt.text-position = $ctrx, $y;
+        $txt.font = $head-sub, $head-core-size - 2; # 16;
+        $txt.say:   $ptitle2, :align<center>;
     }
-    $y -= 26;   # add some vertical space after the title
+    $y -= 26;   # add some vertical space after the title block
 
     # Helper to start a fresh page when we run out of space
     sub new-page() {
@@ -228,9 +231,9 @@ sub do-pdf-language-samples(
         # repeat running head (optional)
         $page.text: -> $t {
             $t.font = $head-core, 12; # $font-size; head-core-size2
-            $t.text-position = $x, $y;
+            $t.text-position = $ctrx, $y;
             $ptitle2 = "GNU FreeFont — {$face-title}";
-            $t.say: $ptitle2, :align<left>;
+            $t.say: $ptitle2, :align<center>;
         }
         $y -= 20;
     }
@@ -270,6 +273,7 @@ sub do-pdf-language-samples(
             $t.text-position = $x, $y;
             $t.print: "$lang", :align<left>;
 
+            $t.font = $head-core, $font-size - 2; # head-core-size2
             $t.text-position = $rmx, $y;
             $t.say:   "ISO ID: {$k.uc}", :align<right>;
         }

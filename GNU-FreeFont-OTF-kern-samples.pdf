@@ -13,210 +13,222 @@ endobj
   /Type /Page
   /Contents 4 0 R
   /Parent 2 0 R
-  /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 10 0 R >> >>
+  /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R /F4 11 0 R >> >>
 >>
 endobj
 
 4 0 obj
-<< /Length 5611 >> stream
+<< /Length 5754 >> stream
 BT
   /F1 16 Tf
-  1 0 0 1 54 738 Tm
-  (GNU FreeFont ñ Language Samples ó FreeSerif) Tj
-  1 0 0 1 558 738 Tm
-  /F1 14 Tf
-  [ 11446 (\(Font size, with kerning\)) ] TJ
+  1 0 0 1 306 738 Tm
+  [ 11448 (GNU FreeFont ñ Language Samples ó FreeSerif) ] TJ
+  1 0 0 1 306 723 Tm
+  /F2 14 Tf
+  [ 6002 (\(Font size 11, with kerning\)) ] TJ
   15.4 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 712 Tm
+  1 0 0 1 54 697 Tm
   (Dutch) Tj
-  1 0 0 1 558 712 Tm
+  /F1 9 Tf
+  1 0 0 1 558 697 Tm
   [ 4945 (ISO ID: NL) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 696 Tm
+  /F3 12 Tf
+  1 0 0 1 54 681 Tm
   [ (Qu) 10 (i) 10 (zd) 10 (e) 20 (l) 5 (ta) 10 (g) 10 (e) 10 (rn) 10 (e s) 20 (p) 10 (i) 10 (s) 10 (te j) 10 (o) 10 (r) 10 (dbÊ) 10 (r m) 10 (ed fl) 10 (¯d) 10 (e, m) 10 (e) 10 (n) 10 (s c) 10 (i) 10 (r) 10 (kus) 20 (kl) 10 (o) 28 (vn) 10 (e) 10 (n W) 50 (a) 5 (l) 5 (th) 10 (e) 10 (r s) 20 (p) 10 (i) 10 (ll) 10 (ed) 10 (e pÂ) 5 (l) 10 (o) 10 (f) 60 (o) 10 (n.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 670.8 Tm
+  1 0 0 1 54 655.8 Tm
   (English) Tj
-  1 0 0 1 558 670.8 Tm
+  /F1 9 Tf
+  1 0 0 1 558 655.8 Tm
   [ 5001 (ISO ID: EN) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 654.8 Tm
+  /F3 12 Tf
+  1 0 0 1 54 639.8 Tm
   [ (ABCDEFGHIJKLMNOPQRSTUVWXY) 20 (Z a) 10 (bc) 10 (d) 10 (e) 20 (f) 70 (g) 10 (hi) 80 (jklmn) 10 (o) 10 (pq) 20 (rs) 10 (tu) 20 (vwxyz 0123456789 Oo Fi f) 20 (i f) 20 (i) 20 (i W) 50 (a) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 629.6 Tm
+  1 0 0 1 54 614.6 Tm
   (French) Tj
-  1 0 0 1 558 629.6 Tm
+  /F1 9 Tf
+  1 0 0 1 558 614.6 Tm
   [ 4945 (ISO ID: FR) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 613.6 Tm
+  /F3 12 Tf
+  1 0 0 1 54 598.6 Tm
   [ (V) 50 (o) 10 (i) 10 (x am) 20 (b) 10 (i) 30 (guÎ díun c) 10 (ú) 20 (ur q) 20 (u) 10 (i, a) 20 (u zÈ) 10 (p) 10 (h) 25 (yr, p) 10 (r) 10 (È) 20 (f) 60 (Ë) 10 (r) 10 (e l) 10 (e) 10 (s j) 20 (a) 10 (t) 5 (te) 10 (s d) 10 (e ki) 35 (wi) 10 (s.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 588.4 Tm
+  1 0 0 1 54 573.4 Tm
   (German) Tj
-  1 0 0 1 558 588.4 Tm
+  /F1 9 Tf
+  1 0 0 1 558 573.4 Tm
   [ 5001 (ISO ID: DE) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 572.4 Tm
+  /F3 12 Tf
+  1 0 0 1 54 557.4 Tm
   [ (Zw) 20 (ˆ) 10 (lf Bo) 10 (xk) 20 (‰mp) 10 (f) 60 (e) 10 (r j) 20 (a) 10 (g) 10 (e) 10 (n Vi) 10 (k) 15 (to) 10 (r q) 20 (ue) 10 (r ¸) 15 (be) 10 (r d) 10 (e) 10 (n gr) 10 (oﬂe) 10 (n Sy) 10 (l) 5 (te) 10 (r De) 20 (i) 20 (c) 20 (h.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 547.2 Tm
+  1 0 0 1 54 532.2 Tm
   (Indonesian) Tj
-  1 0 0 1 558 547.2 Tm
+  /F1 9 Tf
+  1 0 0 1 558 532.2 Tm
   [ 4612 (ISO ID: ID) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 531.2 Tm
+  /F3 12 Tf
+  1 0 0 1 54 516.2 Tm
   [ (Sa) 25 (y) 20 (a li) 10 (h) 5 (a) 10 (t f) 60 (oto Ham) 10 (e) 10 (ng) 10 (ku) 15 (b) 10 (u) 20 (w) 20 (o) 10 (n) 10 (o XV be) 10 (rsam) 5 (a e) 10 (n) 5 (am ze) 20 (b) 10 (ra p) 10 (ur) 10 (ba c) 10 (an) 5 (ti) 10 (k y) 20 (ang j) 20 (a) 10 (tu) 10 (h dari Al Quranm) 10 (u.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 506 Tm
+  1 0 0 1 54 491 Tm
   (Italian) Tj
-  1 0 0 1 558 506 Tm
+  /F1 9 Tf
+  1 0 0 1 558 491 Tm
   [ 4501 (ISO ID: IT) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 490 Tm
+  /F3 12 Tf
+  1 0 0 1 54 475 Tm
   [ (Ma la v) 20 (o) 10 (l) 10 (pe, c) 10 (o) 10 (l s) 20 (uo ba) 5 (lzo, h) 5 (a ra) 10 (ggi) 20 (un) 5 (to i) 10 (l q) 20 (u) 10 (i) 20 (e) 10 (to Fi) 20 (d) 10 (o.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 464.8 Tm
+  1 0 0 1 54 449.8 Tm
   (Norwegian \(BokmÂl\)) Tj
-  1 0 0 1 558 464.8 Tm
+  /F1 9 Tf
+  1 0 0 1 558 449.8 Tm
   [ 5056 (ISO ID: NB) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 448.8 Tm
+  /F3 12 Tf
+  1 0 0 1 54 433.8 Tm
   [ (V) 50 (Âr sÊ) 10 (r) 10 (e Zu) 10 (l) 10 (u f) 60 (ra ba) 5 (d) 10 (e¯) 28 (y) 20 (a s) 20 (p) 10 (i) 10 (l) 5 (te j) 10 (o w) 10 (hi) 10 (s) 10 (t o) 10 (g q) 20 (u) 10 (i) 20 (c) 20 (k) 10 (s) 10 (te) 10 (p) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 423.6 Tm
+  1 0 0 1 54 408.6 Tm
   (Norwegian \(Nyorsk\)) Tj
-  1 0 0 1 558 423.6 Tm
+  /F1 9 Tf
+  1 0 0 1 558 408.6 Tm
   [ 5056 (ISO ID: NN) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 407.6 Tm
+  /F3 12 Tf
+  1 0 0 1 54 392.6 Tm
   [ (H¯) 28 (v) 20 (di) 10 (ng) 10 (e) 10 (n sÂ) 10 (g pÂ d) 10 (e) 20 (i s) 20 (m) 5 (Â f) 50 (u) 20 (g) 10 (l) 10 (e) 20 (ung) 10 (an) 10 (e dÂ Ê) 10 (t) 5 (ta Â) 10 (t e) 20 (i) 10 (n Âs.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 382.4 Tm
+  1 0 0 1 54 367.4 Tm
   (Polish) Tj
-  1 0 0 1 558 382.4 Tm
+  /F1 9 Tf
+  1 0 0 1 558 367.4 Tm
   [ 4890 (ISO ID: PL) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 366.4 Tm
+  /F3 12 Tf
+  1 0 0 1 54 351.4 Tm
   [ (P) 30 (c) 20 (hn) 5 () 5 ( w t Ûd j) 10 (e) 10 (a l) 10 (u) 15 (b o) 20 (m s) 20 (krzy\b f) 20 (i) 30 (g.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 341.2 Tm
+  1 0 0 1 54 326.2 Tm
   (Romanian) Tj
-  1 0 0 1 558 341.2 Tm
+  /F1 9 Tf
+  1 0 0 1 558 326.2 Tm
   [ 5112 (ISO ID: RO) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 325.2 Tm
+  /F3 12 Tf
+  1 0 0 1 54 310.2 Tm
   [ (A) 20 (g) 10 (e) 10 (ra vu) 10 (l) 10 (pe m) 5 (ar) 10 (o) 10 (ni) 20 (e sar) 10 (e pe) 10 (s) 10 (te c) 10 (‚) 5 (i) 10 (n) 10 (e) 20 (l) 10 (e c) 10 (e) 20 (l l) 10 (e) 10 (n) 10 (e) 10 (\t.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 300 Tm
+  1 0 0 1 54 285 Tm
   (Russian) Tj
-  1 0 0 1 558 300 Tm
+  /F1 9 Tf
+  1 0 0 1 558 285 Tm
   [ 5056 (ISO ID: RU) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 284 Tm
+  /F3 12 Tf
+  1 0 0 1 54 269 Tm
   [ (\n\f) 10 (\r \f) 10 () 10 ( ) 10 (  ) 10 () 15 () 10 (#) 10 ( ) 25 () 40 (Å) 10 (ç) 10 ( è ê) 10 (ù†) 10 (\f) 10 (≠ ˇ) 30 (\f ˛) 15 (˝.) ] TJ
   13.2 TL
   T*
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 258.8 Tm
+  1 0 0 1 54 243.8 Tm
   (Spanish) Tj
-  1 0 0 1 558 258.8 Tm
+  /F1 9 Tf
+  1 0 0 1 558 243.8 Tm
   [ 4946 (ISO ID: ES) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 242.8 Tm
+  /F3 12 Tf
+  1 0 0 1 54 227.8 Tm
   [ (El v) 20 (e) 20 (l) 10 (o) 10 (z m) 10 (ur) 10 (c) 10 (i) 20 (È) 20 (la) 10 (g) 10 (o hi) 10 (n) 10 (d) 10 (˙ c) 10 (o) 10 (mÌa f) 60 (e) 20 (li) 10 (z c) 10 (ar) 10 (di) 10 (ll) 10 (o y ki) 35 (wi. La c) 10 (i) 30 (g¸eÒ) 5 (a toc) 10 (a) 10 (ba e) 20 (l sax) 35 (o) 10 (f) 60 (Û) 10 (n d) 10 (e) 10 (tr·s d) 10 (e) 20 (l pa) 5 (l) 10 (e) 10 (n) 10 (q) 20 (ue d) 10 (e) ] TJ
   13.2 TL
   T*
@@ -225,22 +237,23 @@ BT
 ET
 BT
   /F1 11 Tf
-  1 0 0 1 54 204.4 Tm
+  1 0 0 1 54 189.4 Tm
   (Ukranian) Tj
-  1 0 0 1 558 204.4 Tm
+  /F1 9 Tf
+  1 0 0 1 558 189.4 Tm
   [ 5056 (ISO ID: UK) ] TJ
-  12.1 TL
+  9.9 TL
   T*
 ET
 BT
-  /F2 12 Tf
-  1 0 0 1 54 188.4 Tm
+  /F3 12 Tf
+  1 0 0 1 54 173.4 Tm
   [ (˚) 30 (˘) 10 (\r ˜, è) 10 (ç) 10 (˝, ) 10 (? ı) 30 () 10 (\f) 15 (è) 10 ( ˇ , †ç) 10 () 15 (≠) 10 (#) 10 ( \f Ùç) 30 (ÅÚê!) ] TJ
   13.2 TL
   T*
 ET
 BT
-  /F3 9 Tf
+  /F4 9 Tf
   1 0 0 1 54 44 Tm
   (Generated by GNU::FreeFont-OTF) Tj
   9.9 TL
@@ -265,16 +278,25 @@ endobj
 <<
   /Type /Font
   /Subtype /Type1
+  /BaseFont /Helvetica
+  /Encoding /WinAnsiEncoding
+>>
+endobj
+
+7 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
   /BaseFont /FreeSerif
-  /Encoding 7 0 R
+  /Encoding 8 0 R
   /FirstChar 1
-  /FontDescriptor 8 0 R
+  /FontDescriptor 9 0 R
   /LastChar 255
   /Widths [ 437 444 444 278 417 417 367 489 367 670 505 436 756 431 756 434 432 422 524 482 632 492 388 498 694 500 435 524 524 471 401 250 333 0 424 0 0 0 0 0 0 0 0 250 0 250 0 500 500 500 500 500 500 500 500 500 500 0 0 0 0 0 444 0 721 631 670 719 610 564 722 714 327 385 709 611 881 725 724 576 723 667 529 606 721 701 947 714 701 613 0 0 0 0 0 0 435 500 444 499 444 373 467 498 278 348 513 258 779 489 491 500 499 345 367 283 490 468 683 482 471 417 0 0 0 0 495 0 490 0 0 0 0 0 0 0 0 0 0 0 491 0 490 468 0 200 0 0 0 0 0 0 0 0 0 705 624 0 0 524 0 0 0 0 0 0 0 0 0 0 0 0 524 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 491 0 435 435 0 435 435 639 0 444 444 0 444 0 278 0 0 0 489 269 491 397 664 491 278 491 432 490 672 490 664 504 662 ]
 >>
 endobj
 
-7 0 obj
+8 0 obj
 <<
   /Type /Encoding
   /BaseEncoding /WinAnsiEncoding
@@ -282,7 +304,7 @@ endobj
 >>
 endobj
 
-8 0 obj
+9 0 obj
 <<
   /Type /FontDescriptor
   /Ascent 800
@@ -292,7 +314,7 @@ endobj
   /Flags 32
   /FontBBox [ -879 -551 1767 936 ]
   /FontFamily /FreeSerif
-  /FontFile3 9 0 R
+  /FontFile3 10 0 R
   /FontName /FreeSerif
   /FontWeight 400
   /ItalicAngle 0
@@ -303,7 +325,7 @@ endobj
 >>
 endobj
 
-9 0 obj
+10 0 obj
 <<
   /Subtype /OpenType
   /Filter /FlateDecode
@@ -5397,7 +5419,7 @@ Z™†Âj∂\Õñ*h©Çñ*h©Çñk—r-ZÆEÀµh©Çñ*h©w"
 endstream
 endobj
 
-10 0 obj
+11 0 obj
 <<
   /Type /Font
   /Subtype /Type1
@@ -5407,24 +5429,25 @@ endobj
 endobj
 
 xref
-0 11
+0 12
 0000000000 65535 f 
 0000000015 00000 n 
 0000000065 00000 n 
 0000000151 00000 n 
-0000000283 00000 n 
-0000005947 00000 n 
-0000006058 00000 n 
-0000007000 00000 n 
-0000007518 00000 n 
-0000007835 00000 n 
-0001304211 00000 n 
+0000000293 00000 n 
+0000006100 00000 n 
+0000006211 00000 n 
+0000006317 00000 n 
+0000007259 00000 n 
+0000007777 00000 n 
+0000008095 00000 n 
+0001304472 00000 n 
 trailer
 <<
-  /ID [ <6514cd9efad0897c5562738c22f17e72> <6514cd9efad0897c5562738c22f17e72> ]
+  /ID [ <441bdf3d56ed26ea7b6b378879e6915c> <441bdf3d56ed26ea7b6b378879e6915c> ]
   /Root 1 0 R
-  /Size 11
+  /Size 12
 >>
 startxref
-1304318
+1304579
 %%EOF
