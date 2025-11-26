@@ -189,7 +189,7 @@ sub do-pdf-language-samples(
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
     my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
-    my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); #, :weight<regular>);
+    my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); # default: regular
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
