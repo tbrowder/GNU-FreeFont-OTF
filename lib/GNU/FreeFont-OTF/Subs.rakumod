@@ -197,6 +197,7 @@ sub do-pdf-language-samples(
     my Numeric $x      = $margin;
     my Numeric $y      = $page.media-box[3] - $margin; # top margin from page height
     my Numeric $col-w  = $page.media-box[2] - 2*$margin;
+    my Numeric $rmx    = $page.media-box[2] - $margin;
 
     # --- Page Title ---
     my ($ptitle, $ptitle2);
@@ -212,6 +213,7 @@ sub do-pdf-language-samples(
         }
         $txt.print: $ptitle, :align<left>;
 
+        $txt.text-position = $rmx, $y;
         $txt.font = $head-core, $head-core-size - 2; # 16;
         $txt.say:   $ptitle2, :align<right>;
     }
@@ -267,6 +269,8 @@ sub do-pdf-language-samples(
             $t.font = $head-core, $font-size; # head-core-size2
             $t.text-position = $x, $y;
             $t.print: "$lang", :align<left>;
+
+            $t.text-position = $rmx, $y;
             $t.say:   "ISO ID: {$k.uc}", :align<right>;
         }
         $y -= 16;
