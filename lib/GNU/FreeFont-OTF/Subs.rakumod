@@ -17,8 +17,8 @@ print q:to/HERE/;
    $font-ref may be:
      * Int: A reference number from the code tables (1..12)
      * Str: a code from the code tables
-     * Str: a family name (e.g., "Free Sans") 
-     * Str: a path to a .ttf/.otf file
+     * Str: a family name (e.g., "Free Sans")
+     * Str: a path to an .otf (or .ttf) file
 
    With the 'print' input the default output PDF file will be:
        GNU-FreeFont-OTF-samples.pdf
@@ -44,7 +44,7 @@ sub resolve-font-ref(
     --> IO::Path
 ) is export {
 
-    my %fonts = get-font-file-paths-hash; 
+    my %fonts = get-font-file-paths-hash;
     unless %fonts.defined {
         die "Could not find font hash '%fonts'. Is it installed?";
     }
@@ -103,7 +103,7 @@ sub resolve-font-ref(
     if $debug {
         say "DEBUG: calculated \$fr: $fr";
     }
-    
+
     with $font-ref {
         my $r = $_;
         when $r ~~ 1..12 {
@@ -148,8 +148,8 @@ sub do-pdf-language-samples(
     # unless the output file is defined, make it reflect the other input values
     unless $ofile.defined and $ofile ~~ /\S/ {
         # start with this and modify as needed:
-        my $base = "GNU-FreeFont-OTF"; 
-      
+        my $base = "GNU-FreeFont-OTF";
+
         my $n1 = $page-size.contains("a4", :i) ?? "A4" !! "";
         my $n2 = $kerning ?? "kern" !! "nokern";
         my $n3 = $lang ?? $lang !! "";
@@ -257,7 +257,7 @@ sub do-pdf-language-samples(
     }
 
     my @nkeys = %names.keys.sort;
-    my $n = 2; 
+    my $n = 2;
 
     # -- default one page with one pangram per language
     for @nkeys.kv -> $i, $name {
