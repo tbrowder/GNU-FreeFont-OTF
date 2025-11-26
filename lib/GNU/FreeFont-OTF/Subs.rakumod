@@ -276,7 +276,7 @@ sub do-pdf-language-samples(
             $t.font = $head-sub, $font-size; # head-core-size2
             #$t.text-position = $rmx - 36, $y;
             #$t.say:   "ISO ID: {$k.uc}", :align<left>;
-            $t.say:   " (ISO ID: {$k.uc})"; # , :align<left>;
+            $t.say:   " ({$k.uc})"; # , :align<left>;
         }
         $y -= 16;
 
