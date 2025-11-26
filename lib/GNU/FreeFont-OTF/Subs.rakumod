@@ -184,7 +184,7 @@ sub do-pdf-language-samples(
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
     my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
-    my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); #, :weight<re>);
+    my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); #, :weight<regular>);
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
@@ -273,7 +273,7 @@ sub do-pdf-language-samples(
             $t.text-position = $x, $y;
             $t.print: "$lang", :align<left>;
 
-            $t.font = $head-sub; #, $font-size - 2; # head-core-size2
+            $t.font = $head-sub, $font-size; # head-core-size2
             #$t.text-position = $rmx - 36, $y;
             #$t.say:   "ISO ID: {$k.uc}", :align<left>;
             $t.say:   " (ISO ID: {$k.uc})"; # , :align<left>;
@@ -284,7 +284,7 @@ sub do-pdf-language-samples(
         # content width)
         my @box;
         $page.text: -> $t {
-            $t.font = $loaded-font, 12; # sample-text-size
+            $t.font = $loaded-font, $font-size; # sample-text-size
             $t.text-position = $x, $y;
             @box = $t.say: $text, :width($col-w), :align<left>, :kern($kerning);
         }
