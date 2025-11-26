@@ -215,7 +215,7 @@ sub do-pdf-language-samples(
         }
         $txt.print: $ptitle, :align<center>;
 
-        $y -= 15;   # add some vertical space after the title
+        $y -= 18;   # add some vertical space after the title
         $txt.text-position = $ctrx, $y;
         $txt.font = $head-sub, $head-core-size - 2; # 16;
         $txt.say:   $ptitle2, :align<center>;
@@ -273,9 +273,10 @@ sub do-pdf-language-samples(
             $t.text-position = $x, $y;
             $t.print: "$lang", :align<left>;
 
-            $t.font = $head-core, $font-size - 2; # head-core-size2
-            $t.text-position = $rmx, $y;
-            $t.say:   "ISO ID: {$k.uc}", :align<right>;
+            $t.font = $head-sub; #, $font-size - 2; # head-core-size2
+            #$t.text-position = $rmx - 36, $y;
+            #$t.say:   "ISO ID: {$k.uc}", :align<left>;
+            $t.say:   " (ISO ID: {$k.uc})"; # , :align<left>;
         }
         $y -= 16;
 
