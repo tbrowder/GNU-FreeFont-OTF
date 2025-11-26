@@ -78,7 +78,7 @@ sub resolve-font-ref(
     }
 
     if $has-hyphens {
-        # assume its mostly correct except ensure pieces are capitalized properly
+        # assume it's mostly correct except ensure pieces are capitalized properly
         my @parts = $fr.split($sep);
         unless @parts.elems == 2 { die "unknown font alias '$fr'"; }
         $fr = "";
@@ -114,13 +114,18 @@ sub resolve-font-ref(
         }
     }
 
-    if $font-path.defined {
-        if $font-path.IO.r {
-            $font-ref = $font-path;
-        }
-        else {
-            die "Could not find GNU FreeFont file '$font-path'"; #family ‘$fam’. Is it installed?";
-        }
+    unless $font-path.defined and $font-path.IO.r {
+        die qq:to/HERE/;
+        FATAL: Could not find a GNU FreeFont file
+        with font reference '$font-ref'.
+        Is your desired font installed?
+
+        If so, please file an issue describing:
+            + the exact font reference you used
+            + the font you expected to find
+            + the font path on your server
+            + your operating system and version
+        HERE
     }
 
     $font-path;
