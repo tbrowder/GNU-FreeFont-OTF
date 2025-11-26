@@ -18,11 +18,12 @@ endobj
 endobj
 
 4 0 obj
-<< /Length 5297 >> stream
+<< /Length 5611 >> stream
 BT
   /F1 16 Tf
   1 0 0 1 54 738 Tm
   (GNU FreeFont – Language Samples — FreeSerif) Tj
+  1 0 0 1 558 738 Tm
   /F1 14 Tf
   [ 11446 (\(Font size, with kerning\)) ] TJ
   15.4 TL
@@ -32,6 +33,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 712 Tm
   (Dutch) Tj
+  1 0 0 1 558 712 Tm
   [ 4945 (ISO ID: NL) ] TJ
   12.1 TL
   T*
@@ -47,6 +49,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 670.8 Tm
   (English) Tj
+  1 0 0 1 558 670.8 Tm
   [ 5001 (ISO ID: EN) ] TJ
   12.1 TL
   T*
@@ -62,6 +65,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 629.6 Tm
   (French) Tj
+  1 0 0 1 558 629.6 Tm
   [ 4945 (ISO ID: FR) ] TJ
   12.1 TL
   T*
@@ -77,6 +81,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 588.4 Tm
   (German) Tj
+  1 0 0 1 558 588.4 Tm
   [ 5001 (ISO ID: DE) ] TJ
   12.1 TL
   T*
@@ -92,6 +97,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 547.2 Tm
   (Indonesian) Tj
+  1 0 0 1 558 547.2 Tm
   [ 4612 (ISO ID: ID) ] TJ
   12.1 TL
   T*
@@ -107,6 +113,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 506 Tm
   (Italian) Tj
+  1 0 0 1 558 506 Tm
   [ 4501 (ISO ID: IT) ] TJ
   12.1 TL
   T*
@@ -122,6 +129,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 464.8 Tm
   (Norwegian \(Bokmål\)) Tj
+  1 0 0 1 558 464.8 Tm
   [ 5056 (ISO ID: NB) ] TJ
   12.1 TL
   T*
@@ -137,6 +145,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 423.6 Tm
   (Norwegian \(Nyorsk\)) Tj
+  1 0 0 1 558 423.6 Tm
   [ 5056 (ISO ID: NN) ] TJ
   12.1 TL
   T*
@@ -152,6 +161,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 382.4 Tm
   (Polish) Tj
+  1 0 0 1 558 382.4 Tm
   [ 4890 (ISO ID: PL) ] TJ
   12.1 TL
   T*
@@ -167,6 +177,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 341.2 Tm
   (Romanian) Tj
+  1 0 0 1 558 341.2 Tm
   [ 5112 (ISO ID: RO) ] TJ
   12.1 TL
   T*
@@ -182,6 +193,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 300 Tm
   (Russian) Tj
+  1 0 0 1 558 300 Tm
   [ 5056 (ISO ID: RU) ] TJ
   12.1 TL
   T*
@@ -197,6 +209,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 258.8 Tm
   (Spanish) Tj
+  1 0 0 1 558 258.8 Tm
   [ 4946 (ISO ID: ES) ] TJ
   12.1 TL
   T*
@@ -214,6 +227,7 @@ BT
   /F1 11 Tf
   1 0 0 1 54 204.4 Tm
   (Ukranian) Tj
+  1 0 0 1 558 204.4 Tm
   [ 5056 (ISO ID: UK) ] TJ
   12.1 TL
   T*
@@ -5399,18 +5413,18 @@ xref
 0000000065 00000 n 
 0000000151 00000 n 
 0000000283 00000 n 
-0000005633 00000 n 
-0000005744 00000 n 
-0000006686 00000 n 
-0000007204 00000 n 
-0000007521 00000 n 
-0001303897 00000 n 
+0000005947 00000 n 
+0000006058 00000 n 
+0000007000 00000 n 
+0000007518 00000 n 
+0000007835 00000 n 
+0001304211 00000 n 
 trailer
 <<
-  /ID [ <a2cc1e96e8e90fabefea4a9a7580505a> <a2cc1e96e8e90fabefea4a9a7580505a> ]
+  /ID [ <6514cd9efad0897c5562738c22f17e72> <6514cd9efad0897c5562738c22f17e72> ]
   /Root 1 0 R
   /Size 11
 >>
 startxref
-1304004
+1304318
 %%EOF
