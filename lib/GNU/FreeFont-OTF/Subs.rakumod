@@ -129,12 +129,12 @@ sub resolve-font-ref(
 
 sub do-pdf-language-samples(
     $font-ref is copy,
-Str :$ofile is copy,
+    :$ofile is copy,
     # default options if NOT explicitly entered
     :$font-size = $default-font-size,
     :$page-size = 'Letter',
     :$kerning   = True,
-    :$lang      = False,
+    :$lang      = False, # or one lang code
     :$all       = False, # show all features
     :$debug,
     --> IO::Path
@@ -248,13 +248,15 @@ Str :$ofile is copy,
 
     my @nkeys = %names.keys.sort;
     my $n = 2; 
+
+    # -- default one page with one pangram per language
     for @nkeys.kv -> $i, $name {
         my $k = %names{$name};
         say "DEBUG: \$k: $k, \$name: $name" if $debug and $i < $n;
         # $k is the two-char ISO abbreviation of the language
         # $sample{$k}.text  is the text line
 
-        my %h = %samples{$k};
+        my %h    = %samples{$k};
         my $lang = %h<lang>;
         my $text = %h<text>;
         say "DEBUG: \$lang: $lang" if 0 and $debug;
