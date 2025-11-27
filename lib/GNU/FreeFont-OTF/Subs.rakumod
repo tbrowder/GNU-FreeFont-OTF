@@ -152,9 +152,11 @@ sub do-pdf-language-samples(
     :$kerning   = True,
     :$lang      = False, # or one lang code
     :$all       = False, # show all features
-    :$debug,
+    :$debug     = 0,
     --> IO::Path
     ) is export {
+
+say "DEBUG: debug value = $debug";
 
     # unless the output file is defined, make it reflect the other input values
     unless $ofile.defined and $ofile ~~ /\S/ {
