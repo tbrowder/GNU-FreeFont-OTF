@@ -241,7 +241,7 @@ sub do-pdf-language-samples(
         # :$face-title!,
         # :$font-size!,
         :$debug,
-        # --> List ($page, $y)
+        # --> List # ($page, $y)
     ) {
         $page = $pdf.add-page;
 # refresh pages to be done by the caller? or return a List?
@@ -251,11 +251,13 @@ sub do-pdf-language-samples(
         $y     = $page.media-box[3] - $margin;
         # repeat running head (optional)
         $page.text: -> $t {
-            $t.font = $head-core, $font-size; # $font-size; head-core-size2
-            #$t.text-position = $ctrx, $y;
+            $t.font = $head-core, $font-size;
             $t.text-position = $cx, $y;
             my $title = "GNU FreeFont — {$face-title}";
             $t.say: $title, :align<center>;
+            if $debug {
+                say "DEBUG (new-page) title: $title, y = $y";
+            }
         }
         $y -= 20;
     }
@@ -288,7 +290,8 @@ sub do-pdf-language-samples(
     # -- default one page with one pangram per language
     for @nkeys.kv -> $i, $name {
         my $k = %names{$name};
-        say "DEBUG: \$k: $k, \$name: $name" if $debug and $i < $n;
+        say "DEBUG: showing pangram for \$k: $k, \$name: $name" 
+            if $debug and $i < 2 * $n;
         # $k is the two-char ISO abbreviation of the language
         # $sample{$k}.text  is the text line
 
@@ -301,7 +304,7 @@ sub do-pdf-language-samples(
         #   enough room?
         if $y < $margin + 60 { 
             # $page  = $pdf.add-page;
-            new-page(); 
+            new-page(:$debug); 
             # will need to refresh pages here
             @pages = $pdf.pages;
         }
