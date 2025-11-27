@@ -157,6 +157,13 @@ sub do-pdf-language-samples(
     ) is export {
 
 say "DEBUG: debug value = $debug";
+    if $debug == 1 {
+        $ofile = "debug-samples1.pdf";
+    }
+    elsif $debug == 2 {
+        $ofile = "debug-samples2.pdf";
+    }
+
 
     # unless the output file is defined, make it reflect the other input values
     unless $ofile.defined and $ofile ~~ /\S/ {
