@@ -323,13 +323,17 @@ sub do-pdf-language-samples(
         # Header label for the language
         #   enough room?
         if $y < $margin + 60 { 
-#=begin comment
             # original sub used here
-            new-page(:$debug); 
-#=end comment
-=begin comment
-            # newl sub used here
-=end comment
+            if 1 {
+                new-page(:$debug); 
+            }
+
+            =begin comment
+            else {
+                # new sub used here
+                do-new-page(:$debug); 
+            }
+            =end comment
 
 
             # now refresh pages here
