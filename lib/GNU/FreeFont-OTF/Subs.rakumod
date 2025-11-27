@@ -235,10 +235,11 @@ sub do-pdf-language-samples(
     # Helper to start a fresh page when we run out of space
     # TODO if possible, make it an independent sub at the module top level
     sub new-page(
-        # $pdf
-        # $margin # all edge margin are the same for now
-        # $face-title
-        # --> $page
+        # :$pdf!,
+        # :$margin!,     # all edge margins are the same for now
+        # :$face-title!,
+        # :$font-size!,
+        # --> List ($page, $y)
     ) {
         $page = $pdf.add-page;
 # refresh pages to be done by the caller? or return a List?
@@ -249,8 +250,8 @@ sub do-pdf-language-samples(
         $page.text: -> $t {
             $t.font = $head-core, 12; # $font-size; head-core-size2
             $t.text-position = $ctrx, $y;
-            $ptitle2 = "GNU FreeFont — {$face-title}";
-            $t.say: $ptitle2, :align<center>;
+            my $title = "GNU FreeFont — {$face-title}";
+            $t.say: $title, :align<center>;
         }
         $y -= 20;
     }
