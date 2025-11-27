@@ -244,7 +244,7 @@ sub do-pdf-language-samples(
     ) {
         $page = $pdf.add-page;
 # refresh pages to be done by the caller? or return a List?
-        @pages = $pdf.pages;  # refresh list
+#       @pages = $pdf.pages;  # refresh list
         my $x  = $margin;
         my $cx = $page.media-box[2] / 2;
         $y     = $page.media-box[3] - $margin;
@@ -294,7 +294,7 @@ sub do-pdf-language-samples(
             # $page  = $pdf.add-page;
             new-page(); 
             # will need to refresh pages here
-            # @pages = $pdf.pages;
+            @pages = $pdf.pages;
         }
         $page.text: -> $t {
             $t.font = $head-core, $font-size; # head-core-size2
