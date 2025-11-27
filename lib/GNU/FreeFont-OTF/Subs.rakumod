@@ -256,7 +256,7 @@ sub do-pdf-language-samples(
             my $title = "GNU FreeFont — {$face-title}";
             $t.say: $title, :align<center>;
             if $debug {
-                say "DEBUG (new-page) title: $title, y = $y";
+                say "DEBUG (in sub new-page) title: $title, y = $y";
             }
         }
         $y -= 20;
@@ -280,8 +280,10 @@ sub do-pdf-language-samples(
     # force a large number of samples for testing the new-page sub
     if $debug {
         my @t = @nkeys;
+        my $max = @t.elems / 2;
         while @t {
             @nkeys.push: @t.pop;
+            last if @t.elems > $max
         }
         @nkeys .= sort;
     }
