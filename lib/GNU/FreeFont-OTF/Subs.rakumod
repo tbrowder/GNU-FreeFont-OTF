@@ -383,3 +383,13 @@ sub put-text-sample(
     my $h = $page.media-box[3];
 } # end of sub put-text-sample
 
+sub do-new-page(
+    :$pdf!,
+    :$margin!,     # all edge margins are the same for now
+    :$face-title!,
+    :$font-size!,
+    :$debug,
+    --> List # ($page, $y)
+) is export {
+} # end of sub new-page
+
