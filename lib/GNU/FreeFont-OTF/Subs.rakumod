@@ -132,6 +132,16 @@ sub resolve-font-ref(
 
 } # end of sub resolve-font-ref
 
+# some default settings for the rest of the module
+# put in Vars later
+# A bold core-font for headings (portable even if GNU FreeFont is missing)
+#   face only
+my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
+my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); # default: regular
+# Note: font-size is only for the body text
+# other sizes may need to be modified after seeing real output:
+my $head-core-size = 16;
+
 sub do-pdf-language-samples(
     $font-ref is copy,
     :$ofile is copy,
@@ -174,9 +184,11 @@ sub do-pdf-language-samples(
 
     my $font-path = resolve-font-ref $font-ref;
 
+=begin comment
     # Note: font-size is only for the body text
     # other sizes may need to be modified after seeing real output:
     my $head-core-size = 16;
+=end comment
 
     my $loaded-font = try { load-font :file($font-path) } //
             die "Could not find GNU FreeFont file ‘$font-path’. Is it installed?";
@@ -191,10 +203,12 @@ sub do-pdf-language-samples(
         say "DEBUG: input font ref: $font-ref";
     }
 
+=begin comment
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
     my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
     my $head-sub  = PDF::Lite.new.core-font(:family<Helvetica>); # default: regular
+=end comment
 
     # --- Make a new PDF (portrait page-size) ---
     my PDF::Lite $pdf .= new;
@@ -391,5 +405,24 @@ sub do-new-page(
     :$debug,
     --> List # ($page, $y)
 ) is export {
+    my $page = $pdf.add-page;
+    # refresh pages is to be done by the caller
+    # @pages = $pdf.pages;  # refresh list
+    my $x  = $margin;
+    my $cx = $page.media-box[2] / 2;
+    my $y  = $page.media-box[3] - $margin;
+    # repeat running head (optional)
+    $page.text: -> $t {
+        $t.font = $head-core, $font-size;
+        $t.text-position = $cx, $y;
+        my $title = "GNU FreeFont — {$face-title}";
+        $t.say: $title, :align<center>;
+        if $debug {
+            say "DEBUG (in sub new-page) title: $title, y = $y";
+        }
+    }
+    $y -= 20;
+
+    $page, $y;
 } # end of sub new-page
 
