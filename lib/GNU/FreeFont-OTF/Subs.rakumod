@@ -245,12 +245,14 @@ sub do-pdf-language-samples(
         $page = $pdf.add-page;
 # refresh pages to be done by the caller? or return a List?
         @pages = $pdf.pages;  # refresh list
-        $x     = $margin;
+        my $x  = $margin;
+        my $cx = $page.media-box[2] / 2;
         $y     = $page.media-box[3] - $margin;
         # repeat running head (optional)
         $page.text: -> $t {
             $t.font = $head-core, $font-size; # $font-size; head-core-size2
-            $t.text-position = $ctrx, $y;
+            #$t.text-position = $ctrx, $y;
+            $t.text-position = $cx, $y;
             my $title = "GNU FreeFont — {$face-title}";
             $t.say: $title, :align<center>;
         }
