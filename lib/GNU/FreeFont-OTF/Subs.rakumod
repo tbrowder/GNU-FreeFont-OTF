@@ -232,6 +232,7 @@ sub do-pdf-language-samples(
     }
     $y -= 26;   # add some vertical space after the title block
 
+#=begin comment
     # Helper to start a fresh page when we run out of space
     # TODO if possible, make it an independent sub at the module top level
     sub new-page(
@@ -248,13 +249,14 @@ sub do-pdf-language-samples(
         $y     = $page.media-box[3] - $margin;
         # repeat running head (optional)
         $page.text: -> $t {
-            $t.font = $head-core, 12; # $font-size; head-core-size2
+            $t.font = $head-core, $font-size; # $font-size; head-core-size2
             $t.text-position = $ctrx, $y;
             my $title = "GNU FreeFont — {$face-title}";
             $t.say: $title, :align<center>;
         }
         $y -= 20;
     }
+#=end comment
 
     # --- Body: each entry in %default-samples is a (language => text) pair ---
     my %samples := try %default-samples
