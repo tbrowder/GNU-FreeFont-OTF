@@ -240,6 +240,7 @@ sub do-pdf-language-samples(
         # :$margin!,     # all edge margins are the same for now
         # :$face-title!,
         # :$font-size!,
+        :$debug,
         # --> List ($page, $y)
     ) {
         $page = $pdf.add-page;
@@ -274,6 +275,14 @@ sub do-pdf-language-samples(
     }
 
     my @nkeys = %names.keys.sort;
+    # force a large number of samples for testing the new-page sub
+    if $debug {
+        my @t = @nkeys;
+        while @t {
+            @nkeys.push: @t.pop;
+        }
+        @nkeys .= sort;
+    }
     my $n = 2;
 
     # -- default one page with one pangram per language
