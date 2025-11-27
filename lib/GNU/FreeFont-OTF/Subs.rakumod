@@ -133,6 +133,7 @@ sub resolve-font-ref(
 } # end of sub resolve-font-ref
 
 # some default settings for the rest of the module
+# removed from its original place
 # put in Vars later
 # A bold core-font for headings (portable even if GNU FreeFont is missing)
 #   face only
@@ -185,6 +186,7 @@ sub do-pdf-language-samples(
     my $font-path = resolve-font-ref $font-ref;
 
 =begin comment
+    # moved up and out of this block
     # Note: font-size is only for the body text
     # other sizes may need to be modified after seeing real output:
     my $head-core-size = 16;
@@ -204,6 +206,7 @@ sub do-pdf-language-samples(
     }
 
 =begin comment
+    # moved up and out of this block
     # A bold core-font for headings (portable even if GNU FreeFont is missing)
     #   face only
     my $head-core = PDF::Lite.new.core-font(:family<Helvetica>, :weight<bold>);
@@ -249,6 +252,7 @@ sub do-pdf-language-samples(
 #=begin comment
     # Helper to start a fresh page when we run out of space
     # TODO if possible, make it an independent sub at the module top level
+    # the replacement is named: do-new-page
     sub new-page(
         # :$pdf!,
         # :$margin!,     # all edge margins are the same for now
@@ -258,7 +262,7 @@ sub do-pdf-language-samples(
         # --> List # ($page, $y)
     ) {
         $page = $pdf.add-page;
-# refresh pages to be done by the caller? or return a List?
+        # refresh pages is done by the caller
 #       @pages = $pdf.pages;  # refresh list
         my $x  = $margin;
         my $cx = $page.media-box[2] / 2;
@@ -319,9 +323,16 @@ sub do-pdf-language-samples(
         # Header label for the language
         #   enough room?
         if $y < $margin + 60 { 
-            # $page  = $pdf.add-page;
+#=begin comment
+            # original sub used here
             new-page(:$debug); 
-            # will need to refresh pages here
+#=end comment
+=begin comment
+            # newl sub used here
+=end comment
+
+
+            # now refresh pages here
             @pages = $pdf.pages;
         }
         $page.text: -> $t {
