@@ -324,7 +324,7 @@ sub do-pdf-language-samples(
         #   enough room?
         if $y < $margin + 60 { 
             # original sub used here
-            if 0 {
+            if $debug < 2  {
                 new-page(:$debug); 
             }
 

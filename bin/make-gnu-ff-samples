@@ -94,8 +94,11 @@ for @*ARGS {
     when /^:i l / {
         $page-size = "Letter";
     }
-    when /^:i d / {
-        ++$debug
+    when /^ d / {
+        $debug = 1;
+    }
+    when /^ D / {
+        $debug = 2;
     }
     default {
         say "FATAL: Unknown argument '$_'";
