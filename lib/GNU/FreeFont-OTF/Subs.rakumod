@@ -165,6 +165,11 @@ sub do-pdf-language-samples(
 
     unless $font-ref.defined and ($font-ref ~~ /\S/) {
         $font-ref = "Free Serif";
+        # but that restricts the output choices
+        if $all or $lang {
+            say "NOTE: You have selected a font ($font-ref) by default.";
+            say "      Please file an issue if this was not intended.";
+        }
     }
 
     my $font-path = resolve-font-ref $font-ref;
@@ -228,11 +233,18 @@ sub do-pdf-language-samples(
     $y -= 26;   # add some vertical space after the title block
 
     # Helper to start a fresh page when we run out of space
-    sub new-page() {
+    # TODO if possible, make it an independent sub at the module top level
+    sub new-page(
+        # $pdf
+        # $margin # all edge margin are the same for now
+        # $face-title
+        # --> $page
+    ) {
         $page = $pdf.add-page;
+# refresh pages to be done by the caller? or return a List?
         @pages = $pdf.pages;  # refresh list
-        $x    = $margin;
-        $y    = $page.media-box[3] - $margin;
+        $x     = $margin;
+        $y     = $page.media-box[3] - $margin;
         # repeat running head (optional)
         $page.text: -> $t {
             $t.font = $head-core, 12; # $font-size; head-core-size2
@@ -272,7 +284,13 @@ sub do-pdf-language-samples(
         say "DEBUG: \$lang: $lang" if 0 and $debug;
         say "DEBUG: \$text: $text" if 0 and $debug;
         # Header label for the language
-        if $y < $margin + 60 { new-page }
+        #   enough room?
+        if $y < $margin + 60 { 
+            # $page  = $pdf.add-page;
+            new-page(); 
+            # will need to refresh pages here
+            # @pages = $pdf.pages;
+        }
         $page.text: -> $t {
             $t.font = $head-core, $font-size; # head-core-size2
             $t.text-position = $x, $y;
@@ -321,3 +339,28 @@ sub do-pdf-language-samples(
     return $ofile.IO;
 
 } # end sub do-*
+
+sub put-page-title(
+    $line1,   # center it
+    $line2,   # center it
+    :$lx!,    # xrefs to the active page space
+    :$rx!,    # xrefs to the active page space
+    :$ty!,    # yrefs to the active page space
+    :$by!,    # yrefs to the active page space
+    :$page!,  # a valid PDF page
+) is export {
+} # end of sub put-page-title
+
+sub put-text-sample(
+    $title,   # align left
+    $text,    # align left
+    :$lx!,    # xrefs to the active page space
+    :$rx!,    # xrefs to the active page space
+    :$ty!,    # yrefs to the active page space
+    :$by!,    # yrefs to the active page space
+    :$page!,  # a valid PDF page
+) is export {
+    my $w = $page.media-box[2];
+    my $h = $page.media-box[3];
+} # end of sub put-text-sample
+
