@@ -324,16 +324,25 @@ sub do-pdf-language-samples(
         #   enough room?
         if $y < $margin + 60 { 
             # original sub used here
-            if 1 {
+            if 0 {
                 new-page(:$debug); 
             }
 
-            =begin comment
+            #=begin comment
             else {
+                note "DEBUG: attempting using the new sub do-new-page...";
                 # new sub used here
-                do-new-page(:$debug); 
+                my ($arg1, $arg2) = do-new-page(
+                    :$pdf,
+                    :$margin,     # all edge margins are the same for now
+                    :$face-title,
+                    :$font-size,
+                    :$debug,
+                    ); 
+                $page = $arg1;
+                $y    = $arg2;
             }
-            =end comment
+            #=end comment
 
 
             # now refresh pages here
@@ -439,5 +448,5 @@ sub do-new-page(
     $y -= 20;
 
     $page, $y;
-} # end of sub new-page
+} # end of sub do-new-page
 
