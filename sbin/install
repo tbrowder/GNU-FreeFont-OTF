@@ -1,0 +1,13 @@
+#!/usr/bin/env raku
+
+if not @*ARGS {
+    print qq:to/HERE/;
+    Usage: {$*PROGRAM.basename} go
+
+    Used by the Build.rakudoc module
+    to insert the currently available
+    language samples into the docs.
+    HERE
+    exit;
+}
+
