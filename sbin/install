@@ -23,26 +23,44 @@ if not @*ARGS {
 my $debug = 0;
 
 for @*ARGS {
-    when /:i d/ { ++$debug }
+    when /^ :i d/ { ++$debug }
 }
 
-unless $*HOME ~~ /tbrowde/ {
+if  $*HOME ~~ /tbrowde/ {
     # only works on the author's servers
-    exit;
+    say "DEBUG: on the author's servers" if $debug;
 }
+else { exit }
 
 say "DEBUG is on" if $debug;
 
 my $docfil  = "$*CWD/docs/README.rakudoc";
 my @lines   = $docfil.IO.lines;
+unless @lines.elems {
+    say "DEBUG: unable to read any line from file: $docfil";
+    say "       Exiting...";
+    exit;
+}
+
 my $in-list = False;
 
 # first see if all is well
 my %h = %default-samples;
 my $rewrite = False;
 for @lines -> $line is copy {
-   $in-list = True if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> /;
-   $in-list = False if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> /;
+   #say "DEBUG: doc line: |$line|" if $debug;
+
+   if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> / {
+       $in-list = True;
+       say "DEBUG: in the lang list" if $debug;
+   }
+
+
+   if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> / {
+       $in-list = False;
+       say "DEBUG: exited the lang list" if $debug;
+   }
+
 }
 
 # if it's not current, update it

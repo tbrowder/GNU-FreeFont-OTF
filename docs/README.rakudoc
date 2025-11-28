@@ -68,7 +68,7 @@ languages at L<https://clagnut.com>.)
 
 Please create an issue if you want one changed or added for your language. 
 Languages currently shown are:
-Z<begin lang def>
+Z<begin lang list>
 =item de - German
 =item en - English
 =item es - Spanish
@@ -82,7 +82,7 @@ Z<begin lang def>
 =item ro - Romanian
 =item ru - Russian
 =item uk - Ukranian
-Z<end lang def>
+Z<end lang list>
 
 =head2 Table 1
 
