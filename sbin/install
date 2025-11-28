@@ -37,5 +37,6 @@ for @lines -> $line is copy {
    $in-list = False if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> /;
 }
 
+
 # if it's not current, update it
-my $fh = open $docfil, :w;
+# my $fh = open $docfil, :w;
