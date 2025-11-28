@@ -257,7 +257,7 @@ sub do-pdf-language-samples(
     }
     $y -= 26;   # add some vertical space after the title block
 
-#=begin comment
+=begin comment
     # Helper to start a fresh page when we run out of space
     # TODO if possible, make it an independent sub at the module top level
     # the replacement is named: do-new-page
@@ -287,7 +287,7 @@ sub do-pdf-language-samples(
         }
         $y -= 20;
     }
-#=end comment
+=end comment
 
     # --- Body: each entry in %default-samples is a (language => text) pair ---
     my %samples := try %default-samples
@@ -332,15 +332,15 @@ sub do-pdf-language-samples(
         # Header label for the language
         #   enough room?
         if $y < $margin + 60 { 
+            =begin comment
             # original sub used here
             if $debug < 2  {
                 say "DEBUG: using the original new-page..." if $debug;
                 new-page(:$debug); 
             }
-
-            #=begin comment
             else {
-                say "DEBUG: attempting using the new sub do-new-page...";
+            =end comment
+                say "DEBUG: attempting using the new sub do-new-page..." if $debug;
                 # new sub used here
                 my ($arg1, $arg2) = do-new-page(
                     :$pdf,
@@ -351,7 +351,7 @@ sub do-pdf-language-samples(
                     ); 
                 $page = $arg1;
                 $y    = $arg2;
-            }
+            #}
             #=end comment
 
             # now refresh pages here
@@ -406,6 +406,7 @@ sub do-pdf-language-samples(
 
 } # end sub do-*
 
+#= print a page title with two lines
 sub put-page-title(
     $line1,   # center it
     $line2,   # center it
@@ -417,6 +418,7 @@ sub put-page-title(
 ) is export {
 } # end of sub put-page-title
 
+#= print a sample text for some language and font
 sub put-text-sample(
     $title,   # align left
     $text,    # align left
