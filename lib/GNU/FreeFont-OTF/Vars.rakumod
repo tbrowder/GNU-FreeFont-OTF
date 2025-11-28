@@ -1,6 +1,6 @@
 unit module GNU::FreeFont-OTF::Vars;
 
-our %default-samples is export = %(
+our constant %default-samples is export = %(
     # keyed by two-character ISO language code
     #     key => {
     #         lang => "",

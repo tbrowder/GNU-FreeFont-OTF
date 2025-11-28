@@ -1,16 +1,25 @@
+Create the font lists for docs automatically all based on the Vars hash
+:
+  =done: + in option "help"
+  + in rakudocs
+    use Build.rakumod
+      use three parts, middle part is the generated list;
+        combine the three after the build into the final rakudoc
+
+
 Produce several types of output
 
-=done Check clagnut.com for pangrams
+=done:  Check clagnut.com for pangrams
 
 Add more languages
 
-=done Add a lang option that gens a page for one language 
+=done: Add a lang option that gens a page for one language 
 for all fonts
 
-=done Add an option to resolve font aliases or bail with info
+=done: Add an option to resolve font aliases or bail with info
 (check in FontFactory code)
 
-=done Document in README
+Document in README (in work, but looking good)
 
 Check dir new-module1 for CodCharts for FreeFont
 

@@ -1,6 +1,5 @@
 unit module GNU::FreeFont-OTF::Subs;
 
-
 use PDF::Lite;
 use PDF::Font::Loader :load-font;
 use PDF::Content::Page :PageSizes;   # A4, Letter available
@@ -9,21 +8,29 @@ use PDF::Content::Color :rgb;
 use GNU::FreeFont-OTF::Vars;
 use GNU::FreeFont-OTF::FontPaths;
 
-my $lang-list; # defined in the BEGIN block
+my $lang-list;
+my $spaces;
+my $nspaces;
 BEGIN {
+    $lang-list = "";
+    $spaces    = "";
+    $nspaces   = 6;
+    for 1..$nspaces { $spaces ~= " " }
+  
     for %default-samples.keys.sort -> $k {
         my $lang = %default-samples{$k}<lang>;
-        $lang-list ~= "$k - $lang\n";
+        $lang-list ~= "\n" if $k;
+        $lang-list ~= "$spaces$k - $lang";
     }
 }
 
 our $default-font-size is export = 11;
 sub help() is export {
-print q:to/HERE/;
+print qq:to/HERE/;
    Writes a portrait PDF showing all language samples using a selected GNU FreeFont
      face and size.
 
-   $font-ref may be:
+   \$font-ref may be:
      * Int: A reference number from the code tables (1..12)
      * Str: a code from the code tables
      * Str: a family name (e.g., "Free Sans")
@@ -38,7 +45,7 @@ print q:to/HERE/;
    Options:
      * :page-size<Letter|A4> (default: Letter)
      * :kerning<True|False>  (default: True)
-     * :font-size(Int > 0)   (default: $default-font-size)
+     * :font-size(Int > 0)   (default: \$default-font-size)
      * :lang(Lang code)      (default: False)
 
    The following languages have text samples available:

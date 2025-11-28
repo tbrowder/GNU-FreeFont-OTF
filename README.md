@@ -13,10 +13,12 @@ use Test;
 use PDF::Content;
 use GNU::FreeFont-OTF;
 
+# Use the provided class to create individual font objects
+# of the desired font face:
 my $ff = GNU::FreeFont-OTF.new;
 
 # Select the GNU FreeFont 'Free Serif' to be loaded
-# as an object to be used to print text on a PDF page:
+# as a PDF font object to be used to print text on a PDF page:
 my $font  = $ff.get-font: "Free Serif";
 isa-ok $font, PDF::Content::FontObj;
 # OUTPUT:
@@ -27,7 +29,7 @@ ok 1 - The object is-a 'PDF::Content::FontObj'
 DESCRIPTION
 ===========
 
-**GNU::FreeFont-OTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include thousands of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
+**GNU::FreeFont-OTF** is a Raku package that provides easy handling of the set of GNU FreeFont OpenType fonts which descended from the classic Adobe Type 1 free fonts (shown in Table 2 below). Unlike the original Adobe fonts, these fonts also include many hundreds of Unicode characters that can be used with many languages. The fonts are also among the few, freely-available fonts that have Type 1 kerning.
 
 See [GNU FreeFont](https://www.gnu.org/software/freefont/sources/) for much more information on the sources and Unicode coverage of the GNU FreeFonts collection.
 
@@ -43,7 +45,7 @@ The following tables show the hash codes (keys) to use to select the desired fon
 
 Note the *Code* and *Code2* columns. Each row contains equivalent code you may use to select the desired GNU FreeFont face.
 
-You maay also use the font name in the first colum or the reference number to select the font.
+You may also use the font name in the first column or the reference number to select the font.
 
 Font samples
 ------------
