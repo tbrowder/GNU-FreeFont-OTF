@@ -78,7 +78,7 @@ Please create an issue if you want one changed or added for your language. Langu
 
   * ru - Russian
 
-  * uk - Ukranian
+  * uk - Ukranian 
 
 Table 1
 -------

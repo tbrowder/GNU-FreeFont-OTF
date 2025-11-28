@@ -63,5 +63,12 @@ for @lines -> $line is copy {
 
 }
 
+my %names;
+for %h.keys -> $iso-key {
+    my $name = %h{$iso-key}<lang>;
+    %names{$name} = $iso-key;
+}
+my @nkeys = %names.keys.sort;
+
 # if it's not current, update it
 # my $fh = open $docfil, :w;
