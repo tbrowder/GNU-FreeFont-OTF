@@ -156,14 +156,13 @@ sub do-pdf-language-samples(
     --> IO::Path
     ) is export {
 
-say "DEBUG: debug value = $debug";
+    say "DEBUG: debug value = $debug" if $debug;
     if $debug == 1 {
         $ofile = "debug-samples1.pdf";
     }
     elsif $debug == 2 {
         $ofile = "debug-samples2.pdf";
     }
-
 
     # unless the output file is defined, make it reflect the other input values
     unless $ofile.defined and $ofile ~~ /\S/ {
@@ -307,13 +306,14 @@ say "DEBUG: debug value = $debug";
     # force a large number of samples for testing the new-page sub
     if $debug {
         my @t = @nkeys;
-        my $max = @t.elems / 2;
+        my $max = @t.elems * 1.5;
         while @t {
             @nkeys.push: @t.pop;
             last if @t.elems > $max
         }
         @nkeys .= sort;
     }
+    say "DEBUG: using {@nkeys.elems} samples" if $debug;
     my $n = 2;
 
     # -- default one page with one pangram per language
@@ -334,12 +334,13 @@ say "DEBUG: debug value = $debug";
         if $y < $margin + 60 { 
             # original sub used here
             if $debug < 2  {
+                say "DEBUG: using the original new-page..." if $debug;
                 new-page(:$debug); 
             }
 
             #=begin comment
             else {
-                note "DEBUG: attempting using the new sub do-new-page...";
+                say "DEBUG: attempting using the new sub do-new-page...";
                 # new sub used here
                 my ($arg1, $arg2) = do-new-page(
                     :$pdf,
