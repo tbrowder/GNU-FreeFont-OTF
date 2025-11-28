@@ -353,7 +353,6 @@ say "DEBUG: debug value = $debug";
             }
             #=end comment
 
-
             # now refresh pages here
             @pages = $pdf.pages;
         }
