@@ -20,10 +20,18 @@ if not @*ARGS {
 # sample fonts list in file:
 #   /lib/*/*/Vars.rakumod
 
+my $debug = 0;
+
+for @*ARGS {
+    when /:i d/ { ++$debug }
+}
+
 unless $*HOME ~~ /tbrowde/ {
     # only works on the author's servers
     exit;
 }
+
+say "DEBUG is on" if $debug;
 
 my $docfil  = "$*CWD/docs/README.rakudoc";
 my @lines   = $docfil.IO.lines;
@@ -36,7 +44,6 @@ for @lines -> $line is copy {
    $in-list = True if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> /;
    $in-list = False if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> /;
 }
-
 
 # if it's not current, update it
 # my $fh = open $docfil, :w;
