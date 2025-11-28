@@ -1,5 +1,7 @@
 #!/usr/bin/env raku
 
+use GNU::FreeFont-OTF::Vars;
+
 if not @*ARGS {
     print qq:to/HERE/;
     Usage: {$*PROGRAM.basename} go
@@ -11,3 +13,29 @@ if not @*ARGS {
     exit;
 }
 
+# Reads the docs/README.rakudoc file and
+# ensure the list of installed 
+# languages is correct. The
+# source of truth is in the 
+# sample fonts list in file:
+#   /lib/*/*/Vars.rakumod
+
+unless $*HOME ~~ /tbrowde/ {
+    # only works on the author's servers
+    exit;
+}
+
+my $docfil  = "$*CWD/docs/README.rakudoc";
+my @lines   = $docfil.IO.lines;
+my $in-list = False;
+
+# first see if all is well
+my %h = %default-samples;
+my $rewrite = False;
+for @lines -> $line is copy {
+   $in-list = True if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> /;
+   $in-list = False if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> /;
+}
+
+# if it's not current, update it
+my $fh = open $docfil, :w;

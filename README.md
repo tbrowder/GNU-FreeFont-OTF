@@ -52,7 +52,7 @@ Font samples
 
 This package includes an installed Raku script, `make-gnu-ff-samples`, to produce a page of *pangrams* in several languages for a selected font. (See more information about pangrams and a large list of them for many languages at [https://clagnut.com](https://clagnut.com).)
 
-Please create an issue if you want one changed or added for your language. Languages currently shown are:
+Please create an issue if you want one changed or added for your language. Languages currently shown are: 
 
   * de - German
 
