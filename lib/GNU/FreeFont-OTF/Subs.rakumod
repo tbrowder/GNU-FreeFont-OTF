@@ -1,5 +1,6 @@
 unit module GNU::FreeFont-OTF::Subs;
 
+
 use PDF::Lite;
 use PDF::Font::Loader :load-font;
 use PDF::Content::Page :PageSizes;   # A4, Letter available
@@ -7,6 +8,14 @@ use PDF::Content::Color :rgb;
 
 use GNU::FreeFont-OTF::Vars;
 use GNU::FreeFont-OTF::FontPaths;
+
+my $lang-list; # defined in the BEGIN block
+BEGIN {
+    for %default-samples.keys.sort -> $k {
+        my $lang = %default-samples{$k}<lang>;
+        $lang-list ~= "$k - $lang\n";
+    }
+}
 
 our $default-font-size is export = 11;
 sub help() is export {
@@ -20,8 +29,9 @@ print q:to/HERE/;
      * Str: a family name (e.g., "Free Sans")
      * Str: a path to an .otf (or .ttf) file
 
-   With the 'print' input the default output PDF file will be:
-       GNU-FreeFont-OTF-samples.pdf
+   With only the 'print' input argument, the default output 
+     PDF file will be: 'GNU-FreeFont-OTF-samples.pdf'. (Adding
+     other options may result in other default file names.)
    Otherwise you may choose another path by entering it as:
        ofile=/path/to/file
 
@@ -30,6 +40,9 @@ print q:to/HERE/;
      * :kerning<True|False>  (default: True)
      * :font-size(Int > 0)   (default: $default-font-size)
      * :lang(Lang code)      (default: False)
+
+   The following languages have text samples available:
+      {$lang-list}
 
    Renders pages in the given portrait size with ~0.75in margins and adds
      "n of m" page numbers bottom-right.
@@ -461,3 +474,14 @@ sub do-new-page(
     $page, $y;
 } # end of sub do-new-page
 
+sub show-lang-list(
+    --> Str
+) is export {
+    my $lang-list = "";
+    for %default-samples.keys.sort -> $k {
+        my $lang = %default-samples{$k}<lang>;
+        say "=item $k - $lang";
+        $lang-list ~= "$k - $lang\n";
+    }
+    $lang-list;
+} # end of sub show-lang-list
