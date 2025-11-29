@@ -48,6 +48,7 @@ my $in-list = False;
 
 # First see if all is well with the current docs
 # and lang code and name match
+
 # The known data to check against:
 my %samp = %default-samples;
 # All we need are the iso and lang name
@@ -100,12 +101,12 @@ LINE: for @lines -> $line is copy {
 
 unless is-deeply %h1, %h2 {
     note qq:to/HERE/;
-    FATAL: Language list in $docfile
-           is NOT identical to the source.
+    FATAL: The language list in $docfile is NOT 
+           identical to the source in file:
+               $docfile
     HERE
     exit(1);
 }
-
 
 # if it's not current, update it
 # my $fh = open $docfil, :w;

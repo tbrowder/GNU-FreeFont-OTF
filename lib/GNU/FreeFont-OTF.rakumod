@@ -14,8 +14,10 @@ use PDF::Content::FontObj;
 use Font::FreeType;
 
 use GNU::FreeFont-OTF::FontPaths;
-#use GNU::FreeFont-OTF::Subs;
 use GNU::FreeFont-OTF::Vars;
+
+# WARNING: The Subs module is NOT usable by this class file
+#use GNU::FreeFont-OTF::Subs; # <== WARNING: 
 
 has %.font-file-paths;
 has @.codes-list;

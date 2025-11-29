@@ -1,32 +1,28 @@
-Create the font lists for docs automatically all based on the Vars hash
-:
-  =done: + in option "help"
-  + in rakudocs
-    use Build.rakumod
-      use three parts, middle part is the generated list;
-        combine the three after the build into the final rakudoc
-
-
 Produce several types of output
+  + one page for one lang and 12 fonts
 
-=done:  Check clagnut.com for pangrams
-
-Add more languages
-
-=done: Add a lang option that gens a page for one language 
-for all fonts
-
-=done: Add an option to resolve font aliases or bail with info
-(check in FontFactory code)
+Add more languages (may wait till next version)
 
 Document in README (in work, but looking good)
 
-Check dir new-module1 for CodCharts for FreeFont
+Check dir new-module1 for CodeCharts for FreeFont
 
 Move the TextBox module to PDF::GraphicsUtils
 
 NO REUSE OF A LOADED FONT FOR NOW
   check with David again
+
+=done:  Check clagnut.com for pangrams
+
+=done Create the font lists for docs automatically based on the Vars hash:
+  =done: + in option "help"
+  =done+ in rakudocs: use Build.rakumod with an sbin/install script
+
+=done: Add a lang option that gens a page for one language 
+       for all fonts
+
+=done: Add an option to resolve font aliases or bail with info
+       (check in FontFactory code)
 
 =done
 2025-08-11
