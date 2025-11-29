@@ -113,9 +113,10 @@ if $help {
 }
 
 =begin comment
+# in module lib/*/*/Subs.rakumod
 sub do-pdf-language-samples(
     $font-ref,
-    Str:D :$ofile!,
+    :$ofile is copy,
     :$font-size = 12,
     :$page-size = 'Letter',
     :$kerning   = True,
@@ -130,6 +131,14 @@ sub do-pdf-language-samples(
 my $opath = do-pdf-language-samples $font-ref, :$ofile, :$font-size,
                 :$page-size, :$kerning, :$lang, :$all, :$debug;
 say "See output: $opath";
+
+
+
+
+
+
+
+
 
 =finish
 
