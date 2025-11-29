@@ -14,7 +14,7 @@ if not @*ARGS {
 }
 
 # Reads the docs/README.rakudoc file and
-# ensure the list of installed 
+# ensures the list of installed 
 # languages is correct. The
 # source of truth is in the 
 # sample fonts list in file:
@@ -34,35 +34,51 @@ else { exit }
 
 say "DEBUG is on" if $debug;
 
-my $docfil  = "$*CWD/docs/README.rakudoc";
-my @lines   = $docfil.IO.lines;
+my $docfile = "$*CWD/docs/README.rakudoc";
+my @lines   = $docfile.IO.lines;
 unless @lines.elems {
-    say "DEBUG: unable to read any line from file: $docfil";
+    say "DEBUG: Unable to read any line from file: $docfile";
     say "       Exiting...";
     exit;
 }
 
 my $in-list = False;
 
-# first see if all is well
+# First see if all is well with the current docs
 my %h = %default-samples;
 my $rewrite = False;
-for @lines -> $line is copy {
-   #say "DEBUG: doc line: |$line|" if $debug;
+LINE: for @lines -> $line is copy {
+    #say "DEBUG: doc line: |$line|" if $debug;
 
-   if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> / {
-       $in-list = True;
-       say "DEBUG: in the lang list" if $debug;
-   }
+    if $line  ~~ /^ \h* Z :i \< \h* begin \h* lang \h* list \h* \> / {
+        $in-list = True;
+        say "DEBUG: in the lang list" if $debug;
+        next LINE;
+    }
+    if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> / {
+        $in-list = False;
+        say "DEBUG: exited the lang list" if $debug;
+    }
 
+    next LINE unless $in-list;
 
-   if $line ~~ /^ \h* Z :i \< \h* end \h* lang \h* list \h* \> / {
-       $in-list = False;
-       say "DEBUG: exited the lang list" if $debug;
-   }
+    # A data line:
+    # =item uk - Ukranian
+    if $line ~~ /^ \h* '=item' \h+ (\w\w)  \h+ '-' \h+ (\N+) $/ {
+        # ok
+        say "DEBUG: good format: |$line|" if $debug;
+    }
+    else {
+        die qq:to/HERE/;
+        FATAL: Unexpected line in file '{$docfile}':
+                  |$line|
+               Exiting...
+        HERE
+    }
 
 }
 
+# The known data to check against::
 my %names;
 for %h.keys -> $iso-key {
     my $name = %h{$iso-key}<lang>;
