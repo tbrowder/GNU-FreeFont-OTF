@@ -1,5 +1,7 @@
 #!/usr/bin/env raku
 
+use Test;
+
 use GNU::FreeFont-OTF::Vars;
 
 if not @*ARGS {
@@ -45,8 +47,19 @@ unless @lines.elems {
 my $in-list = False;
 
 # First see if all is well with the current docs
-my %h = %default-samples;
+# and lang code and name match
+# The known data to check against:
+my %samp = %default-samples;
+# All we need are the iso and lang name
+my %h1;
+for %samp.keys -> $iso-key {
+    my $lang = %samp{$iso-key}<lang>;
+    %h1{$iso-key} = $lang;
+}
+
 my $rewrite = False;
+
+my %h2; # this docs's lang hash
 LINE: for @lines -> $line is copy {
     #say "DEBUG: doc line: |$line|" if $debug;
 
@@ -66,6 +79,14 @@ LINE: for @lines -> $line is copy {
     # =item uk - Ukranian
     if $line ~~ /^ \h* '=item' \h+ (\w\w)  \h+ '-' \h+ (\N+) $/ {
         # ok
+        my $iso-code = ~$0.trim;
+        my $lang     = ~$1.trim;
+        if %h2{$iso-code}:exists {
+            die "FATAL: Duplicate ISO code $iso-code in file $docfile";
+        }
+        else {
+            %h2{$iso-code} = $lang;
+        }
         say "DEBUG: good format: |$line|" if $debug;
     }
     else {
@@ -75,16 +96,16 @@ LINE: for @lines -> $line is copy {
                Exiting...
         HERE
     }
-
 }
 
-# The known data to check against::
-my %names;
-for %h.keys -> $iso-key {
-    my $name = %h{$iso-key}<lang>;
-    %names{$name} = $iso-key;
+unless is-deeply %h1, %h2 {
+    note qq:to/HERE/;
+    FATAL: Language list in $docfile
+           is NOT identical to the source.
+    HERE
+    exit(1);
 }
-my @nkeys = %names.keys.sort;
+
 
 # if it's not current, update it
 # my $fh = open $docfil, :w;
