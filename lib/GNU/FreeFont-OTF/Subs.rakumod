@@ -30,6 +30,16 @@ print qq:to/HERE/;
    Writes a portrait PDF showing all language samples using a selected GNU FreeFont
      face and size.
 
+   Usage:
+
+   Modes:
+
+   Options:
+
+   font=
+   lang=X
+   all
+
    \$font-ref may be:
      * Int: A reference number from the code tables (1..12)
      * Str: a code from the code tables

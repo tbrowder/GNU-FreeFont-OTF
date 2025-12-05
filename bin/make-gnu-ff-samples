@@ -24,12 +24,13 @@ if not @*ARGS.elems {
     print qq:to/HERE/;
     Usage: $p <mode> [options]
 
-    Modes
+    Modes:
       print   - Creates a local PDF of the text samples for
                 the default font ('Free Serif')
-    Options
+    Options:
       font=X  - Where X is the desired font reference
       ofile=X - Where X is the desired output PDF file name
+                  (default: $defofil)
       size=X  - Where X is the desired font size (default: $default-font-size)
       lang=X  - Where X is the desired language (in place of all languages)
       all     - Print a separate page for each language with each
