@@ -176,6 +176,15 @@ sub do-pdf-language-samples(
     --> IO::Path
     ) is export {
 
+    if $all {
+        say qq:to/HERE/;
+        Sorry, the 'all' option is not yet implemented (NYI).
+          Please file an issue if it is important to you.
+        Exiting...
+        HERE
+        exit;
+    }
+
     say "DEBUG: debug value = $debug" if $debug;
     if $debug == 1 {
         $ofile = "debug-samples1.pdf";
@@ -335,6 +344,18 @@ sub do-pdf-language-samples(
     }
     say "DEBUG: using {@nkeys.elems} samples" if $debug;
     my $n = 2;
+
+    # TODO: break code into more general subs for page headers
+    #       and body and enders
+
+    if $lang {
+        my $name = %samples{$lang}<lang>;
+        say qq:to/HERE/;
+        You have selected the 'lang' option for 
+            lang: $lang
+            name: $name
+        HERE
+    }
 
     # -- default one page with one pangram per language
     for @nkeys.kv -> $i, $name {
